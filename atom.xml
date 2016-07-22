@@ -4,13 +4,34 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-07-22T14:09:13+08:00</updated>
+  <updated>2016-07-22T14:21:10+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Github Pages 静态网站托管]]></title>
+    <link href="http://golog.cc/14691683071762.html"/>
+    <updated>2016-07-22T14:18:27+08:00</updated>
+    <id>http://golog.cc/14691683071762.html</id>
+    <content type="html"><![CDATA[
+<p>本网站就是采用Github pages托管的静态网站。</p>
+
+<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+
+<p>下面简要的说一下：</p>
+
+<ol>
+<li><p>如何把网站托管到Github Pages上面</p></li>
+<li><p>如何在Github Pages上面绑定域名</p></li>
+<li><p>如何进行静态网站的托管同步</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一台机器上设置多个SSH Key]]></title>
