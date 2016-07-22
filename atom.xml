@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-07-22T14:24:46+08:00</updated>
+  <updated>2016-07-22T14:32:55+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,9 +14,9 @@
   
   <entry>
     <title type="html"><![CDATA[Github Pages 静态网站托管]]></title>
-    <link href="http://golog.cc/github%20pages%20and%20static%20website.html"/>
+    <link href="http://golog.cc/github-pages-and-static-website.html"/>
     <updated>2016-07-22T14:18:27+08:00</updated>
-    <id>http://golog.cc/github%20pages%20and%20static%20website.html</id>
+    <id>http://golog.cc/github-pages-and-static-website.html</id>
     <content type="html"><![CDATA[
 <p>本网站就是采用Github pages托管的静态网站。</p>
 
@@ -35,10 +35,14 @@
   
   <entry>
     <title type="html"><![CDATA[一台机器上设置多个SSH Key]]></title>
-    <link href="http://golog.cc/set%20many%20ssh%20keys%20in%20a%20computer.html"/>
+    <link href="http://golog.cc/set-many-ssh-keys-in-a-computer.html"/>
     <updated>2016-07-22T01:13:35+08:00</updated>
-    <id>http://golog.cc/set%20many%20ssh%20keys%20in%20a%20computer.html</id>
+    <id>http://golog.cc/set-many-ssh-keys-in-a-computer.html</id>
     <content type="html"><![CDATA[
+<blockquote>
+<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
+</blockquote>
+
 <p><strong>1. 生成 ssh keys</strong></p>
 
 <p>终端下输入命令：</p>
@@ -160,9 +164,9 @@ ssh -T git@域名
   
   <entry>
     <title type="html"><![CDATA[有关Golang的又一个小站点]]></title>
-    <link href="http://golog.cc/another%20website%20about%20golang.html"/>
+    <link href="http://golog.cc/another-website-about-golang.html"/>
     <updated>2016-07-21T23:53:01+08:00</updated>
-    <id>http://golog.cc/another%20website%20about%20golang.html</id>
+    <id>http://golog.cc/another-website-about-golang.html</id>
     <content type="html"><![CDATA[
 <p>从Golang还是零点几的版本时，就开始使用。对于Golang的感情很深，虽然我的Golang的变成技术不怎么样，也没有拿它写过什么大的项目。这没有关系，不妨碍我对它的喜爱。</p>
 
