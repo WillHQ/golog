@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Github Pages 静态网站托管 - GOLOG
+  GO语言错误处理 - GOLOG
   
   </title>
   
@@ -98,84 +98,86 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>Github Pages 静态网站托管</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2016/7/22</span>
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="error-of-go-build.html">
+                
+                  <h1>go build时的错误分析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">go build 错误一</h2>
 
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
-           
-         
-          <span class="comments">
-            
+<p>如果出现：</p>
 
-            
-          </span>
+<pre><code>
+warning: building out-of-date packages:
 
-        </div>
-      </div><!-- article -->
+runtime/pprof
 
-      <div class="article-content">
-      <p>本网站就是采用Github pages托管的静态网站。</p>
+testing
 
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+regexp/syntax
 
-<p>下面简要的说一下：</p>
+regexp
 
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
+installing these packages with &#39;go test -i&#39; will speed future tests.
 
+</code></pre>
 
-    
+<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
+如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
 
-      </div>
+<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
 
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="path-package.html" 
-          title="Previous Post: Path包">&laquo; Path包</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="set-many-ssh-keys-in-a-computer.html" 
-          title="Next Post: 一台机器上设置多个SSH Key">一台机器上设置多个SSH Key &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">

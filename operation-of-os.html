@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Github Pages 静态网站托管 - GOLOG
+  操作系统相关操作 - GOLOG
   
   </title>
   
@@ -107,14 +107,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Github Pages 静态网站托管</h1>
+          <h1>操作系统相关操作</h1>
      
         <div class="read-more clearfix">
           <span class="date">2016/7/22</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -127,17 +127,15 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>本网站就是采用Github pages托管的静态网站。</p>
+      <ul>
+<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
+<li><p>判断当前用户是否是root用户</p>
 
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+<pre><code>
+os.Geteuid() != 0
 
-<p>下面简要的说一下：</p>
-
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
+</code></pre></li>
+</ul>
 
 
     
@@ -148,16 +146,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="path-package.html" 
-          title="Previous Post: Path包">&laquo; Path包</a>
+          <a href="get-path-with-golang.html" 
+          title="Previous Post: go中获取各种路径">&laquo; go中获取各种路径</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="set-many-ssh-keys-in-a-computer.html" 
-          title="Next Post: 一台机器上设置多个SSH Key">一台机器上设置多个SSH Key &raquo;</a>
+          <a  href="error-of-go-build.html" 
+          title="Next Post: go build时的错误分析">go build时的错误分析 &raquo;</a>
       
       </p>
         </div>

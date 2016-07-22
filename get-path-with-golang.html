@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Github Pages 静态网站托管 - GOLOG
+  go中获取各种路径 - GOLOG
   
   </title>
   
@@ -107,14 +107,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Github Pages 静态网站托管</h1>
+          <h1>go中获取各种路径</h1>
      
         <div class="read-more clearfix">
           <span class="date">2016/7/22</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -127,16 +127,71 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>本网站就是采用Github pages托管的静态网站。</p>
+      <ol>
+<li><p>执行用户当前所在路径：</p>
 
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+<pre><code>
+os.Getwd()
 
-<p>下面简要的说一下：</p>
+</code></pre></li>
+<li><p>执行程序所在路径：</p>
 
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
+<p>执行程序文件相对路径：</p>
+
+<pre><code>
+file, _ := exec.LookPath(os.Args[0])
+
+</code></pre>
+
+<p>执行程序所在的绝对路径：</p>
+
+<p>（使用下面一套方法）</p>
+
+<pre><code>
+file, _ := exec.LookPath(os.Args[0])
+log.Println(&quot;file:&quot;, file)
+dir,_ := path.Split(file)
+log.Println(&quot;dir:&quot;, dir)
+os.Chdir(dir)
+wd, _ := os.Getwd()
+log.Println(&quot;wd:&quot;, wd)
+
+</code></pre>
+
+<p>比如这个程序</p>
+
+<pre><code>package main
+import(
+    &quot;os&quot;
+    &quot;log&quot;
+    &quot;os/exec&quot;
+    &quot;path&quot;
+)
+func main() {
+    file, _ := os.Getwd()
+    log.Println(&quot;current path:&quot;, file)
+    file, _ = exec.LookPath(os.Args[0])
+    log.Println(&quot;exec path:&quot;, file)
+    dir,_ := path.Split(file)
+    log.Println(&quot;exec folder relative path:&quot;, dir)
+    os.Chdir(dir)
+    wd, _ := os.Getwd()
+    log.Println(&quot;exec folder absolute path:&quot;, wd)
+}
+
+</code></pre>
+
+<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
+我执行的路径是<code>/home/houqun/</code></p>
+
+<p>返回结果：</p>
+
+<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
+2013/02/06 11:09:07 current path: /home/houqun
+2013/02/06 11:09:07 exec path: handcode/test
+2013/02/06 11:09:07 exec folder relative path: handcode/
+2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
+</code></pre></li>
 </ol>
 
 
@@ -148,16 +203,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="path-package.html" 
-          title="Previous Post: Path包">&laquo; Path包</a>
+          <a href="change-type-of-data.html" 
+          title="Previous Post: go 类型转换">&laquo; go 类型转换</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="set-many-ssh-keys-in-a-computer.html" 
-          title="Next Post: 一台机器上设置多个SSH Key">一台机器上设置多个SSH Key &raquo;</a>
+          <a  href="operation-of-os.html" 
+          title="Next Post: 操作系统相关操作">操作系统相关操作 &raquo;</a>
       
       </p>
         </div>
