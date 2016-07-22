@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-07-22T14:32:55+08:00</updated>
+  <updated>2016-07-22T14:33:04+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -158,23 +158,6 @@ ssh -T git@域名
 </code></pre>
 
 <p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[有关Golang的又一个小站点]]></title>
-    <link href="http://golog.cc/another-website-about-golang.html"/>
-    <updated>2016-07-21T23:53:01+08:00</updated>
-    <id>http://golog.cc/another-website-about-golang.html</id>
-    <content type="html"><![CDATA[
-<p>从Golang还是零点几的版本时，就开始使用。对于Golang的感情很深，虽然我的Golang的变成技术不怎么样，也没有拿它写过什么大的项目。这没有关系，不妨碍我对它的喜爱。</p>
-
-<p>大大小小的写了一些项目，在各种项目中查找资料、自己研究，积累一些Golang的技巧和代码片段。在这个小站里，把这些分享出来，与所有的Golanger一块交流。</p>
-
-<p>这是这个小站的第一篇文章。整个小站采用的是静态网站，原本想用go语言的hugo，不过考虑到域名问题、空间问题等，还是在自己电脑上生成静态网站，而后再上传到静态网站托管的服务器上。</p>
-
-<p>就是这个小站。欢迎大家留言，欢迎大家来多交流。</p>
 
 ]]></content>
   </entry>

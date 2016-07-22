@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://golog.cc/</loc>
-  <lastmod>2016-07-22T14:33:04+08:00</lastmod>
+  <lastmod>2016-07-22T15:39:41+08:00</lastmod>
 </url>
 
 <url>
@@ -13,11 +13,6 @@
 <url>
   <loc>http://golog.cc/set-many-ssh-keys-in-a-computer.html</loc>
   <lastmod>2016-07-22T01:13:35+08:00</lastmod>
-</url>
-
-<url>
-  <loc>http://golog.cc/another-website-about-golang.html</loc>
-  <lastmod>2016-07-21T23:53:01+08:00</lastmod>
 </url>
 
 
