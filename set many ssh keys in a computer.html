@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Github Pages 静态网站托管 - GOLOG
+  一台机器上设置多个SSH Key - GOLOG
   
   </title>
   
@@ -99,7 +99,7 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Github Pages 静态网站托管</h1>
+          <h1>一台机器上设置多个SSH Key</h1>
      
         <div class="read-more clearfix">
           <span class="date">2016/7/22</span>
@@ -119,17 +119,121 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>本网站就是采用Github pages托管的静态网站。</p>
+      <p><strong>1. 生成 ssh keys</strong></p>
 
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+<p>终端下输入命令：</p>
 
-<p>下面简要的说一下：</p>
+<pre><code>
+ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
+</code></pre>
+
+<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
+
+<p>注意：双引号换成自己的邮箱，如果linux下遇到权限问题，只需在前面加上sudo</p>
+
+<p><strong>2. github添加SSH keys</strong></p>
+
+<p>将id_rsa.pub里面的内容复制下来，在github上的settings里面找到add keys，将其粘贴到key即可，title唯一即可随便填，建议写有意义的;</p>
+
+<p><strong>3. 测试</strong></p>
+
+<p>在控制台上测试一下，输入：</p>
+
+<pre><code>
+ssh -T git@github.com
+
+</code></pre>
+
+<p>只要看到最后一行:</p>
+
+<pre><code>
+Hi chenlianjiang! You&#39;ve successfully authenticated, but GitHub does not provide shell access
+
+</code></pre>
+
+<p>说明验证成功了.</p>
+
+<p><strong>4. gitlib帐号添加SSH keys</strong></p>
+
+<p>同第（1）步一样，生成新的SSH Keys</p>
+
+<p>这时候在生成ssh key时候要注意了这时一路回车，不输入任何字符在绑定gitlibng的ssh key时，会发现将github的ssh key覆盖了。需要做调整：</p>
+
+<p>打开终端，终端下输入命令：</p>
+
+<pre><code>
+ssh-keygen -t rsa -C &quot;youname@example.com&quot;
+
+</code></pre>
+
+<p>这时，给这个文件起一个名字， 比如叫C:\Users\Administrator.ssh\ id_rsa_gitlib, 所以相应的也会生成一个 id_rsa_gitlib.pub 文件。</p>
+
+<p>注意这里如果只输入文件名会在终端的当前目录下生成，拷贝到对应位置即可；</p>
+
+<p>终端输入一下命令：</p>
+
+<pre><code>
+$ ssh-add ~/.ssh/id_rsa
+
+$ ssh-add ~/.ssh/id_rsa_gitlib
+
+</code></pre>
+
+<p>ssh-add命令是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在/usr/bin/ssh-add</p>
+
+<p>如果出现Could not open a connection to your authentication agent.错误提示先执行$ ssh-agent.exe bash，然后执行上面命令；</p>
+
+<pre><code>
+-D：删除ssh-agent中的所有密钥
+
+-d：从ssh-agent中的删除密钥
+
+-e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙
+
+-s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙
+
+-L：显示ssh-agent中的公钥
+
+-l：显示ssh-agent中的密钥
+
+-t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥
+
+-X：对ssh-agent进行解锁
+
+-x：对ssh-agent进行加锁
+
+</code></pre>
+
+<p>在~/.ssh/目录下新建config文件，并添加:</p>
+
+<pre><code>
+# github
+Host github.com
+      HostName github.com
+      PreferredAuthentications publickey
+      IdentityFile ~/.ssh/id_rsa
+      
+# gitlib
+Host gitlib.com
+      HostName gitlib.com
+      PreferredAuthentications publickey
+      IdentityFile ~/.ssh/id_rsa_gitlib
+
+</code></pre>
+
+<p>将id_rsa_gitlib.pub里面的内容复制下来，在gitlib上的账户里面找到所示SSH keys，将其粘贴到key内容即可，Title唯一即可随便填，，点击添加需要输入登录密码；</p>
+
+<p><strong>5. 测试</strong></p>
+
+<p>在控制台上测试一下，输入：</p>
+
+<pre><code>
+ssh -T git@域名
+
+</code></pre>
+
+<p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
 
 
     
@@ -140,13 +244,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
+          <a href="github%20pages%20and%20static%20website.html" 
+          title="Previous Post: Github Pages 静态网站托管">&laquo; Github Pages 静态网站托管</a>
+      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14691212152076.html" 
-          title="Next Post: 一台机器上设置多个SSH Key">一台机器上设置多个SSH Key &raquo;</a>
+          <a  href="another%20website%20about%20golang.html" 
+          title="Next Post: 有关Golang的又一个小站点">有关Golang的又一个小站点 &raquo;</a>
       
       </p>
         </div>
@@ -217,19 +324,19 @@
 	      
 		      
 			      <li class="post">
-			        <a href="14691683071762.html">Github Pages 静态网站托管</a>
+			        <a href="github%20pages%20and%20static%20website.html">Github Pages 静态网站托管</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="14691212152076.html">一台机器上设置多个SSH Key</a>
+			        <a href="set%20many%20ssh%20keys%20in%20a%20computer.html">一台机器上设置多个SSH Key</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="14691163813356.html">有关Golang的又一个小站点</a>
+			        <a href="another%20website%20about%20golang.html">有关Golang的又一个小站点</a>
 			      </li>
 		     
 		   
