@@ -4,13 +4,288 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-07-23T01:32:42+08:00</updated>
+  <updated>2016-07-23T02:45:52+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[go中获取各种路径]]></title>
+    <link href="http://golog.cc/get-path-with-golang.html"/>
+    <updated>2016-07-22T18:45:18+08:00</updated>
+    <id>http://golog.cc/get-path-with-golang.html</id>
+    <content type="html"><![CDATA[
+<ol>
+<li><p>执行用户当前所在路径：</p>
+
+<pre><code>
+os.Getwd()
+
+</code></pre></li>
+<li><p>执行程序所在路径：</p>
+
+<p>执行程序文件相对路径：</p>
+
+<pre><code>
+file, _ := exec.LookPath(os.Args[0])
+
+</code></pre>
+
+<p>执行程序所在的绝对路径：</p>
+
+<p>（使用下面一套方法）</p>
+
+<pre><code>
+file, _ := exec.LookPath(os.Args[0])
+log.Println(&quot;file:&quot;, file)
+dir,_ := path.Split(file)
+log.Println(&quot;dir:&quot;, dir)
+os.Chdir(dir)
+wd, _ := os.Getwd()
+log.Println(&quot;wd:&quot;, wd)
+
+</code></pre>
+
+<p>比如这个程序</p>
+
+<pre><code>package main
+import(
+    &quot;os&quot;
+    &quot;log&quot;
+    &quot;os/exec&quot;
+    &quot;path&quot;
+)
+func main() {
+    file, _ := os.Getwd()
+    log.Println(&quot;current path:&quot;, file)
+    file, _ = exec.LookPath(os.Args[0])
+    log.Println(&quot;exec path:&quot;, file)
+    dir,_ := path.Split(file)
+    log.Println(&quot;exec folder relative path:&quot;, dir)
+    os.Chdir(dir)
+    wd, _ := os.Getwd()
+    log.Println(&quot;exec folder absolute path:&quot;, wd)
+}
+
+</code></pre>
+
+<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
+我执行的路径是<code>/home/houqun/</code></p>
+
+<p>返回结果：</p>
+
+<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
+2013/02/06 11:09:07 current path: /home/houqun
+2013/02/06 11:09:07 exec path: handcode/test
+2013/02/06 11:09:07 exec folder relative path: handcode/
+2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[操作系统相关操作]]></title>
+    <link href="http://golog.cc/operation-of-os.html"/>
+    <updated>2016-07-22T18:43:07+08:00</updated>
+    <id>http://golog.cc/operation-of-os.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
+<li><p>判断当前用户是否是root用户</p>
+
+<pre><code>
+os.Geteuid() != 0
+
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Path包]]></title>
+    <link href="http://golog.cc/path-package.html"/>
+    <updated>2016-07-22T18:32:21+08:00</updated>
+    <id>http://golog.cc/path-package.html</id>
+    <content type="html"><![CDATA[
+<p>path.clean用于对路径../../等进行过滤，在创建、修改文件的时候需要使用，否则会有漏洞</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[go time package 时间包]]></title>
+    <link href="http://golog.cc/time-package-of-golang.html"/>
+    <updated>2016-07-22T18:54:24+08:00</updated>
+    <id>http://golog.cc/time-package-of-golang.html</id>
+    <content type="html"><![CDATA[
+<p>go 的time package 提供了time.Format函数，用来对时间进行格式化输出。</p>
+
+<p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
+
+<p>问题是，go采用的格式化layout 和我们以往所用的任何经验都不同。以至于初次接触总是一头雾水。</p>
+
+<p>其实go提供的这个layout对算法的实现非常科学高效，而且很规律。下面我们详细分解下。</p>
+
+<p><strong>直接上个对应表：</strong></p>
+
+<p>前面是含义，后面是 go 的表示值,多种表示,逗号&quot;,&quot;分割：</p>
+
+<ul>
+<li>月份 1,01,Jan,January</li>
+<li>日　 2,02,_2</li>
+<li>时　 3,03,15,PM,pm,AM,am</li>
+<li>分　 4,04</li>
+<li>秒　 5,05</li>
+<li>年　 06,2006</li>
+<li>时区 -07,-0700,Z0700,Z07:00,-07:00,MST</li>
+<li>周几 Mon,Monday</li>
+</ul>
+
+<p>您看出规律了么！哦是的，你发现了，这里面没有一个是重复的，所有的值表示都唯一对应一个时间部分。并且涵盖了很多格式组合。</p>
+
+<span id="more"></span><!-- more -->
+
+<p><strong>比如小时的表示(原定义是下午3时，也就是15时)</strong></p>
+
+<ul>
+<li>3 用12小时制表示，去掉前导0</li>
+<li>03 用12小时制表示，保留前导0</li>
+<li>15 用24小时制表示，保留前导0</li>
+<li>03pm 用24小时制am/pm表示上下午表示，保留前导0</li>
+<li>3pm 用24小时制am/pm表示上下午表示，去掉前导0
+又比如月份</li>
+<li>1 数字表示月份，去掉前导0</li>
+<li>01 数字表示月份，保留前导0</li>
+<li>Jan 缩写单词表示月份</li>
+<li>January 全单词表示月份</li>
+</ul>
+
+<p><strong>实例对应</strong></p>
+
+<p>真实时间：我的UTC时间是 2013年12月5日，我的本地时区是Asia </p>
+
+<p>字符表示：　　2013 12 5 Asia</p>
+
+<p>Go Layout：　2006 01 2 MST</p>
+
+<p>真实时间：我的UTC时间是 2013年12月22点，我的本地时区是Asia</p>
+
+<p>字符表示：　　2013 12 22 Asia</p>
+
+<p>Go Layout：　2006 01 15 MST</p>
+
+<p>是滴，上面这个时间是合法的，虽然没有说是那一天，但是说了小时。而所有这些数字的顺序正好是1,2,4,5,6,7和一个时区MST。</p>
+
+<p>其实还有一个秒的 repeated digits for fractional seconds 表示法，用的是 0和9 ,很少用，源代码里面是这样写的</p>
+
+<pre><code>1. stdFracSecond0                          // &quot;.0&quot;, &quot;.00&quot;, ... , trailing zeros included
+2. stdFracSecond9                          // &quot;.9&quot;, &quot;.99&quot;, ..., trailing zeros omitted
+</code></pre>
+
+<p><strong>那些分界符</strong></p>
+
+<p>除了那些值之外的都是分界符号，自然匹配了，直接举例子吧</p>
+
+<p>字符表示：　　2013-12 21 Asia</p>
+
+<p>Go Layout：　2006-01 15 MST</p>
+
+<p>字符表示：　　2013年12月21时 时区Asia</p>
+
+<p>Go Layout：　2006年01月15时 时区MST</p>
+
+<p>好了，您是否感觉这个表示方法兼容度更好，适应性更强呢，更容易记忆呢。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[go 类型转换]]></title>
+    <link href="http://golog.cc/change-type-of-data.html"/>
+    <updated>2016-07-22T18:51:23+08:00</updated>
+    <id>http://golog.cc/change-type-of-data.html</id>
+    <content type="html"><![CDATA[
+<ol>
+<li><p>整型到字符串</p>
+
+<pre><code>s = strconv.Itoa(i) 
+
+s = strconv.FormatInt(int64(i), 10)
+</code></pre></li>
+<li><p>字符串到整型</p>
+
+<pre><code>i, err = strconv.Atoi(s)
+
+i, err = ParseInt(s, 10, 0) 
+</code></pre></li>
+<li><p>字符串到float（32/64）</p>
+
+<pre><code>f, err = ParseFloat(s, 32) `
+</code></pre></li>
+<li><p>整型到float或者float到整型</p>
+
+<pre><code>float(i)
+
+int(f)
+</code></pre></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[go build时的错误分析]]></title>
+    <link href="http://golog.cc/error-of-go-build.html"/>
+    <updated>2016-07-22T18:38:27+08:00</updated>
+    <id>http://golog.cc/error-of-go-build.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">go build 错误一</h2>
+
+<p>如果出现：</p>
+
+<pre><code>
+warning: building out-of-date packages:
+
+runtime/pprof
+
+testing
+
+regexp/syntax
+
+regexp
+
+installing these packages with &#39;go test -i&#39; will speed future tests.
+
+</code></pre>
+
+<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
+如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
+
+<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[import的使用]]></title>
+    <link href="http://golog.cc/usage-of-import.html"/>
+    <updated>2016-07-22T18:37:36+08:00</updated>
+    <id>http://golog.cc/usage-of-import.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li><p>import包命名</p>
+
+<p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Github Pages 静态网站托管]]></title>
@@ -158,281 +433,6 @@ ssh -T git@域名
 </code></pre>
 
 <p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Path包]]></title>
-    <link href="http://golog.cc/path-package.html"/>
-    <updated>2016-07-22T18:32:21+08:00</updated>
-    <id>http://golog.cc/path-package.html</id>
-    <content type="html"><![CDATA[
-<p>path.clean用于对路径../../等进行过滤，在创建、修改文件的时候需要使用，否则会有漏洞</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[import的使用]]></title>
-    <link href="http://golog.cc/usage-of-import.html"/>
-    <updated>2016-07-22T18:37:36+08:00</updated>
-    <id>http://golog.cc/usage-of-import.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li><p>import包命名</p>
-
-<p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go build时的错误分析]]></title>
-    <link href="http://golog.cc/error-of-go-build.html"/>
-    <updated>2016-07-22T18:38:27+08:00</updated>
-    <id>http://golog.cc/error-of-go-build.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">go build 错误一</h2>
-
-<p>如果出现：</p>
-
-<pre><code>
-warning: building out-of-date packages:
-
-runtime/pprof
-
-testing
-
-regexp/syntax
-
-regexp
-
-installing these packages with &#39;go test -i&#39; will speed future tests.
-
-</code></pre>
-
-<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
-如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
-
-<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[操作系统相关操作]]></title>
-    <link href="http://golog.cc/operation-of-os.html"/>
-    <updated>2016-07-22T18:43:07+08:00</updated>
-    <id>http://golog.cc/operation-of-os.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
-<li><p>判断当前用户是否是root用户</p>
-
-<pre><code>
-os.Geteuid() != 0
-
-</code></pre></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go中获取各种路径]]></title>
-    <link href="http://golog.cc/get-path-with-golang.html"/>
-    <updated>2016-07-22T18:45:18+08:00</updated>
-    <id>http://golog.cc/get-path-with-golang.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li><p>执行用户当前所在路径：</p>
-
-<pre><code>
-os.Getwd()
-
-</code></pre></li>
-<li><p>执行程序所在路径：</p>
-
-<p>执行程序文件相对路径：</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-
-</code></pre>
-
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go 类型转换]]></title>
-    <link href="http://golog.cc/change-type-of-data.html"/>
-    <updated>2016-07-22T18:51:23+08:00</updated>
-    <id>http://golog.cc/change-type-of-data.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li><p>整型到字符串</p>
-
-<pre><code>s = strconv.Itoa(i) 
-
-s = strconv.FormatInt(int64(i), 10)
-</code></pre></li>
-<li><p>字符串到整型</p>
-
-<pre><code>i, err = strconv.Atoi(s)
-
-i, err = ParseInt(s, 10, 0) 
-</code></pre></li>
-<li><p>字符串到float（32/64）</p>
-
-<pre><code>f, err = ParseFloat(s, 32) `
-</code></pre></li>
-<li><p>整型到float或者float到整型</p>
-
-<pre><code>float(i)
-
-int(f)
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go time package 时间包]]></title>
-    <link href="http://golog.cc/time-package-of-golang.html"/>
-    <updated>2016-07-22T18:54:24+08:00</updated>
-    <id>http://golog.cc/time-package-of-golang.html</id>
-    <content type="html"><![CDATA[
-<p>go 的time package 提供了time.Format函数，用来对时间进行格式化输出。</p>
-
-<p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
-
-<p>问题是，go采用的格式化layout 和我们以往所用的任何经验都不同。以至于初次接触总是一头雾水。</p>
-
-<p>其实go提供的这个layout对算法的实现非常科学高效，而且很规律。下面我们详细分解下。</p>
-
-<p><strong>直接上个对应表：</strong></p>
-
-<p>前面是含义，后面是 go 的表示值,多种表示,逗号&quot;,&quot;分割：</p>
-
-<ul>
-<li>月份 1,01,Jan,January</li>
-<li>日　 2,02,_2</li>
-<li>时　 3,03,15,PM,pm,AM,am</li>
-<li>分　 4,04</li>
-<li>秒　 5,05</li>
-<li>年　 06,2006</li>
-<li>时区 -07,-0700,Z0700,Z07:00,-07:00,MST</li>
-<li>周几 Mon,Monday</li>
-</ul>
-
-<p>您看出规律了么！哦是的，你发现了，这里面没有一个是重复的，所有的值表示都唯一对应一个时间部分。并且涵盖了很多格式组合。</p>
-
-<span id="more"></span><!-- more -->
-
-<p><strong>比如小时的表示(原定义是下午3时，也就是15时)</strong></p>
-
-<ul>
-<li>3 用12小时制表示，去掉前导0</li>
-<li>03 用12小时制表示，保留前导0</li>
-<li>15 用24小时制表示，保留前导0</li>
-<li>03pm 用24小时制am/pm表示上下午表示，保留前导0</li>
-<li>3pm 用24小时制am/pm表示上下午表示，去掉前导0
-又比如月份</li>
-<li>1 数字表示月份，去掉前导0</li>
-<li>01 数字表示月份，保留前导0</li>
-<li>Jan 缩写单词表示月份</li>
-<li>January 全单词表示月份</li>
-</ul>
-
-<p><strong>实例对应</strong></p>
-
-<p>真实时间：我的UTC时间是 2013年12月5日，我的本地时区是Asia </p>
-
-<p>字符表示：　　2013 12 5 Asia</p>
-
-<p>Go Layout：　2006 01 2 MST</p>
-
-<p>真实时间：我的UTC时间是 2013年12月22点，我的本地时区是Asia</p>
-
-<p>字符表示：　　2013 12 22 Asia</p>
-
-<p>Go Layout：　2006 01 15 MST</p>
-
-<p>是滴，上面这个时间是合法的，虽然没有说是那一天，但是说了小时。而所有这些数字的顺序正好是1,2,4,5,6,7和一个时区MST。</p>
-
-<p>其实还有一个秒的 repeated digits for fractional seconds 表示法，用的是 0和9 ,很少用，源代码里面是这样写的</p>
-
-<pre><code>1. stdFracSecond0                          // &quot;.0&quot;, &quot;.00&quot;, ... , trailing zeros included
-2. stdFracSecond9                          // &quot;.9&quot;, &quot;.99&quot;, ..., trailing zeros omitted
-</code></pre>
-
-<p><strong>那些分界符</strong></p>
-
-<p>除了那些值之外的都是分界符号，自然匹配了，直接举例子吧</p>
-
-<p>字符表示：　　2013-12 21 Asia</p>
-
-<p>Go Layout：　2006-01 15 MST</p>
-
-<p>字符表示：　　2013年12月21时 时区Asia</p>
-
-<p>Go Layout：　2006年01月15时 时区MST</p>
-
-<p>好了，您是否感觉这个表示方法兼容度更好，适应性更强呢，更容易记忆呢。</p>
 
 ]]></content>
   </entry>
