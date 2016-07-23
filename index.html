@@ -104,6 +104,63 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="error-of-go-build.html">
+                
+                  <h1>go build时的错误分析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">go build 错误一</h2>
+
+<p>如果出现：</p>
+
+<pre><code>
+warning: building out-of-date packages:
+
+runtime/pprof
+
+testing
+
+regexp/syntax
+
+regexp
+
+installing these packages with &#39;go test -i&#39; will speed future tests.
+
+</code></pre>
+
+<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
+如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
+
+<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                      
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="error-of-go-build.html" data-count-type="comments" href="error-of-go-build.html#ds-thread"></a>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="get-path-with-golang.html">
                 
                   <h1>go中获取各种路径</h1>
@@ -392,63 +449,6 @@ int(f)
 
                       
                         &nbsp;<a  class="ds-thread-count" data-thread-key="change-type-of-data.html" data-count-type="comments" href="change-type-of-data.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="error-of-go-build.html">
-                
-                  <h1>go build时的错误分析</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">go build 错误一</h2>
-
-<p>如果出现：</p>
-
-<pre><code>
-warning: building out-of-date packages:
-
-runtime/pprof
-
-testing
-
-regexp/syntax
-
-regexp
-
-installing these packages with &#39;go test -i&#39; will speed future tests.
-
-</code></pre>
-
-<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
-如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
-
-<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="error-of-go-build.html" data-count-type="comments" href="error-of-go-build.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -769,6 +769,12 @@ ssh -T git@域名
 	      
 		      
 			      <li class="post">
+			        <a href="error-of-go-build.html">go build时的错误分析</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="get-path-with-golang.html">go中获取各种路径</a>
 			      </li>
 		     
@@ -788,12 +794,6 @@ ssh -T git@域名
 		      
 			      <li class="post">
 			        <a href="time-package-of-golang.html">go time package 时间包</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="change-type-of-data.html">go 类型转换</a>
 			      </li>
 		     
 		  
