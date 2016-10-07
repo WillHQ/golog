@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Go 编写的内容管理系统 Fragmenta CMS - GOLOG
+  		简单 golang 日志 Golog - GOLOG
   	
   	</title>
   	
@@ -106,7 +106,7 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Go 编写的内容管理系统 Fragmenta CMS</h1>
+          <h1>简单 golang 日志 Golog</h1>
      
         <div class="read-more clearfix">
           <span class="date">2016/10/7</span>
@@ -120,7 +120,7 @@
             
 
             
-              &nbsp;<a  class="ds-thread-count" data-thread-key="fragmenta-cms-project.html" data-count-type="comments" href="fragmenta-cms-project.html#ds-thread"></a>
+              &nbsp;<a  class="ds-thread-count" data-thread-key="golog-log-project.html" data-count-type="comments" href="golog-log-project.html#ds-thread"></a>
             
           </span>
 
@@ -128,19 +128,38 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Fragmenta CMS 是一个用户友好的内容管理系统，用 Go 编写。</p>
+      <p>Golog 是简单的golang日志，基于golang内置log封装.</p>
 
-<p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
+<p>特征</p>
 
-<ul>
-<li><p>简单部署 —— 你只需要一个数据库和fragment —— 与内置的Web服务器本地进行测试</p></li>
-<li><p>使用与你网站相同的风格进行Rich editing</p></li>
-<li><p>免费且开源 (MIT) ——下载二进制文件或自己编译</p></li>
-</ul>
+<ol>
+<li><p>实现各种日志 level: DEBUG, INFO, WARN, ERROR</p></li>
+<li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
+</ol>
 
-<p>项目的Github链接：<a href="http://github.com/fragmenta/fragmenta-cms">http://github.com/fragmenta/fragmenta-cms</a></p>
+<p>代码实例</p>
 
-<p>项目的主页链接：<a href="http://fragmenta.eu/">http://fragmenta.eu/</a></p>
+<pre><code>// rotating hander, max log files is 4, max file size is 4M
+rotatingHandler := logger.NewRotatingHandler(&quot;./&quot;, &quot;test.log&quot;, 4, 4*1024*1024)
+
+// logger set handlers: console, rotating
+logger.SetHandlers(logger.Console, rotatingHandler)
+
+defer logger.Close()
+
+// logger set flags
+logger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+
+// logger set log level
+logger.SetLevel(logger.INFO)
+
+logger.Debug(&quot;something&quot;, &quot;debug&quot;)
+logger.Info(&quot;something&quot;)
+logger.Warn(&quot;something&quot;)
+logger.Error(&quot;something&quot;)
+</code></pre>
+
+<p>项目Github链接：<a href="https://github.com/jander/golog">https://github.com/jander/golog</a></p>
 
 
     
@@ -151,16 +170,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="golog-log-project.html" 
-          title="Previous Post: 简单 golang 日志 Golog">&laquo; 简单 golang 日志 Golog</a>
+          <a href="mattermost-go-project.html" 
+          title="Previous Post: Slack 的开源替代品 Mattermost">&laquo; Slack 的开源替代品 Mattermost</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="error-of-go-build.html" 
-          title="Next Post: go build时的错误分析">go build时的错误分析 &raquo;</a>
+          <a  href="fragmenta-cms-project.html" 
+          title="Next Post: Go 编写的内容管理系统 Fragmenta CMS">Go 编写的内容管理系统 Fragmenta CMS &raquo;</a>
       
       </p>
         </div>
@@ -172,7 +191,7 @@
           
 
           
-              <div class="ds-thread" data-thread-key="fragmenta-cms-project.html" data-url="http://golog.cc/fragmenta-cms-project.html" data-title="Go 编写的内容管理系统 Fragmenta CMS"></div>
+              <div class="ds-thread" data-thread-key="golog-log-project.html" data-url="http://golog.cc/golog-log-project.html" data-title="简单 golang 日志 Golog"></div>
           
         </div>
       </div>
