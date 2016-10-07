@@ -4,13 +4,46 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-10-07T21:11:10+08:00</updated>
+  <updated>2016-10-08T00:08:43+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下切换用户的命令]]></title>
+    <link href="http://golog.cc/change-user-os.html"/>
+    <updated>2016-10-08T00:07:00+08:00</updated>
+    <id>http://golog.cc/change-user-os.html</id>
+    <content type="html"><![CDATA[
+<ol>
+<li>增加用户，在root下：</li>
+</ol>
+
+<pre><code>
+add user git
+
+</code></pre>
+
+<p>表示增加git用户。</p>
+
+<ol>
+<li>切换用户</li>
+</ol>
+
+<pre><code>
+su git
+
+</code></pre>
+
+<p>切换成git用户。</p>
+
+<p>从root用户切换到其他用户不需要密码，从其他用户切换到root用户，需要输入密码。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何升级CentOS 6.5下的MySQL]]></title>
