@@ -4,13 +4,30 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-10-07T18:06:47+08:00</updated>
+  <updated>2016-10-07T18:29:07+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[ThinkGo类ThinkPHP的Go语言WEB开发框架]]></title>
+    <link href="http://golog.cc/thinkgo-web-frame-project.html"/>
+    <updated>2016-10-07T19:02:19+08:00</updated>
+    <id>http://golog.cc/thinkgo-web-frame-project.html</id>
+    <content type="html"><![CDATA[
+<p>ThinkGo 是一款 Go 语言编写的 web 快速开发框架。</p>
+
+<p>它基于开源框架 Gin 进行二次开发，旨在实现一种类 ThinkPHP 的高可用、高效率的 web 框架。</p>
+
+<p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
+
+<p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Slack 的开源替代品 Mattermost]]></title>
