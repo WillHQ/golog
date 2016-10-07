@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		GO语言杂谈 - GOLOG
+  		数据库相关 - GOLOG
   	
   	</title>
   	
@@ -108,24 +108,107 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="github-pages-and-static-website.html">
+                <a class="clearlink" href="how-to-update-mysql-in-centos.html">
                 
-                  <h1>Github Pages 静态网站托管</h1>
+                  <h1>如何升级CentOS 6.5下的MySQL</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>本网站就是采用Github pages托管的静态网站。</p>
+                        	<ul>
+<li>1. 备份数据库，升级MySQL通常不会丢失数据，但保险起见，我们需要做这一步。输入命令：</li>
+</ul>
 
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+<pre><code>
+mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
 
-<p>下面简要的说一下：</p>
+</code></pre>
 
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
+<ul>
+<li>2. 停止MySQL服务，输入命令：</li>
+</ul>
+
+<pre><code>
+service mysqld stop
+
+</code></pre>
+
+<ul>
+<li>3. 卸载旧版MySQL，输入命令：</li>
+</ul>
+
+<pre><code>
+yum remove mysql mysql-*
+
+</code></pre>
+
+<ul>
+<li>4. 移除命令执行后，可再看看是否有残余的mysql，输入命令：</li>
+</ul>
+
+<pre><code>
+yum list installed | grep mysql
+
+</code></pre>
+
+<p>如果有，可输入命令删除：</p>
+
+<pre><code>
+rum remove mysql－libs
+
+</code></pre>
+
+<ul>
+<li>5. 下载安装最新的rpm文件</li>
+</ul>
+
+<pre><code>
+rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+
+</code></pre>
+
+<ul>
+<li>6. 安装MySQL，输入命令：</li>
+</ul>
+
+<pre><code>
+yum install mysql-community-server
+
+</code></pre>
+
+<ul>
+<li>7. 安装完成后，输入命令查看MySQL版本号：</li>
+</ul>
+
+<pre><code>
+mysql -V
+
+</code></pre>
+
+<ul>
+<li>8. 启动MySQL，输入命令：</li>
+</ul>
+
+<pre><code>
+service mysqld start
+
+</code></pre>
+
+<p>在经过上面的方法升级之后，Mysql启动时，可能会报错，复发启动，查看/var/log/mysqld.log发现：</p>
+
+<pre><code>
+[ERROR] InnoDB: auto-extending data file ./ibdata1 is of a different size 640 pages (rounded down to MB) than specified in the .cnf file: initial 768 pages, max 0 (relevant if non-zero) pages!
+
+</code></pre>
+
+<p>可以采用下面的方法来处理：</p>
+
+<pre><code>
+rm -rf /var/lib/mysql/ib*
+
+</code></pre>
+
+<p>删除ibdata1、ib_logfile0、ib_logfile1等文件，再重启Mysql即可。</p>
 
                         
                       </div>
@@ -134,10 +217,10 @@
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2016/7/22</span>
+                    <span class="date">2016/10/7</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -145,7 +228,7 @@
                       
 
                       
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="github-pages-and-static-website.html" data-count-type="comments" href="github-pages-and-static-website.html#ds-thread"></a>
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="how-to-update-mysql-in-centos.html" data-count-type="comments" href="how-to-update-mysql-in-centos.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -153,132 +236,44 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="set-many-ssh-keys-in-a-computer.html">
+                <a class="clearlink" href="centos-Another-MySQL-daemon-already-running.html">
                 
-                  <h1>一台机器上设置多个SSH Key</h1>
+                  <h1>CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<blockquote>
-<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
-</blockquote>
-
-<p><strong>1. 生成 ssh keys</strong></p>
-
-<p>终端下输入命令：</p>
+                        	<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
 
 <pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
+service mysqld restart
+
+service mysqld start
 
 </code></pre>
 
-<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
-
-<p>注意：双引号换成自己的邮箱，如果linux下遇到权限问题，只需在前面加上sudo</p>
-
-<p><strong>2. github添加SSH keys</strong></p>
-
-<p>将id_rsa.pub里面的内容复制下来，在github上的settings里面找到add keys，将其粘贴到key即可，title唯一即可随便填，建议写有意义的;</p>
-
-<p><strong>3. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
+<p>都解决不了，会提示：</p>
 
 <pre><code>
-ssh -T git@github.com
+Another MySQL daemon already running with the same unix socket.
 
 </code></pre>
 
-<p>只要看到最后一行:</p>
+<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
+
+<ol>
+<li><p>重启服务器</p></li>
+<li><p>采用如下的命令：</p></li>
+</ol>
 
 <pre><code>
-Hi chenlianjiang! You&#39;ve successfully authenticated, but GitHub does not provide shell access
+# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
+
+# service mysqld start
 
 </code></pre>
 
-<p>说明验证成功了.</p>
-
-<p><strong>4. gitlib帐号添加SSH keys</strong></p>
-
-<p>同第（1）步一样，生成新的SSH Keys</p>
-
-<p>这时候在生成ssh key时候要注意了这时一路回车，不输入任何字符在绑定gitlibng的ssh key时，会发现将github的ssh key覆盖了。需要做调整：</p>
-
-<p>打开终端，终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时，给这个文件起一个名字， 比如叫C:\Users\Administrator.ssh\ id_rsa_gitlib, 所以相应的也会生成一个 id_rsa_gitlib.pub 文件。</p>
-
-<p>注意这里如果只输入文件名会在终端的当前目录下生成，拷贝到对应位置即可；</p>
-
-<p>终端输入一下命令：</p>
-
-<pre><code>
-$ ssh-add ~/.ssh/id_rsa
-
-$ ssh-add ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>ssh-add命令是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在/usr/bin/ssh-add</p>
-
-<p>如果出现Could not open a connection to your authentication agent.错误提示先执行$ ssh-agent.exe bash，然后执行上面命令；</p>
-
-<pre><code>
--D：删除ssh-agent中的所有密钥
-
--d：从ssh-agent中的删除密钥
-
--e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙
-
--s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙
-
--L：显示ssh-agent中的公钥
-
--l：显示ssh-agent中的密钥
-
--t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥
-
--X：对ssh-agent进行解锁
-
--x：对ssh-agent进行加锁
-
-</code></pre>
-
-<p>在~/.ssh/目录下新建config文件，并添加:</p>
-
-<pre><code>
-# github
-Host github.com
-      HostName github.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa
-      
-# gitlib
-Host gitlib.com
-      HostName gitlib.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>将id_rsa_gitlib.pub里面的内容复制下来，在gitlib上的账户里面找到所示SSH keys，将其粘贴到key内容即可，Title唯一即可随便填，，点击添加需要输入登录密码；</p>
-
-<p><strong>5. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@域名
-
-</code></pre>
-
-<p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
+<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
 
                         
                       </div>
@@ -287,10 +282,10 @@ ssh -T git@域名
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2016/7/22</span>
+                    <span class="date">2016/10/7</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -298,7 +293,7 @@ ssh -T git@域名
                       
 
                       
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="set-many-ssh-keys-in-a-computer.html" data-count-type="comments" href="set-many-ssh-keys-in-a-computer.html#ds-thread"></a>
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="centos-Another-MySQL-daemon-already-running.html" data-count-type="comments" href="centos-Another-MySQL-daemon-already-running.html#ds-thread"></a>
                        
                   </span>
                   </div>

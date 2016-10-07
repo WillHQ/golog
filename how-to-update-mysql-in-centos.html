@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		操作系统相关 - GOLOG
+  		如何升级CentOS 6.5下的MySQL - GOLOG
   	
   	</title>
   	
@@ -87,7 +87,7 @@
 		        
 		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
 		        
-		            <li><a href="about-os.html">操作系统相关</a></li>
+		            <li><a href="about-database.html">数据库相关</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -99,96 +99,168 @@
        
 
  <script type="text/javascript">
-	$(function(){
-		$('#menu_item_index').addClass('is_active');
-	});
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
 </script>
 <div class="row">
-	<div class="large-8 medium-8 columns">
-		<div class="markdown-body home-categories">
-		
-			<div class="article">
-                <a class="clearlink" href="centos-Another-MySQL-daemon-already-running.html">
-                
-                  <h1>CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>如何升级CentOS 6.5下的MySQL</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2016/10/7</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+              &nbsp;<a  class="ds-thread-count" data-thread-key="how-to-update-mysql-in-centos.html" data-count-type="comments" href="how-to-update-mysql-in-centos.html#ds-thread"></a>
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <ul>
+<li>1. 备份数据库，升级MySQL通常不会丢失数据，但保险起见，我们需要做这一步。输入命令：</li>
+</ul>
 
 <pre><code>
-service mysqld restart
+mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
 
+</code></pre>
+
+<ul>
+<li>2. 停止MySQL服务，输入命令：</li>
+</ul>
+
+<pre><code>
+service mysqld stop
+
+</code></pre>
+
+<ul>
+<li>3. 卸载旧版MySQL，输入命令：</li>
+</ul>
+
+<pre><code>
+yum remove mysql mysql-*
+
+</code></pre>
+
+<ul>
+<li>4. 移除命令执行后，可再看看是否有残余的mysql，输入命令：</li>
+</ul>
+
+<pre><code>
+yum list installed | grep mysql
+
+</code></pre>
+
+<p>如果有，可输入命令删除：</p>
+
+<pre><code>
+rum remove mysql－libs
+
+</code></pre>
+
+<ul>
+<li>5. 下载安装最新的rpm文件</li>
+</ul>
+
+<pre><code>
+rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+
+</code></pre>
+
+<ul>
+<li>6. 安装MySQL，输入命令：</li>
+</ul>
+
+<pre><code>
+yum install mysql-community-server
+
+</code></pre>
+
+<ul>
+<li>7. 安装完成后，输入命令查看MySQL版本号：</li>
+</ul>
+
+<pre><code>
+mysql -V
+
+</code></pre>
+
+<ul>
+<li>8. 启动MySQL，输入命令：</li>
+</ul>
+
+<pre><code>
 service mysqld start
 
 </code></pre>
 
-<p>都解决不了，会提示：</p>
+<p>在经过上面的方法升级之后，Mysql启动时，可能会报错，复发启动，查看/var/log/mysqld.log发现：</p>
 
 <pre><code>
-Another MySQL daemon already running with the same unix socket.
+[ERROR] InnoDB: auto-extending data file ./ibdata1 is of a different size 640 pages (rounded down to MB) than specified in the .cnf file: initial 768 pages, max 0 (relevant if non-zero) pages!
 
 </code></pre>
 
-<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
-
-<ol>
-<li><p>重启服务器</p></li>
-<li><p>采用如下的命令：</p></li>
-</ol>
+<p>可以采用下面的方法来处理：</p>
 
 <pre><code>
-# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
-
-# service mysqld start
+rm -rf /var/lib/mysql/ib*
 
 </code></pre>
 
-<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="centos-Another-MySQL-daemon-already-running.html" data-count-type="comments" href="centos-Another-MySQL-daemon-already-running.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-              
+<p>删除ibdata1、ib_logfile0、ib_logfile1等文件，再重启Mysql即可。</p>
 
 
-			<div class="row">
-			  <div class="large-6 columns">
-			  <p class="text-left" style="padding-top:25px;">
-			   
-			  </p>
-			  </div>
-			  <div class="large-6 columns">
-			<p class="text-right" style="padding-top:25px;">
-			
-			</p>
-			  </div>
-			</div>
-		</div>
-	</div><!-- large 8 -->
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="centos-Another-MySQL-daemon-already-running.html" 
+          title="Next Post: CentOS下Mysql无法启动，提示“Another MySQL daemon already running”">CentOS下Mysql无法启动，提示“Another MySQL daemon already running” &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+              <div class="ds-thread" data-thread-key="how-to-update-mysql-in-centos.html" data-url="http://golog.cc/how-to-update-mysql-in-centos.html" data-title="如何升级CentOS 6.5下的MySQL"></div>
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
@@ -236,7 +308,7 @@ Another MySQL daemon already running with the same unix socket.
         
             <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
         
-            <a href="about-os.html"><strong>操作系统相关</strong></a>
+            <a href="about-database.html"><strong>数据库相关</strong></a>
          
         </p>
 
@@ -251,6 +323,12 @@ Another MySQL daemon already running with the same unix socket.
                 <div class="side-content">
                 <ul class="posts-list">
 	      
+		      
+			      <li class="post">
+			        <a href="how-to-update-mysql-in-centos.html">如何升级CentOS 6.5下的MySQL</a>
+			      </li>
+		     
+		  
 		      
 			      <li class="post">
 			        <a href="centos-Another-MySQL-daemon-already-running.html">CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</a>
@@ -276,10 +354,6 @@ Another MySQL daemon already running with the same unix socket.
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="fragmenta-cms-project.html">Go 编写的内容管理系统 Fragmenta CMS</a>
-			      </li>
-		     
 		  
 		      
 		  
