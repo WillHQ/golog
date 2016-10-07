@@ -4,13 +4,54 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-10-07T18:29:07+08:00</updated>
+  <updated>2016-10-07T19:04:11+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS下Mysql无法启动，提示“Another MySQL daemon already running”]]></title>
+    <link href="http://golog.cc/centos-Another-MySQL-daemon-already-running.html"/>
+    <updated>2016-10-07T21:04:41+08:00</updated>
+    <id>http://golog.cc/centos-Another-MySQL-daemon-already-running.html</id>
+    <content type="html"><![CDATA[
+<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
+
+<pre><code>
+service mysqld restart
+
+service mysqld start
+
+</code></pre>
+
+<p>都解决不了，会提示：</p>
+
+<pre><code>
+Another MySQL daemon already running with the same unix socket.
+
+</code></pre>
+
+<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
+
+<ol>
+<li><p>重启服务器</p></li>
+<li><p>采用如下的命令：</p></li>
+</ol>
+
+<pre><code>
+# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
+
+# service mysqld start
+
+</code></pre>
+
+<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ThinkGo类ThinkPHP的Go语言WEB开发框架]]></title>

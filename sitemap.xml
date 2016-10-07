@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://golog.cc/</loc>
-  <lastmod>2016-10-07T19:04:11+08:00</lastmod>
+  <lastmod>2016-10-07T21:11:10+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/centos-Another-MySQL-daemon-already-running.html</loc>
+  <lastmod>2016-10-07T21:04:41+08:00</lastmod>
 </url>
 
 <url>
@@ -99,6 +104,10 @@
 
 <url>
   <loc>http://golog.cc/Projects-of-go.html</loc>
+</url>
+
+<url>
+  <loc>http://golog.cc/about-os.html</loc>
 </url>
 
 

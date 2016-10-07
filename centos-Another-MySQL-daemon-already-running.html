@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Github Pages 静态网站托管 - GOLOG
+  		CentOS下Mysql无法启动，提示“Another MySQL daemon already running” - GOLOG
   	
   	</title>
   	
@@ -108,21 +108,21 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Github Pages 静态网站托管</h1>
+          <h1>CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/7/22</span>
+          <span class="date">2016/10/7</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+              <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
            
          
           <span class="comments">
             
 
             
-              &nbsp;<a  class="ds-thread-count" data-thread-key="github-pages-and-static-website.html" data-count-type="comments" href="github-pages-and-static-website.html#ds-thread"></a>
+              &nbsp;<a  class="ds-thread-count" data-thread-key="centos-Another-MySQL-daemon-already-running.html" data-count-type="comments" href="centos-Another-MySQL-daemon-already-running.html#ds-thread"></a>
             
           </span>
 
@@ -130,17 +130,37 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>本网站就是采用Github pages托管的静态网站。</p>
+      <p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
 
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+<pre><code>
+service mysqld restart
 
-<p>下面简要的说一下：</p>
+service mysqld start
+
+</code></pre>
+
+<p>都解决不了，会提示：</p>
+
+<pre><code>
+Another MySQL daemon already running with the same unix socket.
+
+</code></pre>
+
+<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
 
 <ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
+<li><p>重启服务器</p></li>
+<li><p>采用如下的命令：</p></li>
 </ol>
+
+<pre><code>
+# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
+
+# service mysqld start
+
+</code></pre>
+
+<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
 
 
     
@@ -151,16 +171,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="usage-of-import.html" 
-          title="Previous Post: import的使用">&laquo; import的使用</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="set-many-ssh-keys-in-a-computer.html" 
-          title="Next Post: 一台机器上设置多个SSH Key">一台机器上设置多个SSH Key &raquo;</a>
+          <a  href="thinkgo-web-frame-project.html" 
+          title="Next Post: ThinkGo类ThinkPHP的Go语言WEB开发框架">ThinkGo类ThinkPHP的Go语言WEB开发框架 &raquo;</a>
       
       </p>
         </div>
@@ -172,7 +189,7 @@
           
 
           
-              <div class="ds-thread" data-thread-key="github-pages-and-static-website.html" data-url="http://golog.cc/github-pages-and-static-website.html" data-title="Github Pages 静态网站托管"></div>
+              <div class="ds-thread" data-thread-key="centos-Another-MySQL-daemon-already-running.html" data-url="http://golog.cc/centos-Another-MySQL-daemon-already-running.html" data-title="CentOS下Mysql无法启动，提示“Another MySQL daemon already running”"></div>
           
         </div>
       </div>
