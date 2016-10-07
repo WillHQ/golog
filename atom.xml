@@ -4,13 +4,36 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-07-23T10:25:45+08:00</updated>
+  <updated>2016-07-23T10:41:52+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Go 编写的内容管理系统 Fragmenta CMS]]></title>
+    <link href="http://golog.cc/fragmenta-cms-project.html"/>
+    <updated>2016-10-07T18:04:12+08:00</updated>
+    <id>http://golog.cc/fragmenta-cms-project.html</id>
+    <content type="html"><![CDATA[
+<p>Fragmenta CMS 是一个用户友好的内容管理系统，用 Go 编写。</p>
+
+<p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
+
+<ul>
+<li><p>简单部署 —— 你只需要一个数据库和fragment —— 与内置的Web服务器本地进行测试</p></li>
+<li><p>使用与你网站相同的风格进行Rich editing</p></li>
+<li><p>免费且开源 (MIT) ——下载二进制文件或自己编译</p></li>
+</ul>
+
+<p>项目的Github链接：<a href="http://github.com/fragmenta/fragmenta-cms">http://github.com/fragmenta/fragmenta-cms</a></p>
+
+<p>项目的主页链接：<a href="http://fragmenta.eu/">http://fragmenta.eu/</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[go build时的错误分析]]></title>

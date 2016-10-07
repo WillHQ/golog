@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://golog.cc/</loc>
-  <lastmod>2016-07-23T10:41:52+08:00</lastmod>
+  <lastmod>2016-10-07T18:06:47+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/fragmenta-cms-project.html</loc>
+  <lastmod>2016-10-07T18:04:12+08:00</lastmod>
 </url>
 
 <url>
@@ -75,6 +80,10 @@
 
 <url>
   <loc>http://golog.cc/skills-of-golang.html</loc>
+</url>
+
+<url>
+  <loc>http://golog.cc/Projects-of-go.html</loc>
 </url>
 
 
