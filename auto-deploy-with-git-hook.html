@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		ThinkGo类ThinkPHP的Go语言WEB开发框架 - GOLOG
+  		使用Git的钩子实现自动部署 - GOLOG
   	
   	</title>
   	
@@ -110,21 +110,21 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>ThinkGo类ThinkPHP的Go语言WEB开发框架</h1>
+          <h1>使用Git的钩子实现自动部署</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/7</span>
+          <span class="date">2016/10/8</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+              <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
            
          
           <span class="comments">
             
 
             
-              &nbsp;<a  class="ds-thread-count" data-thread-key="thinkgo-web-frame-project.html" data-count-type="comments" href="thinkgo-web-frame-project.html#ds-thread"></a>
+              &nbsp;<a  class="ds-thread-count" data-thread-key="auto-deploy-with-git-hook.html" data-count-type="comments" href="auto-deploy-with-git-hook.html#ds-thread"></a>
             
           </span>
 
@@ -132,13 +132,36 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>ThinkGo 是一款 Go 语言编写的 web 快速开发框架。</p>
+      <ol>
+<li><p>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</p></li>
+<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
 
-<p>它基于开源框架 Gin 进行二次开发，旨在实现一种类 ThinkPHP 的高可用、高效率的 web 框架。</p>
+<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
+<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
 
-<p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
+<p>在该目录下，运行：</p>
 
-<p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
+<pre><code>
+git clone /var/git/testRep /var/testDeploy
+
+</code></pre>
+
+<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p></li>
+<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
+
+<pre><code>
+unset GIT_DIR
+DeployDir=/var/testDeploy/
+cd $DeployDir
+git add . -A &amp;&amp; git stash
+git pull origin master
+
+</code></pre>
+
+<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
+
+<p>以上方法步骤，验证通过。</p></li>
+</ol>
 
 
     
@@ -149,16 +172,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="centos-Another-MySQL-daemon-already-running.html" 
-          title="Previous Post: CentOS下Mysql无法启动，提示“Another MySQL daemon already running”">&laquo; CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="mattermost-go-project.html" 
-          title="Next Post: Slack 的开源替代品 Mattermost">Slack 的开源替代品 Mattermost &raquo;</a>
+          <a  href="change-user-os.html" 
+          title="Next Post: Linux下切换用户的命令">Linux下切换用户的命令 &raquo;</a>
       
       </p>
         </div>
@@ -170,7 +190,7 @@
           
 
           
-              <div class="ds-thread" data-thread-key="thinkgo-web-frame-project.html" data-url="http://golog.cc/thinkgo-web-frame-project.html" data-title="ThinkGo类ThinkPHP的Go语言WEB开发框架"></div>
+              <div class="ds-thread" data-thread-key="auto-deploy-with-git-hook.html" data-url="http://golog.cc/auto-deploy-with-git-hook.html" data-title="使用Git的钩子实现自动部署"></div>
           
         </div>
       </div>
