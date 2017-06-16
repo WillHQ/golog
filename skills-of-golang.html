@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -135,56 +135,6 @@ file, _ := exec.LookPath(os.Args[0])
 
 </code></pre>
 
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
 
                         
                       </div>
@@ -192,9 +142,9 @@ func main() {
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="get-path-with-golang.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
@@ -237,7 +187,7 @@ os.Geteuid() != 0
                   <div class="more-left left">
                   
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
@@ -274,18 +224,8 @@ s = strconv.FormatInt(int64(i), 10)
 <pre><code>i, err = strconv.Atoi(s)
 
 i, err = ParseInt(s, 10, 0) 
-</code></pre></li>
-<li><p>字符串到float（32/64）</p>
+</code></pre>
 
-<pre><code>f, err = ParseFloat(s, 32) `
-</code></pre></li>
-<li><p>整型到float或者float到整型</p>
-
-<pre><code>float(i)
-
-int(f)
-</code></pre></li>
-</ol>
 
                         
                       </div>
@@ -293,9 +233,9 @@ int(f)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="change-type-of-data.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
@@ -374,13 +314,13 @@ int(f)
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 

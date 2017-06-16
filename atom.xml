@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-16T22:54:20+08:00</updated>
+  <updated>2017-06-17T00:33:01+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -18,7 +18,9 @@
     <updated>2017-06-16T23:09:29+08:00</updated>
     <id>http://golog.cc/beego-web-framework-of-golang.html</id>
     <content type="html"><![CDATA[
-<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站上<a href="http://beego.me">Beego</a>上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+
+<span id="more"></span><!-- more -->
 
 <p>从这篇开始，在使用Beego这个框架做项目的时候，陆续的记录一些笔记，供大家（也包括自己）参考使用。</p>
 
@@ -37,6 +39,8 @@
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <p>解决方法：</p>
 
@@ -58,7 +62,12 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
     <id>http://golog.cc/auto-deploy-with-git-hook.html</id>
     <content type="html"><![CDATA[
 <ol>
-<li><p>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</p></li>
+<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
+</ol>
+
+<span id="more"></span><!-- more -->
+
+<ol>
 <li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
 
 <p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
@@ -142,6 +151,8 @@ su git
 mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
 
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <ul>
 <li>2. 停止MySQL服务，输入命令：</li>
@@ -254,6 +265,8 @@ Another MySQL daemon already running with the same unix socket.
 
 </code></pre>
 
+<span id="more"></span><!-- more -->
+
 <p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
 
 <ol>
@@ -285,6 +298,8 @@ Another MySQL daemon already running with the same unix socket.
 
 <p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
 
+<span id="more"></span><!-- more -->
+
 <p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
 
 ]]></content>
@@ -299,6 +314,8 @@ Another MySQL daemon already running with the same unix socket.
 <p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
 
 <p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
+
+<span id="more"></span><!-- more -->
 
 <p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
 
@@ -325,6 +342,8 @@ Another MySQL daemon already running with the same unix socket.
 <li><p>实现各种日志 level: DEBUG, INFO, WARN, ERROR</p></li>
 <li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
 </ol>
+
+<span id="more"></span><!-- more -->
 
 <p>代码实例</p>
 
@@ -362,6 +381,8 @@ logger.Error(&quot;something&quot;)
 <p>Fragmenta CMS 是一个用户友好的内容管理系统，用 Go 编写。</p>
 
 <p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
+
+<span id="more"></span><!-- more -->
 
 <ul>
 <li><p>简单部署 —— 你只需要一个数据库和fragment —— 与内置的Web服务器本地进行测试</p></li>
@@ -401,6 +422,8 @@ installing these packages with &#39;go test -i&#39; will speed future tests.
 
 </code></pre>
 
+<span id="more"></span><!-- more -->
+
 <p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
 如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
 
@@ -430,6 +453,8 @@ os.Getwd()
 file, _ := exec.LookPath(os.Args[0])
 
 </code></pre>
+
+<span id="more"></span><!-- more -->
 
 <p>执行程序所在的绝对路径：</p>
 
@@ -525,6 +550,8 @@ os.Geteuid() != 0
 
 <p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
 
+<span id="more"></span><!-- more -->
+
 <p>问题是，go采用的格式化layout 和我们以往所用的任何经验都不同。以至于初次接触总是一头雾水。</p>
 
 <p>其实go提供的这个layout对算法的实现非常科学高效，而且很规律。下面我们详细分解下。</p>
@@ -546,7 +573,7 @@ os.Geteuid() != 0
 
 <p>您看出规律了么！哦是的，你发现了，这里面没有一个是重复的，所有的值表示都唯一对应一个时间部分。并且涵盖了很多格式组合。</p>
 
-<span id="more"></span><!-- more -->
+<!-- more -->
 
 <p><strong>比如小时的表示(原定义是下午3时，也就是15时)</strong></p>
 
@@ -620,7 +647,9 @@ s = strconv.FormatInt(int64(i), 10)
 <pre><code>i, err = strconv.Atoi(s)
 
 i, err = ParseInt(s, 10, 0) 
-</code></pre></li>
+</code></pre>
+
+<span id="more"></span><!-- more --></li>
 <li><p>字符串到float（32/64）</p>
 
 <pre><code>f, err = ParseFloat(s, 32) `
@@ -661,6 +690,8 @@ int(f)
 
 <p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
 
+<span id="more"></span><!-- more -->
+
 <p>下面简要的说一下：</p>
 
 <ol>
@@ -692,6 +723,8 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 </code></pre>
 
 <p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
+
+<span id="more"></span><!-- more -->
 
 <p>注意：双引号换成自己的邮箱，如果linux下遇到权限问题，只需在前面加上sudo</p>
 

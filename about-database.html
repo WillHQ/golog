@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -128,91 +128,6 @@ mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
 
 </code></pre>
 
-<ul>
-<li>2. 停止MySQL服务，输入命令：</li>
-</ul>
-
-<pre><code>
-service mysqld stop
-
-</code></pre>
-
-<ul>
-<li>3. 卸载旧版MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-yum remove mysql mysql-*
-
-</code></pre>
-
-<ul>
-<li>4. 移除命令执行后，可再看看是否有残余的mysql，输入命令：</li>
-</ul>
-
-<pre><code>
-yum list installed | grep mysql
-
-</code></pre>
-
-<p>如果有，可输入命令删除：</p>
-
-<pre><code>
-rum remove mysql－libs
-
-</code></pre>
-
-<ul>
-<li>5. 下载安装最新的rpm文件</li>
-</ul>
-
-<pre><code>
-rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-
-</code></pre>
-
-<ul>
-<li>6. 安装MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-yum install mysql-community-server
-
-</code></pre>
-
-<ul>
-<li>7. 安装完成后，输入命令查看MySQL版本号：</li>
-</ul>
-
-<pre><code>
-mysql -V
-
-</code></pre>
-
-<ul>
-<li>8. 启动MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-service mysqld start
-
-</code></pre>
-
-<p>在经过上面的方法升级之后，Mysql启动时，可能会报错，复发启动，查看/var/log/mysqld.log发现：</p>
-
-<pre><code>
-[ERROR] InnoDB: auto-extending data file ./ibdata1 is of a different size 640 pages (rounded down to MB) than specified in the .cnf file: initial 768 pages, max 0 (relevant if non-zero) pages!
-
-</code></pre>
-
-<p>可以采用下面的方法来处理：</p>
-
-<pre><code>
-rm -rf /var/lib/mysql/ib*
-
-</code></pre>
-
-<p>删除ibdata1、ib_logfile0、ib_logfile1等文件，再重启Mysql即可。</p>
 
                         
                       </div>
@@ -220,9 +135,9 @@ rm -rf /var/lib/mysql/ib*
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="how-to-update-mysql-in-centos.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
@@ -263,21 +178,6 @@ Another MySQL daemon already running with the same unix socket.
 
 </code></pre>
 
-<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
-
-<ol>
-<li><p>重启服务器</p></li>
-<li><p>采用如下的命令：</p></li>
-</ol>
-
-<pre><code>
-# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
-
-# service mysqld start
-
-</code></pre>
-
-<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
 
                         
                       </div>
@@ -285,9 +185,9 @@ Another MySQL daemon already running with the same unix socket.
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="centos-Another-MySQL-daemon-already-running.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
@@ -366,13 +266,13 @@ Another MySQL daemon already running with the same unix socket.
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 

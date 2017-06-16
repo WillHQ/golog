@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法 - GOLOG
+  		GOLOG
   	
   	</title>
   	
@@ -103,96 +103,205 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu-index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu-index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2017/6/16</span>
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="change-type-of-data.html">
+                
+                  <h1>go 类型转换</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ol>
+<li><p>整型到字符串</p>
 
-          <span>文章分类：</span> 
-          
-              <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-           
-         
-          <span class="comments">
-            
+<pre><code>s = strconv.Itoa(i) 
 
-            
-              &nbsp;<a  class="ds-thread-count" data-thread-key="mac-xcrun-error-fixed.html" data-count-type="comments" href="mac-xcrun-error-fixed.html#ds-thread"></a>
-            
-          </span>
+s = strconv.FormatInt(int64(i), 10)
+</code></pre></li>
+<li><p>字符串到整型</p>
 
-        </div>
-      </div><!-- article -->
+<pre><code>i, err = strconv.Atoi(s)
 
-      <div class="article-content">
-      <p>在Mac下，执行git命令时候出现如下的错误：</p>
+i, err = ParseInt(s, 10, 0) 
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="change-type-of-data.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                      
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="change-type-of-data.html" data-count-type="comments" href="change-type-of-data.html#ds-thread"></a>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="usage-of-import.html">
+                
+                  <h1>import的使用</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li><p>import包命名</p>
+
+<p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-grammar.html'>GO语言语法</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                      
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="usage-of-import.html" data-count-type="comments" href="usage-of-import.html#ds-thread"></a>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="github-pages-and-static-website.html">
+                
+                  <h1>Github Pages 静态网站托管</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>本网站就是采用Github pages托管的静态网站。</p>
+
+<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="github-pages-and-static-website.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                      
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="github-pages-and-static-website.html" data-count-type="comments" href="github-pages-and-static-website.html#ds-thread"></a>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="set-many-ssh-keys-in-a-computer.html">
+                
+                  <h1>一台机器上设置多个SSH Key</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<blockquote>
+<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
+</blockquote>
+
+<p><strong>1. 生成 ssh keys</strong></p>
+
+<p>终端下输入命令：</p>
 
 <pre><code>
-xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 
 </code></pre>
 
-<span id="more"></span><!-- more -->
-
-<p>解决方法：</p>
-
-<p>打开终端输入</p>
-
-<p>xcode-select --install</p>
-
-<p>回车后，系统弹出下载xcode，点击确认，下载完成后即可。</p>
-
-<p>猜测可能是跟xcode卸载或者升级有些关系，一些插件或组件被破坏了，重新安装下就好。</p>
+<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
 
 
-    
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="set-many-ssh-keys-in-a-computer.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="beego-web-framework-of-golang.html" 
-          title="Previous Post: GO语言重量级WEB框架BEEGO">&laquo; GO语言重量级WEB框架BEEGO</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="auto-deploy-with-git-hook.html" 
-          title="Next Post: 使用Git的钩子实现自动部署">使用Git的钩子实现自动部署 &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-              <div class="ds-thread" data-thread-key="mac-xcrun-error-fixed.html" data-url="http://golog.cc/mac-xcrun-error-fixed.html" data-title="Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法"></div>
-          
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
+                      
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="set-many-ssh-keys-in-a-computer.html" data-count-type="comments" href="set-many-ssh-keys-in-a-computer.html#ds-thread"></a>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   <a href="all.html">&laquo; 上一页</a>  
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">

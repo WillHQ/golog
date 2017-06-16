@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -129,7 +129,7 @@
                   <div class="more-left left">
                   
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
           				   
@@ -158,27 +158,6 @@
 
 <p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
 
-<p>问题是，go采用的格式化layout 和我们以往所用的任何经验都不同。以至于初次接触总是一头雾水。</p>
-
-<p>其实go提供的这个layout对算法的实现非常科学高效，而且很规律。下面我们详细分解下。</p>
-
-<p><strong>直接上个对应表：</strong></p>
-
-<p>前面是含义，后面是 go 的表示值,多种表示,逗号&quot;,&quot;分割：</p>
-
-<ul>
-<li>月份 1,01,Jan,January</li>
-<li>日　 2,02,_2</li>
-<li>时　 3,03,15,PM,pm,AM,am</li>
-<li>分　 4,04</li>
-<li>秒　 5,05</li>
-<li>年　 06,2006</li>
-<li>时区 -07,-0700,Z0700,Z07:00,-07:00,MST</li>
-<li>周几 Mon,Monday</li>
-</ul>
-
-<p>您看出规律了么！哦是的，你发现了，这里面没有一个是重复的，所有的值表示都唯一对应一个时间部分。并且涵盖了很多格式组合。</p>
-
 
                         
                       </div>
@@ -186,9 +165,9 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="time-package-of-golang.html">Read more</a>&nbsp;&nbsp; 
+                   <a href="time-package-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
           				   
@@ -267,13 +246,13 @@
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 

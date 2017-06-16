@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -126,15 +126,6 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
 
 </code></pre>
 
-<p>解决方法：</p>
-
-<p>打开终端输入</p>
-
-<p>xcode-select --install</p>
-
-<p>回车后，系统弹出下载xcode，点击确认，下载完成后即可。</p>
-
-<p>猜测可能是跟xcode卸载或者升级有些关系，一些插件或组件被破坏了，重新安装下就好。</p>
 
                         
                       </div>
@@ -142,9 +133,9 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="mac-xcrun-error-fixed.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2017/6/16</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
@@ -170,39 +161,9 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
                       <div class="a-content-text">
                         
                         	<ol>
-<li><p>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</p></li>
-<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
-
-<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
-<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
-
-<p>在该目录下，运行：</p>
-
-<pre><code>
-git clone /var/git/testRep /var/testDeploy
-
-</code></pre>
-
-<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p>
-
-<blockquote>
-<p>注意：删除已有的文件夹中的文件、删除.git文件夹之后，要切换到git用户之下，使用git用户重新git clone一遍，才可以自动的进行部署，因为部署需要用git用户进行操作，在root做所有的操作，git就没办法把更新的文件部署到发布的目录下面。</p>
-</blockquote></li>
-<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
-
-<pre><code>
-unset GIT_DIR
-DeployDir=/var/testDeploy/
-cd $DeployDir
-git add . -A &amp;&amp; git stash
-git pull origin master
-
-</code></pre>
-
-<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
-
-<p>以上方法步骤，验证通过。</p></li>
+<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
 </ol>
+
 
                         
                       </div>
@@ -210,9 +171,9 @@ git pull origin master
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="auto-deploy-with-git-hook.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/8</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
@@ -269,7 +230,7 @@ su git
                   <div class="more-left left">
                   
                     <span class="date">2016/10/8</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
@@ -348,13 +309,13 @@ su git
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 

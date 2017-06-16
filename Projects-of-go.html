@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -125,7 +125,6 @@
 
 <p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
 
-<p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
 
                         
                       </div>
@@ -133,11 +132,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="thinkgo-web-frame-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -164,13 +163,6 @@
 
 <p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
 
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
-
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
 
                         
                       </div>
@@ -178,11 +170,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="mattermost-go-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -214,29 +206,6 @@
 <li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
 </ol>
 
-<p>代码实例</p>
-
-<pre><code>// rotating hander, max log files is 4, max file size is 4M
-rotatingHandler := logger.NewRotatingHandler(&quot;./&quot;, &quot;test.log&quot;, 4, 4*1024*1024)
-
-// logger set handlers: console, rotating
-logger.SetHandlers(logger.Console, rotatingHandler)
-
-defer logger.Close()
-
-// logger set flags
-logger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-
-// logger set log level
-logger.SetLevel(logger.INFO)
-
-logger.Debug(&quot;something&quot;, &quot;debug&quot;)
-logger.Info(&quot;something&quot;)
-logger.Warn(&quot;something&quot;)
-logger.Error(&quot;something&quot;)
-</code></pre>
-
-<p>项目Github链接：<a href="https://github.com/jander/golog">https://github.com/jander/golog</a></p>
 
                         
                       </div>
@@ -244,11 +213,11 @@ logger.Error(&quot;something&quot;)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="golog-log-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -275,15 +244,6 @@ logger.Error(&quot;something&quot;)
 
 <p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
 
-<ul>
-<li><p>简单部署 —— 你只需要一个数据库和fragment —— 与内置的Web服务器本地进行测试</p></li>
-<li><p>使用与你网站相同的风格进行Rich editing</p></li>
-<li><p>免费且开源 (MIT) ——下载二进制文件或自己编译</p></li>
-</ul>
-
-<p>项目的Github链接：<a href="http://github.com/fragmenta/fragmenta-cms">http://github.com/fragmenta/fragmenta-cms</a></p>
-
-<p>项目的主页链接：<a href="http://fragmenta.eu/">http://fragmenta.eu/</a></p>
 
                         
                       </div>
@@ -291,11 +251,11 @@ logger.Error(&quot;something&quot;)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="fragmenta-cms-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -372,13 +332,13 @@ logger.Error(&quot;something&quot;)
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 

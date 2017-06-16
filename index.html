@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -119,9 +119,8 @@
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站上<a href="http://beego.me">Beego</a>上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
 
-<p>从这篇开始，在使用Beego这个框架做项目的时候，陆续的记录一些笔记，供大家（也包括自己）参考使用。</p>
 
                         
                       </div>
@@ -129,11 +128,11 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="beego-web-framework-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2017/6/16</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html'>GO语言框架</a></span>
+          					    <span class="posted-in"><a href='golang-framework.html'>GO语言框架</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -163,15 +162,6 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
 
 </code></pre>
 
-<p>解决方法：</p>
-
-<p>打开终端输入</p>
-
-<p>xcode-select --install</p>
-
-<p>回车后，系统弹出下载xcode，点击确认，下载完成后即可。</p>
-
-<p>猜测可能是跟xcode卸载或者升级有些关系，一些插件或组件被破坏了，重新安装下就好。</p>
 
                         
                       </div>
@@ -179,9 +169,9 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="mac-xcrun-error-fixed.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2017/6/16</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
@@ -207,39 +197,9 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
                       <div class="a-content-text">
                         
                         	<ol>
-<li><p>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</p></li>
-<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
-
-<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
-<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
-
-<p>在该目录下，运行：</p>
-
-<pre><code>
-git clone /var/git/testRep /var/testDeploy
-
-</code></pre>
-
-<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p>
-
-<blockquote>
-<p>注意：删除已有的文件夹中的文件、删除.git文件夹之后，要切换到git用户之下，使用git用户重新git clone一遍，才可以自动的进行部署，因为部署需要用git用户进行操作，在root做所有的操作，git就没办法把更新的文件部署到发布的目录下面。</p>
-</blockquote></li>
-<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
-
-<pre><code>
-unset GIT_DIR
-DeployDir=/var/testDeploy/
-cd $DeployDir
-git add . -A &amp;&amp; git stash
-git pull origin master
-
-</code></pre>
-
-<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
-
-<p>以上方法步骤，验证通过。</p></li>
+<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
 </ol>
+
 
                         
                       </div>
@@ -247,9 +207,9 @@ git pull origin master
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="auto-deploy-with-git-hook.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/8</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
@@ -306,7 +266,7 @@ su git
                   <div class="more-left left">
                   
                     <span class="date">2016/10/8</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
@@ -340,91 +300,6 @@ mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
 
 </code></pre>
 
-<ul>
-<li>2. 停止MySQL服务，输入命令：</li>
-</ul>
-
-<pre><code>
-service mysqld stop
-
-</code></pre>
-
-<ul>
-<li>3. 卸载旧版MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-yum remove mysql mysql-*
-
-</code></pre>
-
-<ul>
-<li>4. 移除命令执行后，可再看看是否有残余的mysql，输入命令：</li>
-</ul>
-
-<pre><code>
-yum list installed | grep mysql
-
-</code></pre>
-
-<p>如果有，可输入命令删除：</p>
-
-<pre><code>
-rum remove mysql－libs
-
-</code></pre>
-
-<ul>
-<li>5. 下载安装最新的rpm文件</li>
-</ul>
-
-<pre><code>
-rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-
-</code></pre>
-
-<ul>
-<li>6. 安装MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-yum install mysql-community-server
-
-</code></pre>
-
-<ul>
-<li>7. 安装完成后，输入命令查看MySQL版本号：</li>
-</ul>
-
-<pre><code>
-mysql -V
-
-</code></pre>
-
-<ul>
-<li>8. 启动MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-service mysqld start
-
-</code></pre>
-
-<p>在经过上面的方法升级之后，Mysql启动时，可能会报错，复发启动，查看/var/log/mysqld.log发现：</p>
-
-<pre><code>
-[ERROR] InnoDB: auto-extending data file ./ibdata1 is of a different size 640 pages (rounded down to MB) than specified in the .cnf file: initial 768 pages, max 0 (relevant if non-zero) pages!
-
-</code></pre>
-
-<p>可以采用下面的方法来处理：</p>
-
-<pre><code>
-rm -rf /var/lib/mysql/ib*
-
-</code></pre>
-
-<p>删除ibdata1、ib_logfile0、ib_logfile1等文件，再重启Mysql即可。</p>
 
                         
                       </div>
@@ -432,9 +307,9 @@ rm -rf /var/lib/mysql/ib*
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="how-to-update-mysql-in-centos.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
@@ -475,21 +350,6 @@ Another MySQL daemon already running with the same unix socket.
 
 </code></pre>
 
-<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
-
-<ol>
-<li><p>重启服务器</p></li>
-<li><p>采用如下的命令：</p></li>
-</ol>
-
-<pre><code>
-# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
-
-# service mysqld start
-
-</code></pre>
-
-<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
 
                         
                       </div>
@@ -497,9 +357,9 @@ Another MySQL daemon already running with the same unix socket.
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="centos-Another-MySQL-daemon-already-running.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
@@ -530,7 +390,6 @@ Another MySQL daemon already running with the same unix socket.
 
 <p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
 
-<p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
 
                         
                       </div>
@@ -538,11 +397,11 @@ Another MySQL daemon already running with the same unix socket.
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="thinkgo-web-frame-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -569,13 +428,6 @@ Another MySQL daemon already running with the same unix socket.
 
 <p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
 
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
-
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
 
                         
                       </div>
@@ -583,11 +435,11 @@ Another MySQL daemon already running with the same unix socket.
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="mattermost-go-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -619,29 +471,6 @@ Another MySQL daemon already running with the same unix socket.
 <li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
 </ol>
 
-<p>代码实例</p>
-
-<pre><code>// rotating hander, max log files is 4, max file size is 4M
-rotatingHandler := logger.NewRotatingHandler(&quot;./&quot;, &quot;test.log&quot;, 4, 4*1024*1024)
-
-// logger set handlers: console, rotating
-logger.SetHandlers(logger.Console, rotatingHandler)
-
-defer logger.Close()
-
-// logger set flags
-logger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-
-// logger set log level
-logger.SetLevel(logger.INFO)
-
-logger.Debug(&quot;something&quot;, &quot;debug&quot;)
-logger.Info(&quot;something&quot;)
-logger.Warn(&quot;something&quot;)
-logger.Error(&quot;something&quot;)
-</code></pre>
-
-<p>项目Github链接：<a href="https://github.com/jander/golog">https://github.com/jander/golog</a></p>
 
                         
                       </div>
@@ -649,11 +478,11 @@ logger.Error(&quot;something&quot;)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="golog-log-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -680,15 +509,6 @@ logger.Error(&quot;something&quot;)
 
 <p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
 
-<ul>
-<li><p>简单部署 —— 你只需要一个数据库和fragment —— 与内置的Web服务器本地进行测试</p></li>
-<li><p>使用与你网站相同的风格进行Rich editing</p></li>
-<li><p>免费且开源 (MIT) ——下载二进制文件或自己编译</p></li>
-</ul>
-
-<p>项目的Github链接：<a href="http://github.com/fragmenta/fragmenta-cms">http://github.com/fragmenta/fragmenta-cms</a></p>
-
-<p>项目的主页链接：<a href="http://fragmenta.eu/">http://fragmenta.eu/</a></p>
 
                         
                       </div>
@@ -696,11 +516,11 @@ logger.Error(&quot;something&quot;)
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="fragmenta-cms-project.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/10/7</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='Projects-of-go.html'>Go语言项目</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -742,10 +562,6 @@ installing these packages with &#39;go test -i&#39; will speed future tests.
 
 </code></pre>
 
-<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
-如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
-
-<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
 
                         
                       </div>
@@ -753,9 +569,9 @@ installing these packages with &#39;go test -i&#39; will speed future tests.
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="error-of-go-build.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
           				   
@@ -796,56 +612,6 @@ file, _ := exec.LookPath(os.Args[0])
 
 </code></pre>
 
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
 
                         
                       </div>
@@ -853,9 +619,9 @@ func main() {
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="get-path-with-golang.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
@@ -898,7 +664,7 @@ os.Geteuid() != 0
                   <div class="more-left left">
                   
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
@@ -933,7 +699,7 @@ os.Geteuid() != 0
                   <div class="more-left left">
                   
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
           				   
@@ -962,27 +728,6 @@ os.Geteuid() != 0
 
 <p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
 
-<p>问题是，go采用的格式化layout 和我们以往所用的任何经验都不同。以至于初次接触总是一头雾水。</p>
-
-<p>其实go提供的这个layout对算法的实现非常科学高效，而且很规律。下面我们详细分解下。</p>
-
-<p><strong>直接上个对应表：</strong></p>
-
-<p>前面是含义，后面是 go 的表示值,多种表示,逗号&quot;,&quot;分割：</p>
-
-<ul>
-<li>月份 1,01,Jan,January</li>
-<li>日　 2,02,_2</li>
-<li>时　 3,03,15,PM,pm,AM,am</li>
-<li>分　 4,04</li>
-<li>秒　 5,05</li>
-<li>年　 06,2006</li>
-<li>时区 -07,-0700,Z0700,Z07:00,-07:00,MST</li>
-<li>周几 Mon,Monday</li>
-</ul>
-
-<p>您看出规律了么！哦是的，你发现了，这里面没有一个是重复的，所有的值表示都唯一对应一个时间部分。并且涵盖了很多格式组合。</p>
-
 
                         
                       </div>
@@ -990,9 +735,9 @@ os.Geteuid() != 0
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="time-package-of-golang.html">Read more</a>&nbsp;&nbsp; 
+                   <a href="time-package-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
           				   
@@ -1003,301 +748,6 @@ os.Geteuid() != 0
 
                       
                         &nbsp;<a  class="ds-thread-count" data-thread-key="time-package-of-golang.html" data-count-type="comments" href="time-package-of-golang.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="change-type-of-data.html">
-                
-                  <h1>go 类型转换</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li><p>整型到字符串</p>
-
-<pre><code>s = strconv.Itoa(i) 
-
-s = strconv.FormatInt(int64(i), 10)
-</code></pre></li>
-<li><p>字符串到整型</p>
-
-<pre><code>i, err = strconv.Atoi(s)
-
-i, err = ParseInt(s, 10, 0) 
-</code></pre></li>
-<li><p>字符串到float（32/64）</p>
-
-<pre><code>f, err = ParseFloat(s, 32) `
-</code></pre></li>
-<li><p>整型到float或者float到整型</p>
-
-<pre><code>float(i)
-
-int(f)
-</code></pre></li>
-</ol>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="change-type-of-data.html" data-count-type="comments" href="change-type-of-data.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="usage-of-import.html">
-                
-                  <h1>import的使用</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ul>
-<li><p>import包命名</p>
-
-<p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-grammar.html'>GO语言语法</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="usage-of-import.html" data-count-type="comments" href="usage-of-import.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="github-pages-and-static-website.html">
-                
-                  <h1>Github Pages 静态网站托管</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>本网站就是采用Github pages托管的静态网站。</p>
-
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
-
-<p>下面简要的说一下：</p>
-
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="github-pages-and-static-website.html" data-count-type="comments" href="github-pages-and-static-website.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="set-many-ssh-keys-in-a-computer.html">
-                
-                  <h1>一台机器上设置多个SSH Key</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
-</blockquote>
-
-<p><strong>1. 生成 ssh keys</strong></p>
-
-<p>终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
-
-<p>注意：双引号换成自己的邮箱，如果linux下遇到权限问题，只需在前面加上sudo</p>
-
-<p><strong>2. github添加SSH keys</strong></p>
-
-<p>将id_rsa.pub里面的内容复制下来，在github上的settings里面找到add keys，将其粘贴到key即可，title唯一即可随便填，建议写有意义的;</p>
-
-<p><strong>3. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@github.com
-
-</code></pre>
-
-<p>只要看到最后一行:</p>
-
-<pre><code>
-Hi chenlianjiang! You&#39;ve successfully authenticated, but GitHub does not provide shell access
-
-</code></pre>
-
-<p>说明验证成功了.</p>
-
-<p><strong>4. gitlib帐号添加SSH keys</strong></p>
-
-<p>同第（1）步一样，生成新的SSH Keys</p>
-
-<p>这时候在生成ssh key时候要注意了这时一路回车，不输入任何字符在绑定gitlibng的ssh key时，会发现将github的ssh key覆盖了。需要做调整：</p>
-
-<p>打开终端，终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时，给这个文件起一个名字， 比如叫C:\Users\Administrator.ssh\ id_rsa_gitlib, 所以相应的也会生成一个 id_rsa_gitlib.pub 文件。</p>
-
-<p>注意这里如果只输入文件名会在终端的当前目录下生成，拷贝到对应位置即可；</p>
-
-<p>终端输入一下命令：</p>
-
-<pre><code>
-$ ssh-add ~/.ssh/id_rsa
-
-$ ssh-add ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>ssh-add命令是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在/usr/bin/ssh-add</p>
-
-<p>如果出现Could not open a connection to your authentication agent.错误提示先执行$ ssh-agent.exe bash，然后执行上面命令；</p>
-
-<pre><code>
--D：删除ssh-agent中的所有密钥
-
--d：从ssh-agent中的删除密钥
-
--e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙
-
--s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙
-
--L：显示ssh-agent中的公钥
-
--l：显示ssh-agent中的密钥
-
--t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥
-
--X：对ssh-agent进行解锁
-
--x：对ssh-agent进行加锁
-
-</code></pre>
-
-<p>在~/.ssh/目录下新建config文件，并添加:</p>
-
-<pre><code>
-# github
-Host github.com
-      HostName github.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa
-      
-# gitlib
-Host gitlib.com
-      HostName gitlib.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>将id_rsa_gitlib.pub里面的内容复制下来，在gitlib上的账户里面找到所示SSH keys，将其粘贴到key内容即可，Title唯一即可随便填，，点击添加需要输入登录密码；</p>
-
-<p><strong>5. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@域名
-
-</code></pre>
-
-<p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="set-many-ssh-keys-in-a-computer.html" data-count-type="comments" href="set-many-ssh-keys-in-a-computer.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -1315,7 +765,7 @@ ssh -T git@域名
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="all_1.html">&raquo; 下一页</a> 
 			</p>
 			  </div>
 			</div>
@@ -1366,13 +816,13 @@ ssh -T git@域名
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 

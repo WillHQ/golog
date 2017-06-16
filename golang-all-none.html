@@ -39,11 +39,11 @@
 				      	<div style="position: absolute; width:100%;">
 					        <ul id="main-menu" class="left">
 					        
-					        <li id=""><a target="_self" href="index.html">首页</a></li>
+					        <li id="menu-index"><a target="_self" href="index.html">首页</a></li>
 					        
-					        <li id=""><a target="_self" href="about.html">关于本站</a></li>
+					        <li id="menu-about"><a target="_self" href="about.html">关于本站</a></li>
 					        
-					        <li id=""><a target="_self" href="archives.html">文章存档</a></li>
+					        <li id="menu-archives"><a target="_self" href="archives.html">文章存档</a></li>
 					        
 					        </ul>
 
@@ -85,13 +85,13 @@
 		        
 		            <li><a href="skills-of-golang.html">GO语言技巧</a></li>
 		        
-		            <li><a href="Projects-of-go.html">Go语言项目</a></li>
+		            <li><a href="projects-of-go.html">Go语言项目</a></li>
 		        
 		            <li><a href="about-os.html">操作系统相关</a></li>
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html">GO语言框架</a></li>
+		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
 	    </aside>
@@ -104,7 +104,7 @@
 
  <script type="text/javascript">
 	$(function(){
-		$('#menu_item_index').addClass('is_active');
+		$('#menu-index').addClass('is_active');
 	});
 </script>
 <div class="row">
@@ -123,13 +123,6 @@
 
 <p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
 
-<p>下面简要的说一下：</p>
-
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
 
                         
                       </div>
@@ -137,9 +130,9 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="github-pages-and-static-website.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
           				   
@@ -179,110 +172,6 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 
 <p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
 
-<p>注意：双引号换成自己的邮箱，如果linux下遇到权限问题，只需在前面加上sudo</p>
-
-<p><strong>2. github添加SSH keys</strong></p>
-
-<p>将id_rsa.pub里面的内容复制下来，在github上的settings里面找到add keys，将其粘贴到key即可，title唯一即可随便填，建议写有意义的;</p>
-
-<p><strong>3. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@github.com
-
-</code></pre>
-
-<p>只要看到最后一行:</p>
-
-<pre><code>
-Hi chenlianjiang! You&#39;ve successfully authenticated, but GitHub does not provide shell access
-
-</code></pre>
-
-<p>说明验证成功了.</p>
-
-<p><strong>4. gitlib帐号添加SSH keys</strong></p>
-
-<p>同第（1）步一样，生成新的SSH Keys</p>
-
-<p>这时候在生成ssh key时候要注意了这时一路回车，不输入任何字符在绑定gitlibng的ssh key时，会发现将github的ssh key覆盖了。需要做调整：</p>
-
-<p>打开终端，终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时，给这个文件起一个名字， 比如叫C:\Users\Administrator.ssh\ id_rsa_gitlib, 所以相应的也会生成一个 id_rsa_gitlib.pub 文件。</p>
-
-<p>注意这里如果只输入文件名会在终端的当前目录下生成，拷贝到对应位置即可；</p>
-
-<p>终端输入一下命令：</p>
-
-<pre><code>
-$ ssh-add ~/.ssh/id_rsa
-
-$ ssh-add ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>ssh-add命令是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在/usr/bin/ssh-add</p>
-
-<p>如果出现Could not open a connection to your authentication agent.错误提示先执行$ ssh-agent.exe bash，然后执行上面命令；</p>
-
-<pre><code>
--D：删除ssh-agent中的所有密钥
-
--d：从ssh-agent中的删除密钥
-
--e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙
-
--s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙
-
--L：显示ssh-agent中的公钥
-
--l：显示ssh-agent中的密钥
-
--t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥
-
--X：对ssh-agent进行解锁
-
--x：对ssh-agent进行加锁
-
-</code></pre>
-
-<p>在~/.ssh/目录下新建config文件，并添加:</p>
-
-<pre><code>
-# github
-Host github.com
-      HostName github.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa
-      
-# gitlib
-Host gitlib.com
-      HostName gitlib.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>将id_rsa_gitlib.pub里面的内容复制下来，在gitlib上的账户里面找到所示SSH keys，将其粘贴到key内容即可，Title唯一即可随便填，，点击添加需要输入登录密码；</p>
-
-<p><strong>5. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@域名
-
-</code></pre>
-
-<p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
 
                         
                       </div>
@@ -290,9 +179,9 @@ ssh -T git@域名
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="set-many-ssh-keys-in-a-computer.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
+                    <span>文章分类：</span> 
           				  
           					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
           				   
@@ -371,13 +260,13 @@ ssh -T git@域名
         
             <a href="skills-of-golang.html"><strong>GO语言技巧</strong></a>
         
-            <a href="Projects-of-go.html"><strong>Go语言项目</strong></a>
+            <a href="projects-of-go.html"><strong>Go语言项目</strong></a>
         
             <a href="about-os.html"><strong>操作系统相关</strong></a>
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="GO%E8%AF%AD%E8%A8%80%E6%A1%86%E6%9E%B6.html"><strong>GO语言框架</strong></a>
+            <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
 
