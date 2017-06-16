@@ -110,11 +110,17 @@
 
     url_path = window.location.pathname;
     alert(url_path);
+    category_name = 'all';
     if (url_path != '/'){
       url_array = url_path.split('.'); // splite url pate in to 2 parts.
       url_path_without_ext = url_array[0];
       pos_last_char = url_path_without_ext.lastIndexOf('_');
+      if(pos_last_char > 0){
+        category_name = url_path_without_ext.substring(1, pos_last_char);
+        page_number = url_path_without_ext.substring(pos_last_char+1);
+      }
       alert(pos_last_char);
+      alert(category_name);
     }
     
 
