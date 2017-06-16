@@ -107,10 +107,20 @@
  <script type="text/javascript">
 	$(function(){
 		$('#menu-index').addClass('is_active');
+
+    url_path = window.location.pathname;
+    if (url_path != '/'){
+      url_array = url_path.split('.'); // splite url pate in to 2 parts.
+      url_path_without_ext = url_array[0];
+      pos_last_char = lastIndexOf('_');
+      alert(pos_last_char);
+    }
+    
+
     total_post = 0 +2+2+1+1+3+4+3+2+27+1 ;
     total_pages = parseInt(total_post/15)+1;
 
-    alert(window.location.pathname);
+    
    
     $('#pagination-div').append('<span><a href="./all.html">1</span>');
     for (var i = 1; i < total_pages; i++) {
