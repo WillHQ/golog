@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		使用Git的钩子实现自动部署 - GOLOG
+  		Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法 - GOLOG
   	
   	</title>
   	
@@ -110,10 +110,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>使用Git的钩子实现自动部署</h1>
+          <h1>Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/8</span>
+          <span class="date">2017/6/16</span>
 
           <span>posted in&nbsp;</span> 
           
@@ -124,7 +124,7 @@
             
 
             
-              &nbsp;<a  class="ds-thread-count" data-thread-key="auto-deploy-with-git-hook.html" data-count-type="comments" href="auto-deploy-with-git-hook.html#ds-thread"></a>
+              &nbsp;<a  class="ds-thread-count" data-thread-key="mac-xcrun-error-fixed.html" data-count-type="comments" href="mac-xcrun-error-fixed.html#ds-thread"></a>
             
           </span>
 
@@ -132,40 +132,22 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ol>
-<li><p>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</p></li>
-<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
-
-<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
-<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
-
-<p>在该目录下，运行：</p>
+      <p>在Mac下，执行git命令时候出现如下的错误：</p>
 
 <pre><code>
-git clone /var/git/testRep /var/testDeploy
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 
 </code></pre>
 
-<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p>
+<p>解决方法：</p>
 
-<blockquote>
-<p>注意：删除已有的文件夹中的文件、删除.git文件夹之后，要切换到git用户之下，使用git用户重新git clone一遍，才可以自动的进行部署，因为部署需要用git用户进行操作，在root做所有的操作，git就没办法把更新的文件部署到发布的目录下面。</p>
-</blockquote></li>
-<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
+<p>打开终端输入</p>
 
-<pre><code>
-unset GIT_DIR
-DeployDir=/var/testDeploy/
-cd $DeployDir
-git add . -A &amp;&amp; git stash
-git pull origin master
+<p>xcode-select --install</p>
 
-</code></pre>
+<p>回车后，系统弹出下载xcode，点击确认，下载完成后即可。</p>
 
-<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
-
-<p>以上方法步骤，验证通过。</p></li>
-</ol>
+<p>猜测可能是跟xcode卸载或者升级有些关系，一些插件或组件被破坏了，重新安装下就好。</p>
 
 
     
@@ -176,16 +158,13 @@ git pull origin master
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="mac-xcrun-error-fixed.html" 
-          title="Previous Post: Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法">&laquo; Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="change-user-os.html" 
-          title="Next Post: Linux下切换用户的命令">Linux下切换用户的命令 &raquo;</a>
+          <a  href="auto-deploy-with-git-hook.html" 
+          title="Next Post: 使用Git的钩子实现自动部署">使用Git的钩子实现自动部署 &raquo;</a>
       
       </p>
         </div>
@@ -197,7 +176,7 @@ git pull origin master
           
 
           
-              <div class="ds-thread" data-thread-key="auto-deploy-with-git-hook.html" data-url="http://golog.cc/auto-deploy-with-git-hook.html" data-title="使用Git的钩子实现自动部署"></div>
+              <div class="ds-thread" data-thread-key="mac-xcrun-error-fixed.html" data-url="http://golog.cc/mac-xcrun-error-fixed.html" data-title="Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法"></div>
           
           
         </div>

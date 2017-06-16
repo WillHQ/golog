@@ -110,64 +110,6 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="change-type-of-data.html">
-                
-                  <h1>go 类型转换</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li><p>整型到字符串</p>
-
-<pre><code>s = strconv.Itoa(i) 
-
-s = strconv.FormatInt(int64(i), 10)
-</code></pre></li>
-<li><p>字符串到整型</p>
-
-<pre><code>i, err = strconv.Atoi(s)
-
-i, err = ParseInt(s, 10, 0) 
-</code></pre></li>
-<li><p>字符串到float（32/64）</p>
-
-<pre><code>f, err = ParseFloat(s, 32) `
-</code></pre></li>
-<li><p>整型到float或者float到整型</p>
-
-<pre><code>float(i)
-
-int(f)
-</code></pre></li>
-</ol>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="change-type-of-data.html" data-count-type="comments" href="change-type-of-data.html#ds-thread"></a>
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
                 <a class="clearlink" href="get-path-with-golang.html">
                 
                   <h1>go中获取各种路径</h1>
@@ -310,6 +252,64 @@ os.Geteuid() != 0
                 </div>
               </div><!-- article -->
         
+			<div class="article">
+                <a class="clearlink" href="change-type-of-data.html">
+                
+                  <h1>go 类型转换</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ol>
+<li><p>整型到字符串</p>
+
+<pre><code>s = strconv.Itoa(i) 
+
+s = strconv.FormatInt(int64(i), 10)
+</code></pre></li>
+<li><p>字符串到整型</p>
+
+<pre><code>i, err = strconv.Atoi(s)
+
+i, err = ParseInt(s, 10, 0) 
+</code></pre></li>
+<li><p>字符串到float（32/64）</p>
+
+<pre><code>f, err = ParseFloat(s, 32) `
+</code></pre></li>
+<li><p>整型到float或者float到整型</p>
+
+<pre><code>float(i)
+
+int(f)
+</code></pre></li>
+</ol>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                      
+                        &nbsp;<a  class="ds-thread-count" data-thread-key="change-type-of-data.html" data-count-type="comments" href="change-type-of-data.html#ds-thread"></a>
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
               
 
 
@@ -393,6 +393,12 @@ os.Geteuid() != 0
 	      
 		      
 			      <li class="post">
+			        <a href="mac-xcrun-error-fixed.html">Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
 			      </li>
 		     
@@ -416,10 +422,6 @@ os.Geteuid() != 0
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="thinkgo-web-frame-project.html">ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
-			      </li>
-		     
 		  
 		      
 		  

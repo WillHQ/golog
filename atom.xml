@@ -4,13 +4,39 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2016-10-08T16:14:46+08:00</updated>
+  <updated>2017-06-15T20:38:47+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法]]></title>
+    <link href="http://golog.cc/mac-xcrun-error-fixed.html"/>
+    <updated>2017-06-16T22:48:46+08:00</updated>
+    <id>http://golog.cc/mac-xcrun-error-fixed.html</id>
+    <content type="html"><![CDATA[
+<p>在Mac下，执行git命令时候出现如下的错误：</p>
+
+<pre><code>
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+
+</code></pre>
+
+<p>解决方法：</p>
+
+<p>打开终端输入</p>
+
+<p>xcode-select --install</p>
+
+<p>回车后，系统弹出下载xcode，点击确认，下载完成后即可。</p>
+
+<p>猜测可能是跟xcode卸载或者升级有些关系，一些插件或组件被破坏了，重新安装下就好。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用Git的钩子实现自动部署]]></title>
