@@ -91,6 +91,8 @@
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
+		            <li><a href="golang-third-party-package.html">GO语言第三方包</a></li>
+		        
 		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
@@ -105,11 +107,22 @@
  <script type="text/javascript">
 	$(function(){
 		$('#menu-index').addClass('is_active');
+    total_post = 0 +2+2+1+1+3+4+3+2+27+1 ;
+    total_pages = parseInt(total_post/15)+1;
+
+    alert(window.location.pathname);
+   
+    $('#pagination-div').append('<span><a href="./all.html">1</span>');
+    for (var i = 1; i < total_pages; i++) {
+      page_url = './all_' + i +'.html';
+      $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(i + 1)+'</a></span>');
+    }
 	});
 </script>
 <div class="row">
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
+		
 		
 			<div class="article">
                 <a class="clearlink" href="thinkgo-web-frame-project.html">
@@ -274,7 +287,7 @@
 
 
 			<div class="row">
-			  <div class="large-6 columns">
+			  <div class="large-6 columns" id="pagination-div">
 			  <p class="text-left" style="padding-top:25px;">
 			   
 			  </p>
@@ -349,6 +362,8 @@
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
+            <a href="golang-third-party-package.html"><strong>GO语言第三方包</strong></a>
+        
             <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
@@ -366,33 +381,35 @@
 	      
 		      
 			      <li class="post">
-			        <a href="beego-web-framework-of-golang.html">GO语言重量级WEB框架BEEGO</a>
+			        <a href="14976341544521.html">GO语言重量级WEB框架BEEGO</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="mac-xcrun-error-fixed.html">Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
+			        <a href="14976341530125.html">GO语言重量级WEB框架BEEGO</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
+			        <a href="14976341518800.html">GO语言重量级WEB框架BEEGO</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="change-user-os.html">Linux下切换用户的命令</a>
+			        <a href="14976341504722.html">GO语言重量级WEB框架BEEGO</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="how-to-update-mysql-in-centos.html">如何升级CentOS 6.5下的MySQL</a>
+			        <a href="14976341490571.html">GO语言重量级WEB框架BEEGO</a>
 			      </li>
 		     
+		  
+		      
 		  
 		      
 		  
