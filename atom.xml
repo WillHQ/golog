@@ -4,13 +4,26 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-15T20:38:47+08:00</updated>
+  <updated>2017-06-16T22:54:20+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[GO语言重量级WEB框架BEEGO]]></title>
+    <link href="http://golog.cc/beego-web-framework-of-golang.html"/>
+    <updated>2017-06-16T23:09:29+08:00</updated>
+    <id>http://golog.cc/beego-web-framework-of-golang.html</id>
+    <content type="html"><![CDATA[
+<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站上<a href="http://beego.me">Beego</a>上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+
+<p>从这篇开始，在使用Beego这个框架做项目的时候，陆续的记录一些笔记，供大家（也包括自己）参考使用。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法]]></title>
