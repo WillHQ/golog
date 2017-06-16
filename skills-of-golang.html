@@ -109,10 +109,11 @@
 		$('#menu-index').addClass('is_active');
 
     url_path = window.location.pathname;
+    alert(url_path);
     if (url_path != '/'){
       url_array = url_path.split('.'); // splite url pate in to 2 parts.
       url_path_without_ext = url_array[0];
-      pos_last_char = lastIndexOf('_');
+      pos_last_char = url_path_without_ext.lastIndexOf('_');
       alert(pos_last_char);
     }
     
