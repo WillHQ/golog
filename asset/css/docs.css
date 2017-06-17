@@ -23,10 +23,9 @@
   color: #666;
   line-height: 1rem;
   display: inline-block;
-    font-size: 12px;
-    text-transform: uppercase;
-
-   margin:0; 
+  font-size: 14px;
+  text-transform: uppercase;
+  margin:0; 
   font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
   letter-spacing: .1rem;
   padding: 28px 0 0px 0;
@@ -83,7 +82,7 @@
   line-height: 1rem;
 font-weight: 700;
    }
-#site-info h1{ margin:0; padding:0; padding-top: 25px; font-size: 15px;
+#site-info h1{ margin:0; padding:0; padding-top: 25px; font-size: 30px;
  text-transform: uppercase;
   font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
   letter-spacing: .1rem;color: #444;
@@ -96,7 +95,7 @@ font-weight: bold; text-align: center;}
 #site-categories .categories-list li>a{ color: #666; font-size: 12px;}
 #site-categories .categories-list li>a:hover{text-decoration: underline;}
 #site-categories .cat-list{
-padding: 8px 0px; margin: 0;
+padding: 12px 0px; margin: 0;
 }
 #site-categories .side-content>.cat-list{padding: 0;margin: 0;}
 #site-categories .cat-list a{
@@ -783,3 +782,15 @@ font-family: "PT Sans", "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haa
     box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.5); }
   .markdown-body ul.clearing-thumbs a.radius {
     border-radius: 3px; }
+
+/* add by HQ*/
+#pagination-div span a{
+  border:solid 1px #e6e6e6;
+  width:22px;
+  display:inline-block;
+}
+#pagination-div span a.current-page{
+  background-color:#57ad68;
+  color:#000000;
+}
+

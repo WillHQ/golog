@@ -91,8 +91,6 @@
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
-		            <li><a href="golang-third-party-package.html">GO语言第三方包</a></li>
-		        
 		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
@@ -108,6 +106,8 @@
 	$(function(){
 		$('#menu-index').addClass('is_active');
 
+    // how many posts per page.
+    var posts_per_page = 15;
     // get the url path name
     var url_path = window.location.pathname;
     // get the position of last slash in the url path name string
@@ -115,8 +115,9 @@
     var pos_last_slash = url_path.lastIndexOf('/');
     // cut the substring after the last '/'
     var file_name = url_path.substring(pos_last_slash+1);
-    alert(file_name);
+ 
     var category_name = 'all';
+    var current_page_number = 0;
     var category ={};
     
     category['golang-all-none.html'] = 2;
@@ -135,47 +136,109 @@
     
     category['about-database.html'] = 2;
     
-    category['golang-third-party-package.html'] = 27;
-    
     category['golang-framework.html'] = 1;
     
-    alert(category[file_name]);
-    // if the file name is not empty
-    if (file_name != ''){
-      // the file name must look like: xxxx.html/xxxx_3.html
+    console.log(file_name);
+    console.log(category[file_name]);
+    // if the number of post can not be got, it means 
+    if (typeof(category[file_name])=="undefined"){
+      console.log('category["'+file_name+'"] is undefined');
+      // the file name is not empty, and is not 'index.html', and is not 'all.html', 
+      // otherwise the category name is 'all', and the current page number is 0
+      if(file_name != '' && file_name != 'index.html' && file_name != 'all.html'){
+        // or the file name is 'category_x.html' or 'all_x.html'
+        // cut the file name into 2 parts by '.'
+        file_name_array = file_name.split('.');
+        file_name_without_ext = file_name_array[0];
+        // find the last underline in file name
+        pos_last_underline = file_name_without_ext.lastIndexOf('_');
+        // if an underline could be found, 
+        if(pos_last_underline > 0){
+          // substriing before last underline is category name
+          // category name should be check to make sure if it is a category
+          category_name = file_name_without_ext.substring(0, pos_last_underline);
+          // and substring after last underline is the current page number
+          current_page_number = file_name_without_ext.substring(pos_last_underline+1);
+        } else {
+          // if an underline coud not be found,
+          category_name = file_name_without_ext;
+        }
+      }
+    } else {
+      // if the number of posts can be got, it means the file name is the category's name.
       // cut the file name into 2 parts by '.'
-      file_name_array = file_name.split('.');
-      file_name_without_ext = url_array[0];
-      // find the last underline in file name
-      pos_last_underline = file_name_without_ext.lastIndexOf('_');
-      // if an underline could be found, 
-      if(pos_last_underline > 0){
-        // substriing before last underline is category name
-        // category name should be check to make sure if it is a category
-        category_name = file_name_without_ext.substring(1, pos_last_char);
-        // and substring after last underline is page number
-        page_number = file_name_without_ext.substring(pos_last_char+1);
-      } else {
-        // if an underline coud not be found,
-        category_name = file_name_without_ext;
-      }
-
-      if(category_name == 'index'){
-        category_name = 'all';
-      }
-      alert(category_name);
+        file_name_array = file_name.split('.');
+        category_name = url_array[0];
     }
-    
 
-    total_post = 0 +2+2+1+1+3+4+3+2+27+1 ;
-    total_pages = parseInt(total_post/15)+1;
-
+    var total_posts = 0;
+    var total_pages = 0;
+    // if category name is 'all', or is name of a category. Only these two options.
+    if(category_name == 'all'){
+      total_posts = 0 +2+2+1+1+3+4+3+2+1 ;
+    } else {
+      total_posts = category[category_name + '.html'];
+    }
+    total_pages = parseInt(total_posts/posts_per_page)+1;
     
-   
-    $('#pagination-div').append('<span><a href="./all.html">1</span>');
-    for (var i = 1; i < total_pages; i++) {
-      page_url = './all_' + i +'.html';
-      $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(i + 1)+'</a></span>');
+    console.log('category_name is ' + category_name);
+    console.log('current_page_number is ' +current_page_number);
+    console.log('total_posts is ' + total_posts);
+    console.log('total_pages is ' + total_pages);
+
+    if(parseInt(total_pages) <=9){
+      if(parseInt(current_page_number) == 0){
+        $('#pagination-div').append('<span><a href="./'+ category_name +'.html" class="current-page">1</span>');
+      } else {
+        $('#pagination-div').append('<span><a href="./'+ category_name +'.html">1</span>');
+      }
+      for (var i = 1; i < parseInt(total_pages); i++) {
+        page_url = './'+category_name+'_' + i +'.html';
+        if (current_page_number == i){
+          $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'" class="current-page">'+(parseInt(i) + 1)+'</a></span>');
+        } else {
+          $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(parseInt(i) + 1)+'</a></span>');
+        }
+      }
+    } else {
+      if(parseInt(current_page_number) > 0){
+        $('#pagination-div').append('<span><a href="./'+ category_name +'.html">1</span>');
+      }
+      if ((parseInt(current_page_number)-3) > 0){
+        $('#pagination-div').append('<span>&nbsp;...&nbsp;</span>');
+      }
+      
+      if ((parseInt(current_page_number)-2) > 0){
+        page_url = './' + category_name + '_' + (parseInt(current_page_number)-2) +'.html';
+        $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(parseInt(current_page_number)-1)+'</a></span>');
+      }
+
+      if ((parseInt(current_page_number)-1) > 0){
+        page_url = './' + category_name + '_' + (parseInt(current_page_number)-1) +'.html';
+        $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(current_page_number)+'</a></span>');
+      }
+
+      if(parseInt(current_page_number) == 0){
+        $('#pagination-div').append('<span><a href="./'+ category_name +'.html" class="current-page">1</span>');
+      } else {
+        page_url = './' + category_name + '_' + (current_page_number) +'.html';
+        $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'" class="current-page">'+(parseInt(current_page_number)+1)+'</a></span>');
+      }
+      if ((parseInt(current_page_number)+1) < (parseInt(total_pages)-1)){
+        page_url = './' + category_name + '_' + (parseInt(current_page_number)+1) +'.html';
+        $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(parseInt(current_page_number)+2)+'</a></span>');
+      }
+
+      if ((parseInt(current_page_number)+2) < (parseInt(total_pages)-1)){
+        page_url = './' + category_name + '_' + (parseInt(current_page_number)+2) +'.html';
+        $('#pagination-div').append('&nbsp;&nbsp;<span><a href="'+page_url+'">'+(parseInt(current_page_number)+3)+'</a></span>');
+      }
+      if ((parseInt(current_page_number)+3) < (parseInt(total_pages)-1)){
+        $('#pagination-div').append('<span>&nbsp;...&nbsp;</span>');
+      }
+      if(parseInt(current_page_number) < (parseInt(total_pages)-1)){
+        $('#pagination-div').append('&nbsp;&nbsp;<span><a href="./'+ category_name +'_'+(parseInt(total_pages)-1)+'.html">'+ total_pages +'</span>');
+      }
     }
 	});
 </script>
@@ -185,7 +248,7 @@
 
 		
 			<div class="article">
-                <a class="clearlink" href="14976341544521.html">
+                <a class="clearlink" href="beego-web-framework-of-golang.html">
                 
                   <h1>GO语言重量级WEB框架BEEGO</h1>
                   <div class="a-content">
@@ -201,19 +264,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341544521.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="beego-web-framework-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/16</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='golang-framework.html'>GO语言框架</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341544521.html" data-count-type="comments" href="14976341544521.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -221,14 +282,19 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341530125.html">
+                <a class="clearlink" href="mac-xcrun-error-fixed.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>在Mac下，执行git命令时候出现如下的错误：</p>
+
+<pre><code>
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+
+</code></pre>
 
 
                         
@@ -237,19 +303,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341530125.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="mac-xcrun-error-fixed.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/16</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341530125.html" data-count-type="comments" href="14976341530125.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -257,14 +321,16 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341518800.html">
+                <a class="clearlink" href="auto-deploy-with-git-hook.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>使用Git的钩子实现自动部署</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<ol>
+<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
+</ol>
 
 
                         
@@ -273,19 +339,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341518800.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="auto-deploy-with-git-hook.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/8</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341518800.html" data-count-type="comments" href="14976341518800.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -293,15 +357,36 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341504722.html">
+                <a class="clearlink" href="change-user-os.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>Linux下切换用户的命令</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<ol>
+<li>增加用户，在root下：</li>
+</ol>
 
+<pre><code>
+add user git
+
+</code></pre>
+
+<p>表示增加git用户。</p>
+
+<ol>
+<li>切换用户</li>
+</ol>
+
+<pre><code>
+su git
+
+</code></pre>
+
+<p>切换成git用户。</p>
+
+<p>从root用户切换到其他用户不需要密码，从其他用户切换到root用户，需要输入密码。</p>
 
                         
                       </div>
@@ -309,19 +394,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341504722.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                  
+                    <span class="date">2016/10/8</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341504722.html" data-count-type="comments" href="14976341504722.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -329,14 +412,21 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341490571.html">
+                <a class="clearlink" href="how-to-update-mysql-in-centos.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>如何升级CentOS 6.5下的MySQL</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<ul>
+<li>1. 备份数据库，升级MySQL通常不会丢失数据，但保险起见，我们需要做这一步。输入命令：</li>
+</ul>
+
+<pre><code>
+mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
+
+</code></pre>
 
 
                         
@@ -345,19 +435,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341490571.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="how-to-update-mysql-in-centos.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341490571.html" data-count-type="comments" href="14976341490571.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -365,14 +453,28 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341478547.html">
+                <a class="clearlink" href="centos-Another-MySQL-daemon-already-running.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
+
+<pre><code>
+service mysqld restart
+
+service mysqld start
+
+</code></pre>
+
+<p>都解决不了，会提示：</p>
+
+<pre><code>
+Another MySQL daemon already running with the same unix socket.
+
+</code></pre>
 
 
                         
@@ -381,19 +483,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341478547.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="centos-Another-MySQL-daemon-already-running.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341478547.html" data-count-type="comments" href="14976341478547.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -401,14 +501,18 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341465169.html">
+                <a class="clearlink" href="thinkgo-web-frame-project.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>ThinkGo类ThinkPHP的Go语言WEB开发框架</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>ThinkGo 是一款 Go 语言编写的 web 快速开发框架。</p>
+
+<p>它基于开源框架 Gin 进行二次开发，旨在实现一种类 ThinkPHP 的高可用、高效率的 web 框架。</p>
+
+<p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
 
 
                         
@@ -417,19 +521,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341465169.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="thinkgo-web-frame-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341465169.html" data-count-type="comments" href="14976341465169.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -437,14 +539,16 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341453123.html">
+                <a class="clearlink" href="mattermost-go-project.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>Slack 的开源替代品 Mattermost</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
+
+<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
 
 
                         
@@ -453,19 +557,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341453123.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="mattermost-go-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341453123.html" data-count-type="comments" href="14976341453123.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -473,14 +575,21 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341426397.html">
+                <a class="clearlink" href="golog-log-project.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>简单 golang 日志 Golog</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>Golog 是简单的golang日志，基于golang内置log封装.</p>
+
+<p>特征</p>
+
+<ol>
+<li><p>实现各种日志 level: DEBUG, INFO, WARN, ERROR</p></li>
+<li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
+</ol>
 
 
                         
@@ -489,19 +598,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341426397.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="golog-log-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341426397.html" data-count-type="comments" href="14976341426397.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -509,14 +616,16 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341416234.html">
+                <a class="clearlink" href="fragmenta-cms-project.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>Go 编写的内容管理系统 Fragmenta CMS</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>Fragmenta CMS 是一个用户友好的内容管理系统，用 Go 编写。</p>
+
+<p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
 
 
                         
@@ -525,19 +634,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341416234.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="fragmenta-cms-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341416234.html" data-count-type="comments" href="14976341416234.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -545,14 +652,31 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341406419.html">
+                <a class="clearlink" href="error-of-go-build.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>go build时的错误分析</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<h2 id="toc_0">go build 错误一</h2>
+
+<p>如果出现：</p>
+
+<pre><code>
+warning: building out-of-date packages:
+
+runtime/pprof
+
+testing
+
+regexp/syntax
+
+regexp
+
+installing these packages with &#39;go test -i&#39; will speed future tests.
+
+</code></pre>
 
 
                         
@@ -561,19 +685,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341406419.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="error-of-go-build.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341406419.html" data-count-type="comments" href="14976341406419.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -581,14 +703,28 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341396243.html">
+                <a class="clearlink" href="get-path-with-golang.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>go中获取各种路径</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<ol>
+<li><p>执行用户当前所在路径：</p>
+
+<pre><code>
+os.Getwd()
+
+</code></pre></li>
+<li><p>执行程序所在路径：</p>
+
+<p>执行程序文件相对路径：</p>
+
+<pre><code>
+file, _ := exec.LookPath(os.Args[0])
+
+</code></pre>
 
 
                         
@@ -597,19 +733,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341396243.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="get-path-with-golang.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341396243.html" data-count-type="comments" href="14976341396243.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -617,15 +751,22 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341386362.html">
+                <a class="clearlink" href="operation-of-os.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>操作系统相关操作</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<ul>
+<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
+<li><p>判断当前用户是否是root用户</p>
 
+<pre><code>
+os.Geteuid() != 0
+
+</code></pre></li>
+</ul>
 
                         
                       </div>
@@ -633,19 +774,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341386362.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                  
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341386362.html" data-count-type="comments" href="14976341386362.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -653,15 +792,14 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341370950.html">
+                <a class="clearlink" href="path-package.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>Path包</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
-
+                        	<p>path.clean用于对路径../../等进行过滤，在创建、修改文件的时候需要使用，否则会有漏洞</p>
 
                         
                       </div>
@@ -669,19 +807,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341370950.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                  
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341370950.html" data-count-type="comments" href="14976341370950.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -689,14 +825,16 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="14976341356186.html">
+                <a class="clearlink" href="time-package-of-golang.html">
                 
-                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <h1>go time package 时间包</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+                        	<p>go 的time package 提供了time.Format函数，用来对时间进行格式化输出。</p>
+
+<p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
 
 
                         
@@ -705,19 +843,17 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="14976341356186.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/17</span>
+                   <a href="time-package-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
           				   
                   </div>
                   <div class="more-right right">
                   <span class="comments">
                       
 
-                      
-                        &nbsp;<a  class="ds-thread-count" data-thread-key="14976341356186.html" data-count-type="comments" href="14976341356186.html#ds-thread"></a>
                        
                   </span>
                   </div>
@@ -728,15 +864,18 @@
 
 
 			<div class="row">
-			  <div class="large-6 columns" id="pagination-div">
-			  <p class="text-left" style="padding-top:25px;">
-			   
-			  </p>
+			  <div class="large-3 columns">
+  			  <p class="text-left" style="padding-top:25px;">
+  			   
+  			  </p>
 			  </div>
-			  <div class="large-6 columns">
-			<p class="text-right" style="padding-top:25px;">
-			 <a href="all_1.html">&raquo; 下一页</a> 
-			</p>
+        <div class="large-6 columns" id="pagination-div" style="margin-top: 25px;text-align: center;">
+          
+        </div>
+			  <div class="large-3 columns">
+    			<p class="text-right" style="padding-top:25px;">
+    			 <a href="all_1.html">&raquo; 下一页</a> 
+    			</p>
 			  </div>
 			</div>
 		</div>
@@ -803,8 +942,6 @@
         
             <a href="about-database.html"><strong>数据库相关</strong></a>
         
-            <a href="golang-third-party-package.html"><strong>GO语言第三方包</strong></a>
-        
             <a href="golang-framework.html"><strong>GO语言框架</strong></a>
          
         </p>
@@ -822,35 +959,33 @@
 	      
 		      
 			      <li class="post">
-			        <a href="14976341544521.html">GO语言重量级WEB框架BEEGO</a>
+			        <a href="beego-web-framework-of-golang.html">GO语言重量级WEB框架BEEGO</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="14976341530125.html">GO语言重量级WEB框架BEEGO</a>
+			        <a href="mac-xcrun-error-fixed.html">Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="14976341518800.html">GO语言重量级WEB框架BEEGO</a>
+			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="14976341504722.html">GO语言重量级WEB框架BEEGO</a>
+			        <a href="change-user-os.html">Linux下切换用户的命令</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="14976341490571.html">GO语言重量级WEB框架BEEGO</a>
+			        <a href="how-to-update-mysql-in-centos.html">如何升级CentOS 6.5下的MySQL</a>
 			      </li>
 		     
-		  
-		      
 		  
 		      
 		  
@@ -900,19 +1035,6 @@
     </div>
 
   
-
-
-<script type="text/javascript">
-var duoshuoQuery = {short_name:'golog'};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
     
 
     <script src="asset/js/foundation.min.js"></script>
