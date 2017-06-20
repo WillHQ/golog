@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-20T18:20:55+08:00</updated>
+  <updated>2017-06-21T00:51:32+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -29,6 +29,8 @@
 <li>string + 比上述二者快一倍</li>
 <li>bytes.Buffer又比上者快约400-500倍</li>
 </ul>
+
+<span id="more"></span><!-- more -->
 
 <p>如果循环内每次都临时声明一个bytes.Buffer来使用，会比持续存在慢50%，但是仍然很快</p>
 
