@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		简单 golang 日志 Golog - GOLOG
+  		Go语言的字符串拼装方式性能对比 - GOLOG
   	
   	</title>
   	
@@ -114,14 +114,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>简单 golang 日志 Golog</h1>
+          <h1>Go语言的字符串拼装方式性能对比</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/7</span>
+          <span class="date">2017/6/21</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -134,40 +134,107 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Golog 是简单的golang日志，基于golang内置log封装.</p>
+      <p>Go语言中字符串的拼装方法很多，那么问题来了，到底哪家性能好？</p>
 
-<p>特征</p>
+<p>下面代码，分别比较了 fmt.Sprintf，string +，strings.Join，bytes.Buffer，方法是循环若干次比较总时间。</p>
 
-<ol>
-<li><p>实现各种日志 level: DEBUG, INFO, WARN, ERROR</p></li>
-<li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
-</ol>
+<p>在VMWare下的Ubuntu 14.04下运行的结果表明：</p>
 
-<span id="more"></span><!-- more -->
+<ul>
+<li>fmt.Sprintf 和 strings.Join 速度相当</li>
+<li>string + 比上述二者快一倍</li>
+<li>bytes.Buffer又比上者快约400-500倍</li>
+</ul>
 
-<p>代码实例</p>
+<p>如果循环内每次都临时声明一个bytes.Buffer来使用，会比持续存在慢50%，但是仍然很快</p>
 
-<pre><code>// rotating hander, max log files is 4, max file size is 4M
-rotatingHandler := logger.NewRotatingHandler(&quot;./&quot;, &quot;test.log&quot;, 4, 4*1024*1024)
+<p>测试代码如下：</p>
 
-// logger set handlers: console, rotating
-logger.SetHandlers(logger.Console, rotatingHandler)
+<pre><code>
+package main
 
-defer logger.Close()
+import (
+    &quot;bytes&quot;
+    &quot;fmt&quot;
+    &quot;strings&quot;
+    &quot;time&quot;
+)
 
-// logger set flags
-logger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+func benchmarkStringFunction(n int, index int) (d time.Duration) {
+    v := &quot;ni shuo wo shi bu shi tai wu liao le a?&quot;
+    var s string
+    var buf bytes.Buffer
 
-// logger set log level
-logger.SetLevel(logger.INFO)
+    t0 := time.Now()
+    for i := 0; i &lt; n; i++ {
+        switch index {
+        case 0: // fmt.Sprintf
+            s = fmt.Sprintf(&quot;%s[%s]&quot;, s, v)
+        case 1: // string +
+            s = s + &quot;[&quot; + v + &quot;]&quot;
+        case 2: // strings.Join
+            s = strings.Join([]string{s, &quot;[&quot;, v, &quot;]&quot;}, &quot;&quot;)
+        case 3: // temporary bytes.Buffer
+            b := bytes.Buffer{}
+            b.WriteString(&quot;[&quot;)
+            b.WriteString(v)
+            b.WriteString(&quot;]&quot;)
+            s = b.String()
+        case 4: // stable bytes.Buffer
+            buf.WriteString(&quot;[&quot;)
+            buf.WriteString(v)
+            buf.WriteString(&quot;]&quot;)
+        }
 
-logger.Debug(&quot;something&quot;, &quot;debug&quot;)
-logger.Info(&quot;something&quot;)
-logger.Warn(&quot;something&quot;)
-logger.Error(&quot;something&quot;)
+        if i == n-1 {
+            if index == 4 { // for stable bytes.Buffer
+                s = buf.String()
+            }
+            fmt.Println(len(s)) // consume s to avoid compiler optimization
+        }
+    }
+    t1 := time.Now()
+    d = t1.Sub(t0)
+    fmt.Printf(&quot;time of way(%d)=%v\n&quot;, index, d)
+    return d
+}
+
+func main() {
+    k := 5
+    d := [5]time.Duration{}
+    for i := 0; i &lt; k; i++ {
+        d[i] = benchmarkStringFunction(10000, i)
+    }
+
+    for i := 0; i &lt; k-1; i++ {
+        fmt.Printf(&quot;way %d is %6.1f times of way %d\n&quot;, i, float32(d[i])/float32(d[k-1]), k-1)
+    }
+}
+
 </code></pre>
 
-<p>项目Github链接：<a href="https://github.com/jander/golog">https://github.com/jander/golog</a></p>
+<p>其中一次的结果如下：</p>
+
+<pre><code>
+etworker@ubuntu:~/work/go/test$ go run testBenchmark.go 
+410000
+time of way(0)=1.199641573s
+410000
+time of way(1)=568.716669ms
+410000
+time of way(2)=1.197077483s
+41
+time of way(3)=2.277063ms
+410000
+time of way(4)=1.398864ms
+way 0 is  857.6 times of way 4
+way 1 is  406.6 times of way 4
+way 2 is  855.7 times of way 4
+way 3 is    1.6 times of way 4
+
+</code></pre>
+
+<p>经测试，连接100万个字符串，使用buffer消耗的时间约为77毫秒，使用+=消耗的时间为.....抱歉，等了5分钟结果没跑出来，减小数量级后，连接10万字符串的时间为3312毫秒</p>
 
 
     
@@ -178,16 +245,13 @@ logger.Error(&quot;something&quot;)
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="mattermost-go-project.html" 
-          title="Previous Post: Slack 的开源替代品 Mattermost">&laquo; Slack 的开源替代品 Mattermost</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="fragmenta-cms-project.html" 
-          title="Next Post: Go 编写的内容管理系统 Fragmenta CMS">Go 编写的内容管理系统 Fragmenta CMS &raquo;</a>
+          <a  href="beego-web-framework-of-golang.html" 
+          title="Next Post: GO语言重量级WEB框架BEEGO">GO语言重量级WEB框架BEEGO &raquo;</a>
       
       </p>
         </div>

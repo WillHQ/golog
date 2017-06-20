@@ -77,9 +77,9 @@
 	    		<li><a href="about.html"  target="_self">关于本站</a></li>
 	    		<li><label>Categories</label></li>
 		        
-		            <li><a href="golang-all-none.html">GO语言杂谈</a></li>
-		        
 		            <li><a href="golang-standard-package.html">GO语言标准包</a></li>
+		        
+		            <li><a href="golang-all-none.html">GO语言杂谈</a></li>
 		        
 		            <li><a href="golang-grammar.html">GO语言语法</a></li>
 		        
@@ -130,7 +130,7 @@
     
     category['golang-errors-handle.html'] = 1;
     
-    category['skills-of-golang.html'] = 3;
+    category['skills-of-golang.html'] = 4;
     
     category['projects-of-go.html'] = 4;
     
@@ -177,7 +177,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+2+1+1+3+4+3+2+1 ;
+      total_posts = 0 +2+2+1+1+4+4+3+2+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -249,6 +249,139 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="comparison-of-different-ways-to-join-strings.html">
+                
+                  <h1>Go语言的字符串拼装方式性能对比</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>Go语言中字符串的拼装方法很多，那么问题来了，到底哪家性能好？</p>
+
+<p>下面代码，分别比较了 fmt.Sprintf，string +，strings.Join，bytes.Buffer，方法是循环若干次比较总时间。</p>
+
+<p>在VMWare下的Ubuntu 14.04下运行的结果表明：</p>
+
+<ul>
+<li>fmt.Sprintf 和 strings.Join 速度相当</li>
+<li>string + 比上述二者快一倍</li>
+<li>bytes.Buffer又比上者快约400-500倍</li>
+</ul>
+
+<p>如果循环内每次都临时声明一个bytes.Buffer来使用，会比持续存在慢50%，但是仍然很快</p>
+
+<p>测试代码如下：</p>
+
+<pre><code>
+package main
+
+import (
+    &quot;bytes&quot;
+    &quot;fmt&quot;
+    &quot;strings&quot;
+    &quot;time&quot;
+)
+
+func benchmarkStringFunction(n int, index int) (d time.Duration) {
+    v := &quot;ni shuo wo shi bu shi tai wu liao le a?&quot;
+    var s string
+    var buf bytes.Buffer
+
+    t0 := time.Now()
+    for i := 0; i &lt; n; i++ {
+        switch index {
+        case 0: // fmt.Sprintf
+            s = fmt.Sprintf(&quot;%s[%s]&quot;, s, v)
+        case 1: // string +
+            s = s + &quot;[&quot; + v + &quot;]&quot;
+        case 2: // strings.Join
+            s = strings.Join([]string{s, &quot;[&quot;, v, &quot;]&quot;}, &quot;&quot;)
+        case 3: // temporary bytes.Buffer
+            b := bytes.Buffer{}
+            b.WriteString(&quot;[&quot;)
+            b.WriteString(v)
+            b.WriteString(&quot;]&quot;)
+            s = b.String()
+        case 4: // stable bytes.Buffer
+            buf.WriteString(&quot;[&quot;)
+            buf.WriteString(v)
+            buf.WriteString(&quot;]&quot;)
+        }
+
+        if i == n-1 {
+            if index == 4 { // for stable bytes.Buffer
+                s = buf.String()
+            }
+            fmt.Println(len(s)) // consume s to avoid compiler optimization
+        }
+    }
+    t1 := time.Now()
+    d = t1.Sub(t0)
+    fmt.Printf(&quot;time of way(%d)=%v\n&quot;, index, d)
+    return d
+}
+
+func main() {
+    k := 5
+    d := [5]time.Duration{}
+    for i := 0; i &lt; k; i++ {
+        d[i] = benchmarkStringFunction(10000, i)
+    }
+
+    for i := 0; i &lt; k-1; i++ {
+        fmt.Printf(&quot;way %d is %6.1f times of way %d\n&quot;, i, float32(d[i])/float32(d[k-1]), k-1)
+    }
+}
+
+</code></pre>
+
+<p>其中一次的结果如下：</p>
+
+<pre><code>
+etworker@ubuntu:~/work/go/test$ go run testBenchmark.go 
+410000
+time of way(0)=1.199641573s
+410000
+time of way(1)=568.716669ms
+410000
+time of way(2)=1.197077483s
+41
+time of way(3)=2.277063ms
+410000
+time of way(4)=1.398864ms
+way 0 is  857.6 times of way 4
+way 1 is  406.6 times of way 4
+way 2 is  855.7 times of way 4
+way 3 is    1.6 times of way 4
+
+</code></pre>
+
+<p>经测试，连接100万个字符串，使用buffer消耗的时间约为77毫秒，使用+=消耗的时间为.....抱歉，等了5分钟结果没跑出来，减小数量级后，连接10万字符串的时间为3312毫秒</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2017/6/21</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="get-path-with-golang.html">
                 
@@ -450,9 +583,9 @@ i, err = ParseInt(s, 10, 0) 
 
 				  	<p class="cat-list">
 				    
-				        <a href="golang-all-none.html"><strong>GO语言杂谈</strong></a>
-				    
 				        <a href="golang-standard-package.html"><strong>GO语言标准包</strong></a>
+				    
+				        <a href="golang-all-none.html"><strong>GO语言杂谈</strong></a>
 				    
 				        <a href="golang-grammar.html"><strong>GO语言语法</strong></a>
 				    
@@ -481,6 +614,12 @@ i, err = ParseInt(s, 10, 0) 
                 <div class="side-content">
                 <ul class="posts-list">
 	      
+		      
+			      <li class="post">
+			        <a href="comparison-of-different-ways-to-join-strings.html">Go语言的字符串拼装方式性能对比</a>
+			      </li>
+		     
+		  
 		      
 			      <li class="post">
 			        <a href="beego-web-framework-of-golang.html">GO语言重量级WEB框架BEEGO</a>
@@ -536,10 +675,6 @@ i, err = ParseInt(s, 10, 0) 
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="fragmenta-cms-project.html">Go 编写的内容管理系统 Fragmenta CMS</a>
-			      </li>
-		     
 		  
 		      
 		  
