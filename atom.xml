@@ -4,13 +4,307 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-21T12:35:20+08:00</updated>
+  <updated>2017-06-21T21:31:24+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[实用的sublime插件集合 – sublime推荐必备插件]]></title>
+    <link href="http://golog.cc/plugins-of-sublime.html"/>
+    <updated>2017-06-23T17:02:03+08:00</updated>
+    <id>http://golog.cc/plugins-of-sublime.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">1. Package Control</h3>
+
+<p>功能：安装包管理</p>
+
+<p>简介：sublime插件控制台，提供添加、删除、禁用、查找插件等功能</p>
+
+<p>使用：<a href="https://sublime.wbond.net/installation">https://sublime.wbond.net/installation</a></p>
+
+<span id="more"></span><!-- more -->
+
+<p>安装方法：</p>
+
+<ol>
+<li><p>CTRL+` ，出现控制台</p></li>
+<li><p>粘贴以下代码至控制台</p></li>
+</ol>
+
+<p>ST2：</p>
+
+<pre><code>    
+import urllib2,os; pf=&#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), &#39;wb&#39; ).write( urllib2.urlopen( &#39;http://sublime.wbond.net/&#39; +pf.replace( &#39; &#39;,&#39;%20&#39; )).read()); print( &#39;Please restart Sublime Text to finish installation&#39;)
+
+</code></pre>
+
+<p>ST3：</p>
+
+<pre><code>
+import
+urllib.request,os;
+pf
+=
+&#39;Package
+ Control.sublime-package&#39;;
+ipp
+=
+sublime.installed_packages_path();
+urllib.request.install_opener(
+urllib.request.build_opener(
+urllib.request.ProxyHandler())
+);
+open(os.path.join(ipp,
+pf),
+&#39;wb&#39;).write(urllib.request.urlopen(
+&#39;http://sublime.wbond.net/&#39;
++
+pf.replace(&#39;
+ &#39;,&#39;%20&#39;)).read())
+ 
+</code></pre>
+
+<p>其他方法：</p>
+
+<p>如果以上方法不能安装，请使用下面的方法</p>
+
+<ol>
+<li><p>选择菜单：Preferences &gt; Browse Packages</p></li>
+<li><p>打开sublime插件安装包文件夹</p></li>
+<li><p>下载文件并复制到打开的文件夹</p></li>
+<li><p>重启sublime</p></li>
+</ol>
+
+<h3 id="toc_1">2. Emmet</h3>
+
+<p>功能：编码快捷键，前端必备</p>
+
+<p>简介：Emmet作为zen coding的升级版，对于前端来说，可是必备插件，如果你对它还不太熟悉，可以在其官网（<a href="http://docs.emmet.io/%EF%BC%89%E4%B8%8A%E7%9C%8B%E4%B8%8B%E5%85%B7%E4%BD%93%E7%9A%84%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91%E3%80%82">http://docs.emmet.io/）上看下具体的演示视频。</a></p>
+
+<p>使用：教程-<a href="http://docs.emmet.io/cheat-sheet/">http://docs.emmet.io/cheat-sheet/</a>、<a href="http://peters-playground.com/Emmet-Css-Snippets-for-Sublime-Text-2/">http://peters-playground.com/Emmet-Css-Snippets-for-Sublime-Text-2/</a></p>
+
+<p><img src="media/14982085236076/emmet.gif" alt="emmet"/></p>
+
+<h3 id="toc_2">3. JSFormat</h3>
+
+<p>功能：JavaScript的代码格式化插件</p>
+
+<p>简介：很多网站的js代码都进行了压缩，一行式的甚至混淆压缩，这让我们看起来很吃力。而这个插件能帮我们把原始代码进行格式的整理，包括换行和缩进等等，是代码一目了然，更快读懂~</p>
+
+<p>使用：在已压缩的JS文件中，右键选择jsFormat或者使用默认快捷键（Ctrl+Alt+F）</p>
+
+<p><img src="media/14982085236076/jsFormat.gif" alt="jsFormat"/></p>
+
+<h3 id="toc_3">4. LESS</h3>
+
+<p>功能：LESS高亮插件</p>
+
+<p>简介：用LESS的同学都知道，sublime没有支持less的语法高亮，所以这个插件可以帮上我们</p>
+
+<p>使用：打开.less文件或者设置为less格式</p>
+
+<p><img src="media/14982085236076/less.gif" alt="less"/></p>
+
+<h3 id="toc_4">5. Less2CSS</h3>
+
+<p>功能：编译Less</p>
+
+<p>简介：监测到文件改动时，编译保存为.css文件</p>
+
+<p>使用：打开.less文件，编写代码保存即可看到同时生成.css的文件，如果没有则需要安装node。不推荐用这种方法编译，要么用koala，要么就用grunt编译。</p>
+
+<h3 id="toc_5">6. Alignment</h3>
+
+<p>功能：”=”号对齐</p>
+
+<p>简介：变量定义太多，长短不一，可一键对齐</p>
+
+<p>使用：默认快捷键Ctrl+Alt+A和QQ截屏冲突，可设置其他快捷键如：Ctrl+Shift+Alt+A；先选择要对齐的文本</p>
+
+<p><img src="media/14982085236076/align.gif" alt="align"/></p>
+
+<h3 id="toc_6">7. sublime-autoprefixer</h3>
+
+<p>功能：CSS添加私有前缀</p>
+
+<p>简介：CSS还未标准化，所以要给各大浏览器一个前缀以解决兼容问题</p>
+
+<p>使用：Ctrl+Shift+P，选择autoprefixer即可。需要安装Node.js。</p>
+
+<p>其他设置如快捷键请参考：<a href="https://sublime.wbond.net/packages/Autoprefixer">https://sublime.wbond.net/packages/Autoprefixer</a></p>
+
+<p><img src="media/14982085236076/prefixer.gif" alt="prefixe"/></p>
+
+<h3 id="toc_7">8. Clipboard History</h3>
+
+<p>功能：粘贴板历史记录</p>
+
+<p>简介：方便使用复制/剪切的内容</p>
+
+<p>使用：</p>
+
+<ul>
+<li>Ctrl+alt+v：显示历史记录</li>
+<li>Ctrl+alt+d：清空历史记录</li>
+<li>Ctrl+shift+v：粘贴上一条记录（最旧）</li>
+<li>Ctrl+shift+alt+v：粘贴下一条记录（最新）</li>
+</ul>
+
+<p><img src="media/14982085236076/keyboard.gif" alt="keyboard"/></p>
+
+<h3 id="toc_8">9. Bracket Highlighter</h3>
+
+<p>功能：代码匹配</p>
+
+<p>简介：可匹配[], (), {}, “”, ”, <tag></tag>，高亮标记，便于查看起始和结束标记</p>
+
+<p>使用：点击对应代码即可</p>
+
+<p><img src="media/14982085236076/highlight.gif" alt="highlight"/></p>
+
+<h3 id="toc_9">10. Git</h3>
+
+<p>功能：Git管理</p>
+
+<p>简介：插件基本上实现了git的所有功能</p>
+
+<p>使用：<a href="https://github.com/kemayo/sublime-text-git/wiki">https://github.com/kemayo/sublime-text-git/wiki</a></p>
+
+<p><img src="media/14982085236076/git.png" alt="git"/></p>
+
+<h3 id="toc_10">11. jQuery</h3>
+
+<p>功能：jQ函数提示</p>
+
+<p>简介：快捷输入jQ函数，是偷懒的好方法</p>
+
+<p><img src="media/14982085236076/jquery.gif" alt="jquery"/></p>
+
+<h3 id="toc_11">12. Doc​Blockr</h3>
+
+<p>功能：生成优美注释</p>
+
+<p>简介：标准的注释，包括函数名、参数、返回值等，并以多行显示，手动写比较麻烦</p>
+
+<p>使用：输入/<em>、/</em>*然后回车，还有很多用法，请参照</p>
+
+<p><a href="https://sublime.wbond.net/packages/DocBlockr">https://sublime.wbond.net/packages/DocBlockr</a></p>
+
+<p><img src="media/14982085236076/basic.gif" alt="basi"/></p>
+
+<h3 id="toc_12">13. Color​Picker</h3>
+
+<p>功能：调色板</p>
+
+<p>简介：需要输入颜色时，可直接选取颜色</p>
+
+<p>使用：快捷键Windows: ctrl+shift+c</p>
+
+<p><img src="media/14982085236076/14982095581101.jpg" alt=""/></p>
+
+<p><img src="media/14982085236076/14982095671586.jpg" alt=""/></p>
+
+<h3 id="toc_13">14. ConvertToUTF8</h3>
+
+<p>功能：文件转码成utf-8</p>
+
+<p>简介：通过本插件，您可以编辑并保存目前编码不被 Sublime Text 支持的文件，特别是中日韩用户使用的 GB2312，GBK，BIG5，EUC-KR，EUC-JP ，ANSI等。ConvertToUTF8 同时支持 Sublime Text 2 和 3。</p>
+
+<p>使用：安装插件后自动转换为utf-8格式</p>
+
+<p><img src="media/14982085236076/uy67y.gif" alt="uy67y"/></p>
+
+<h3 id="toc_14">15. AutoFileName</h3>
+
+<p>功能：快捷输入文件名</p>
+
+<p>简介：自动完成文件名的输入，如图片选取</p>
+
+<p>使用：输入”/”即可看到相对于本项目文件夹的其他文件</p>
+
+<p><img src="media/14982085236076/autofilename.gif" alt="autofilename"/></p>
+
+<h3 id="toc_15">16. Nodejs</h3>
+
+<p>功能：node代码提示</p>
+
+<p>教程：<a href="https://sublime.wbond.net/packages/Nodejs">https://sublime.wbond.net/packages/Nodejs</a></p>
+
+<p><img src="media/14982085236076/14982095335507.jpg" alt=""/><br/>
+ZCFcC</p>
+
+<h3 id="toc_16">17. IMESupport</h3>
+
+<p>功能：sublime中文输入法</p>
+
+<p>简介：还在纠结 Sublime Text 中文输入法不能跟随光标吗？试试「IMESupport 」这个插件吧！目前只支持 Windows，在搜索等界面不能很好的跟随光标。</p>
+
+<p>使用：Ctrl + Shift + P →输入pci →输入IMESupport →回车</p>
+
+<p><img src="media/14982085236076/c1608aa0gw1e9dmrd3vxpg209y08d75x.gif" alt="c1608aa0gw1e9dmrd3vxpg209y08d75x"/></p>
+
+<h3 id="toc_17">18. Trailing spaces</h3>
+
+<p>功能：检测并一键去除代码中多余的空格</p>
+
+<p>简介：还在纠结代码中有多余的空格而显得代码不规范？或是有处女座情节？次插件帮你实现发现多余空格、一键删除空格、保存时自动删除多余空格，让你的代码规范清爽起来</p>
+
+<p>使用：安装插件并重启，即可自动提示多余空格。一键删除多余空格：CTRL+SHITF+T（需配置），更多配置请点击标题。快捷键配置：在Preferences / Key Bindings – User加上代码（数组内）</p>
+
+<pre><code>
+{
+&quot;keys&quot;:
+[&quot;ctrl+shift+t&quot;],
+&quot;command&quot;:
+&quot;delete_trailing_spaces&quot;
+}
+
+</code></pre>
+
+<p><img src="media/14982085236076/spac.gif" alt="spa"/></p>
+
+<h3 id="toc_18">19. FileDiffs</h3>
+
+<p>功能：强大的比较代码不同工具</p>
+
+<p>简介：比较当前文件与选中的代码、剪切板中代码、另一文件、未保存文件之间的差别。可配置为显示差别在外部比较工具，精确到行。</p>
+
+<p>使用：右键标签页，出现FileDiffs Menu或者Diff with Tab…选择对应文件比较即可</p>
+
+<p><img src="media/14982085236076/diff.gif" alt="diff"/></p>
+
+<h3 id="toc_19">20. GBK Encoding Support</h3>
+
+<p>功能：中文识别</p>
+
+<p>简介：Sublime Text 2可识别UTF-8格式的中文，不识别GBK和ANSI，因此打开很多含中文的文档都会出现乱码。可以通过安装插件GBK Support,来识别GBK和ANSI。</p>
+
+<p>使用：</p>
+
+<ul>
+<li>Open a GBK File</li>
+<li>Save file with GBK encoding</li>
+<li>Change file encoding from utf8 to GBK or GBK to utf8</li>
+</ul>
+
+<p><img src="media/14982085236076/14982094859392.jpg" alt=""/></p>
+
+<p><img src="media/14982085236076/14982095005997.jpg" alt=""/></p>
+
+<h3 id="toc_20">21. 增强侧边栏</h3>
+
+<p>SideBarEnhancements插件有效地改进了Sublime Text的侧边栏。安装插件后在侧边栏上点击右键，可以找到一下新功能：在资源管理器中打开、新建文件、新建文件夹、以…打开、在浏览器中打开。</p>
+
+<p><img src="media/14982085236076/14982109732383.jpg" alt=""/></p>
+
+<p>注：在浏览器中打开的热键是F12。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Go语言的字符串拼装方式性能对比]]></title>
@@ -812,137 +1106,6 @@ int(f)
 <li><p>如何在Github Pages上面绑定域名</p></li>
 <li><p>如何进行静态网站的托管同步</p></li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一台机器上设置多个SSH Key]]></title>
-    <link href="http://golog.cc/set-many-ssh-keys-in-a-computer.html"/>
-    <updated>2016-07-22T01:13:35+08:00</updated>
-    <id>http://golog.cc/set-many-ssh-keys-in-a-computer.html</id>
-    <content type="html"><![CDATA[
-<blockquote>
-<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
-</blockquote>
-
-<p><strong>1. 生成 ssh keys</strong></p>
-
-<p>终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
-
-<span id="more"></span><!-- more -->
-
-<p>注意：双引号换成自己的邮箱，如果linux下遇到权限问题，只需在前面加上sudo</p>
-
-<p><strong>2. github添加SSH keys</strong></p>
-
-<p>将id_rsa.pub里面的内容复制下来，在github上的settings里面找到add keys，将其粘贴到key即可，title唯一即可随便填，建议写有意义的;</p>
-
-<p><strong>3. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@github.com
-
-</code></pre>
-
-<p>只要看到最后一行:</p>
-
-<pre><code>
-Hi chenlianjiang! You&#39;ve successfully authenticated, but GitHub does not provide shell access
-
-</code></pre>
-
-<p>说明验证成功了.</p>
-
-<p><strong>4. gitlib帐号添加SSH keys</strong></p>
-
-<p>同第（1）步一样，生成新的SSH Keys</p>
-
-<p>这时候在生成ssh key时候要注意了这时一路回车，不输入任何字符在绑定gitlibng的ssh key时，会发现将github的ssh key覆盖了。需要做调整：</p>
-
-<p>打开终端，终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时，给这个文件起一个名字， 比如叫C:\Users\Administrator.ssh\ id_rsa_gitlib, 所以相应的也会生成一个 id_rsa_gitlib.pub 文件。</p>
-
-<p>注意这里如果只输入文件名会在终端的当前目录下生成，拷贝到对应位置即可；</p>
-
-<p>终端输入一下命令：</p>
-
-<pre><code>
-$ ssh-add ~/.ssh/id_rsa
-
-$ ssh-add ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>ssh-add命令是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在/usr/bin/ssh-add</p>
-
-<p>如果出现Could not open a connection to your authentication agent.错误提示先执行$ ssh-agent.exe bash，然后执行上面命令；</p>
-
-<pre><code>
--D：删除ssh-agent中的所有密钥
-
--d：从ssh-agent中的删除密钥
-
--e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙
-
--s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙
-
--L：显示ssh-agent中的公钥
-
--l：显示ssh-agent中的密钥
-
--t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥
-
--X：对ssh-agent进行解锁
-
--x：对ssh-agent进行加锁
-
-</code></pre>
-
-<p>在~/.ssh/目录下新建config文件，并添加:</p>
-
-<pre><code>
-# github
-Host github.com
-      HostName github.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa
-      
-# gitlib
-Host gitlib.com
-      HostName gitlib.com
-      PreferredAuthentications publickey
-      IdentityFile ~/.ssh/id_rsa_gitlib
-
-</code></pre>
-
-<p>将id_rsa_gitlib.pub里面的内容复制下来，在gitlib上的账户里面找到所示SSH keys，将其粘贴到key内容即可，Title唯一即可随便填，，点击添加需要输入登录密码；</p>
-
-<p><strong>5. 测试</strong></p>
-
-<p>在控制台上测试一下，输入：</p>
-
-<pre><code>
-ssh -T git@域名
-
-</code></pre>
-
-<p>只要看到最后一行<code>Welcome to GitLab, chenlj!</code>，说明验证成功了</p>
 
 ]]></content>
   </entry>
