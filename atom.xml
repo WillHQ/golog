@@ -4,13 +4,55 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-21T21:31:24+08:00</updated>
+  <updated>2017-06-23T22:47:17+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[常用的Linux命令]]></title>
+    <link href="http://golog.cc/linux-commandp-in-common-use.html"/>
+    <updated>2017-06-24T15:12:23+08:00</updated>
+    <id>http://golog.cc/linux-commandp-in-common-use.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">1. 查看文件大小</h3>
+
+<p>查看当前文件夹下所有文件大小（包括子文件夹）</p>
+
+<pre><code>du -sh
+</code></pre>
+
+<p>后面可以跟具体的文件夹名称</p>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_1">2. 查看磁盘空间大小命令</h3>
+
+<p>df -h Df命令是linux系统以磁盘分区为单位查看文件系统，可以加上参数查看磁盘剩余空间信息，命令格式： </p>
+
+<pre><code>df -hl 
+
+</code></pre>
+
+<p>显示格式为： </p>
+
+<pre><code>文件系统 容量 已用 可用 已用% 挂载
+</code></pre>
+
+<h3 id="toc_2">3. 清理Git占用的空间</h3>
+
+<p>通过以下的命令，清空git占用的一些空间：</p>
+
+<pre><code>git gc
+</code></pre>
+
+<p>该命令可以在任何位置上运行。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[实用的sublime插件集合 – sublime推荐必备插件]]></title>
@@ -1083,29 +1125,6 @@ int(f)
 
 <p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Github Pages 静态网站托管]]></title>
-    <link href="http://golog.cc/github-pages-and-static-website.html"/>
-    <updated>2016-07-22T14:18:27+08:00</updated>
-    <id>http://golog.cc/github-pages-and-static-website.html</id>
-    <content type="html"><![CDATA[
-<p>本网站就是采用Github pages托管的静态网站。</p>
-
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
-
-<span id="more"></span><!-- more -->
-
-<p>下面简要的说一下：</p>
-
-<ol>
-<li><p>如何把网站托管到Github Pages上面</p></li>
-<li><p>如何在Github Pages上面绑定域名</p></li>
-<li><p>如何进行静态网站的托管同步</p></li>
-</ol>
 
 ]]></content>
   </entry>

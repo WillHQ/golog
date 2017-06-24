@@ -134,7 +134,7 @@
     
     category['projects-of-go.html'] = 4;
     
-    category['about-os.html'] = 3;
+    category['about-os.html'] = 4;
     
     category['about-database.html'] = 2;
     
@@ -177,7 +177,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +3+2+1+1+4+4+3+2+1 ;
+      total_posts = 0 +3+2+1+1+4+4+4+2+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -249,6 +249,47 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="operation-of-os.html">
+                
+                  <h1>操作系统相关操作</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
+<li><p>判断当前用户是否是root用户</p>
+
+<pre><code>
+os.Geteuid() != 0
+
+</code></pre></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="path-package.html">
                 
@@ -583,6 +624,12 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 	      
 		      
 			      <li class="post">
+			        <a href="linux-commandp-in-common-use.html">常用的Linux命令</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="plugins-of-sublime.html">实用的sublime插件集合 – sublime推荐必备插件</a>
 			      </li>
 		     
@@ -632,12 +679,6 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 		      
 			      <li class="post">
 			        <a href="thinkgo-web-frame-project.html">ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="mattermost-go-project.html">Slack 的开源替代品 Mattermost</a>
 			      </li>
 		     
 		  
