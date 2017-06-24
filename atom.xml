@@ -4,13 +4,56 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-23T22:47:17+08:00</updated>
+  <updated>2017-06-24T15:17:33+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[GO语言中的StructTag类型]]></title>
+    <link href="http://golog.cc/structtag-of-go.html"/>
+    <updated>2017-06-24T18:57:27+08:00</updated>
+    <id>http://golog.cc/structtag-of-go.html</id>
+    <content type="html"><![CDATA[
+<p>StructTag是什么？在Go语言里，StructTag是一个标记字符串，此字符串可跟随在Struct中字段定义的后面。StructTag就是一系列的 key:”value” 形式的组合，其中key是一个不可为空的字符串，key-value组合可以有多个，空格分隔。</p>
+
+<p>StructTag有什么用？！StructTag主要解决了不同类型数据集合间(Struct,Json,Table等)转换中键值Key定义不一样的问题。StructTag可以理解为一个不用数据类型键值Key的映射表Map, 在StructTag中可以定义不用数据集合键值和Struct中Key值的映射关系，这样方便了Struct数据转为其他类型数据的过程。例如我们可以把Struct数据映射成为一个Json格式的数据，或者把Struct数据映射成为一个数据表Table。当然我们也可以依据StructTag的定义，把一个Json数据转为一个Struct结构数据。</p>
+
+<p>下面，我们可以看一下，Struct和Json数据间的互相转换的例子：</p>
+
+<pre><code>package main  
+import (  
+  &quot;fmt&quot;
+  &quot;encoding/json&quot;
+)
+type Person struct {  
+  FirstName string `json:&quot;first_name&quot;` //FirstName &lt;=&gt; firest_name 
+  LastName string `json:&quot;last_name&quot;` 
+  MiddleName string `json:&quot;middle_name,omitempty&quot;` 
+} 
+func main() {  
+  json_string := ` { &quot;first_name&quot;: &quot;John&quot;, &quot;last_name&quot;: &quot;Smith&quot; }`
+  person := new(Person)
+  json.Unmarshal([]byte(json_string), person) //将json数据转为Person Struct 
+  fmt.Println(person) 
+  new_json, _ := json.Marshal(person) //将Person Sturct 转为json格式   
+  fmt.Printf(&quot;%s\n&quot;, new_json) 
+} 
+
+// *Output* 
+// &amp;{John Smith } 
+// {&quot;first_name&quot;:&quot;John&quot;,&quot;last_name&quot;:&quot;Smith&quot;}
+</code></pre>
+
+<p>从上面的代码可看出，结构体间的数据转换可以不用严格遵循一对一的转换，例如Person Struct 中定义的MiddleName，如果json数据定义中无此字段，可以在StructTag中加入”omitempty”, 标识该字段的数据可忽略。</p>
+
+<p>注意：有时候在Struct转Json的时候，Struct里的key是大写首字母的，如果在转Json的时候，变小写字母，或者其他的名字，就可以用StructTag的方式。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[常用的Linux命令]]></title>
@@ -1110,21 +1153,6 @@ i, err = ParseInt(s, 10, 0) 
 int(f)
 </code></pre></li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[import的使用]]></title>
-    <link href="http://golog.cc/usage-of-import.html"/>
-    <updated>2016-07-22T18:37:36+08:00</updated>
-    <id>http://golog.cc/usage-of-import.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li><p>import包命名</p>
-
-<p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
-</ul>
 
 ]]></content>
   </entry>

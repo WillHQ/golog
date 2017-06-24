@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://golog.cc/</loc>
-  <lastmod>2017-06-24T15:17:33+08:00</lastmod>
+  <lastmod>2017-06-25T00:44:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/structtag-of-go.html</loc>
+  <lastmod>2017-06-24T18:57:27+08:00</lastmod>
 </url>
 
 <url>

@@ -126,7 +126,7 @@
     
     category['golang-standard-package.html'] = 2;
     
-    category['golang-grammar.html'] = 1;
+    category['golang-grammar.html'] = 2;
     
     category['golang-errors-handle.html'] = 1;
     
@@ -177,7 +177,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +3+2+1+1+4+4+4+2+1 ;
+      total_posts = 0 +3+2+2+1+4+4+4+2+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -527,6 +527,12 @@ i, err = ParseInt(s, 10, 0) 
 	      
 		      
 			      <li class="post">
+			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="linux-commandp-in-common-use.html">常用的Linux命令</a>
 			      </li>
 		     
@@ -576,12 +582,6 @@ i, err = ParseInt(s, 10, 0) 
 		      
 			      <li class="post">
 			        <a href="centos-Another-MySQL-daemon-already-running.html">CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="thinkgo-web-frame-project.html">ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
 			      </li>
 		     
 		  
