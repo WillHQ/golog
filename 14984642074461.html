@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		使用Git的钩子实现自动部署 - GOLOG
+  		Linux 下压缩与解压缩命令 - GOLOG
   	
   	</title>
   	
@@ -114,10 +114,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>使用Git的钩子实现自动部署</h1>
+          <h1>Linux 下压缩与解压缩命令</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/8</span>
+          <span class="date">2017/6/26</span>
 
           <span>文章分类：</span> 
           
@@ -134,45 +134,85 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ol>
-<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
-</ol>
+      <h3 id="toc_0">tar</h3>
+
+<p>-c: 建立压缩档案<br/>
+-x：解压<br/>
+-t：查看内容<br/>
+-r：向压缩归档文件末尾追加文件<br/>
+-u：更新原压缩包中的文件</p>
+
+<p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
 
 <span id="more"></span><!-- more -->
 
-<ol>
-<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
+<p>-z：有gzip属性的<br/>
+-j：有bz2属性的<br/>
+-Z：有compress属性的<br/>
+-v：显示所有过程<br/>
+-O：将文件解开到标准输出</p>
 
-<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
-<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
+<p>下面的参数-f是必须的</p>
 
-<p>在该目录下，运行：</p>
+<p>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</p>
 
-<pre><code>
-git clone /var/git/testRep /var/testDeploy
+<h3 id="toc_1">tar -cf all.tar *.jpg</h3>
 
-</code></pre>
+<p>这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。</p>
 
-<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p>
+<h3 id="toc_2">tar -rf all.tar *.gif</h3>
 
-<blockquote>
-<p>注意：删除已有的文件夹中的文件、删除.git文件夹之后，要切换到git用户之下，使用git用户重新git clone一遍，才可以自动的进行部署，因为部署需要用git用户进行操作，在root做所有的操作，git就没办法把更新的文件部署到发布的目录下面。</p>
-</blockquote></li>
-<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
+<p>这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</p>
 
-<pre><code>
-unset GIT_DIR
-DeployDir=/var/testDeploy/
-cd $DeployDir
-git add . -A &amp;&amp; git stash
-git pull origin master
+<h3 id="toc_3">tar -uf all.tar logo.gif</h3>
 
-</code></pre>
+<p>这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</p>
 
-<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
+<h3 id="toc_4">tar -tf all.tar</h3>
 
-<p>以上方法步骤，验证通过。</p></li>
-</ol>
+<p>这条命令是列出all.tar包中所有文件，-t是列出文件的意思</p>
+
+<h3 id="toc_5">tar -xf all.tar</h3>
+
+<p>这条命令是解出all.tar包中所有文件，-x是解开的意思</p>
+
+<h3 id="toc_6">压缩</h3>
+
+<p>tar –cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg</p>
+
+<p>tar –czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz</p>
+
+<p>tar –cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2</p>
+
+<p>tar –cZf jpg.tar.Z *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z</p>
+
+<p>rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for Linux</p>
+
+<p>zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux</p>
+
+<h3 id="toc_7">解压</h3>
+
+<p>tar –xvf file.tar //解压 tar包</p>
+
+<p>tar -xzvf file.tar.gz //解压tar.gz</p>
+
+<p>tar -xjvf file.tar.bz2   //解压 tar.bz2</p>
+
+<p>tar –xZvf file.tar.Z   //解压tar.Z</p>
+
+<p>unrar e file.rar //解压rar<br/>
+unzip file.zip //解压zip</p>
+
+<p>总结<br/>
+1、*.tar 用 tar –xvf 解压<br/>
+2、*.gz 用 gzip -d或者gunzip 解压<br/>
+3、*.tar.gz和*.tgz 用 tar –xzf 解压<br/>
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压<br/>
+5、*.tar.bz2用tar –xjf 解压<br/>
+6、*.Z 用 uncompress 解压<br/>
+7、*.tar.Z 用tar –xZf 解压<br/>
+8、*.rar 用 unrar e解压<br/>
+9、*.zip 用 unzip 解压</p>
 
 
     
@@ -183,16 +223,16 @@ git pull origin master
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="mac-xcrun-error-fixed.html" 
-          title="Previous Post: Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法">&laquo; Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
+          <a href="15137583342148.html" 
+          title="Previous Post: 阿里云vps上mysql挂掉的解决办法">&laquo; 阿里云vps上mysql挂掉的解决办法</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="change-user-os.html" 
-          title="Next Post: Linux下切换用户的命令">Linux下切换用户的命令 &raquo;</a>
+          <a  href="structtag-of-go.html" 
+          title="Next Post: GO语言中的StructTag类型">GO语言中的StructTag类型 &raquo;</a>
       
       </p>
         </div>

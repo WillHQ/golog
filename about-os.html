@@ -122,9 +122,9 @@
     var current_page_number = 0;
     var category ={};
     
-    category['golang-all-none.html'] = 3;
-    
     category['golang-standard-package.html'] = 2;
+    
+    category['golang-all-none.html'] = 3;
     
     category['golang-grammar.html'] = 2;
     
@@ -134,9 +134,9 @@
     
     category['projects-of-go.html'] = 4;
     
-    category['about-os.html'] = 4;
+    category['about-os.html'] = 5;
     
-    category['about-database.html'] = 2;
+    category['about-database.html'] = 3;
     
     category['golang-framework.html'] = 1;
     
@@ -177,7 +177,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +3+2+2+1+4+4+4+2+1 ;
+      total_posts = 0 +2+3+2+1+4+4+5+3+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -249,6 +249,48 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="14984642074461.html">
+                
+                  <h1>Linux 下压缩与解压缩命令</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h3 id="toc_0">tar</h3>
+
+<p>-c: 建立压缩档案<br/>
+-x：解压<br/>
+-t：查看内容<br/>
+-r：向压缩归档文件末尾追加文件<br/>
+-u：更新原压缩包中的文件</p>
+
+<p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="14984642074461.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/26</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="linux-commandp-in-common-use.html">
                 
@@ -519,6 +561,18 @@ su git
 	      
 		      
 			      <li class="post">
+			        <a href="15137583342148.html">阿里云vps上mysql挂掉的解决办法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14984642074461.html">Linux 下压缩与解压缩命令</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
 			      </li>
 		     
@@ -562,18 +616,6 @@ su git
 		      
 			      <li class="post">
 			        <a href="change-user-os.html">Linux下切换用户的命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="how-to-update-mysql-in-centos.html">如何升级CentOS 6.5下的MySQL</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="centos-Another-MySQL-daemon-already-running.html">CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</a>
 			      </li>
 		     
 		  

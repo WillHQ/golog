@@ -122,9 +122,9 @@
     var current_page_number = 0;
     var category ={};
     
-    category['golang-all-none.html'] = 3;
-    
     category['golang-standard-package.html'] = 2;
+    
+    category['golang-all-none.html'] = 3;
     
     category['golang-grammar.html'] = 2;
     
@@ -134,9 +134,9 @@
     
     category['projects-of-go.html'] = 4;
     
-    category['about-os.html'] = 4;
+    category['about-os.html'] = 5;
     
-    category['about-database.html'] = 2;
+    category['about-database.html'] = 3;
     
     category['golang-framework.html'] = 1;
     
@@ -177,7 +177,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +3+2+2+1+4+4+4+2+1 ;
+      total_posts = 0 +2+3+2+1+4+4+5+3+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -249,6 +249,93 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="fragmenta-cms-project.html">
+                
+                  <h1>Go 编写的内容管理系统 Fragmenta CMS</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>Fragmenta CMS 是一个用户友好的内容管理系统，用 Go 编写。</p>
+
+<p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="fragmenta-cms-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="error-of-go-build.html">
+                
+                  <h1>go build时的错误分析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">go build 错误一</h2>
+
+<p>如果出现：</p>
+
+<pre><code>
+warning: building out-of-date packages:
+
+runtime/pprof
+
+testing
+
+regexp/syntax
+
+regexp
+
+installing these packages with &#39;go test -i&#39; will speed future tests.
+
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="error-of-go-build.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="get-path-with-golang.html">
                 
@@ -672,6 +759,18 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 	      
 		      
 			      <li class="post">
+			        <a href="15137583342148.html">阿里云vps上mysql挂掉的解决办法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14984642074461.html">Linux 下压缩与解压缩命令</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
 			      </li>
 		     
@@ -715,18 +814,6 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 		      
 			      <li class="post">
 			        <a href="change-user-os.html">Linux下切换用户的命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="how-to-update-mysql-in-centos.html">如何升级CentOS 6.5下的MySQL</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="centos-Another-MySQL-daemon-already-running.html">CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</a>
 			      </li>
 		     
 		  

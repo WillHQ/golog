@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2017-06-24T15:17:33+08:00</updated>
+  <updated>2018-08-04T16:43:52+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,12 +13,152 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
+    <title type="html"><![CDATA[阿里云vps上mysql挂掉的解决办法]]></title>
+    <link href="http://golog.cc/15137583342148.html"/>
+    <updated>2017-12-20T16:25:34+08:00</updated>
+    <id>http://golog.cc/15137583342148.html</id>
+    <content type="html"><![CDATA[
+<p>用阿里云的vps用作blog服务器，系统很稳定，已经100多天一直运行正常，大概从上个月开始发现blog的mysql会有时挂掉，会收到短信通知。之前没太追究，重新启动了mysql解决的。今天上午又收到短信，已经第三次了。</p>
+
+<p>查了一下日志，三次基本都是一样的：</p>
+
+<span id="more"></span><!-- more -->
+
+<p>130728  6:50:14 [Note] Plugin &#39;FEDERATED&#39; is disabled.<br/>
+130728  6:50:14 InnoDB: The InnoDB memory heap is disabled<br/>
+130728  6:50:14 InnoDB: Mutexes and rw_locks use GCC atomic builtins<br/>
+130728  6:50:14 InnoDB: Compressed tables use zlib 1.2.3.4<br/>
+130728  6:50:14 InnoDB: Initializing buffer pool, size = 128.0M<br/>
+InnoDB: mmap(137363456 bytes) failed; errno 12<br/>
+130728  6:50:14 InnoDB: Completed initialization of buffer pool<br/>
+130728  6:50:14 InnoDB: Fatal error: cannot allocate memory for the buffer pool<br/>
+130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; init function returned error.<br/>
+130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; registration as a STORAGE ENGINE failed.<br/>
+130728  6:50:14 [ERROR] Unknown/unsupported storage engine: InnoDB<br/>
+130728  6:50:14 [ERROR] Aborting<br/>
+130728  6:50:14 [Note] /usr/sbin/mysqld: Shutdown complete</p>
+
+<p>解决方法：<br/>
+1) 在 /etc/mysql/my.cnf 的 mysqld 下增加下面一句：</p>
+
+<p>innodb_buffer_pool_size = 64M</p>
+
+<p>还要设置一下swap分区，因为我的vps是没有swap分区的，通过fdisk -l 和 1mount 看不到swap的信息，需要手动添加一下。</p>
+
+<p>2) 添加swap分区的步骤：</p>
+
+<p>2.1) dd if=/dev/zero of=/swapfile bs=1M count=1024<br/>
+2.2) mkswap /swapfile<br/>
+2.3) swapon /swapfile<br/>
+2.4) 添加这行： /swapfile swap swap defaults 0 0 到 /etc/fstab</p>
+
+<p>目前已经设置了swap分区，并重启了mysql，后续观察一下看看还会不会出现吧。</p>
+
+<p>参考：<a href="http://stackoverflow.com/questions/10284532/amazon-ec2-mysql-aborting-start-because-innodb-mmap-x-bytes-failed-errno-12">http://stackoverflow.com/questions/10284532/amazon-ec2-mysql-aborting-start-because-innodb-mmap-x-bytes-failed-errno-12</a></p>
+
+<p>补充，经过近2个月观察，没再发生down掉的情况。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 下压缩与解压缩命令]]></title>
+    <link href="http://golog.cc/14984642074461.html"/>
+    <updated>2017-06-26T16:03:27+08:00</updated>
+    <id>http://golog.cc/14984642074461.html</id>
+    <content type="html"><![CDATA[
+<h3 id="toc_0">tar</h3>
+
+<p>-c: 建立压缩档案<br/>
+-x：解压<br/>
+-t：查看内容<br/>
+-r：向压缩归档文件末尾追加文件<br/>
+-u：更新原压缩包中的文件</p>
+
+<p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
+
+<span id="more"></span><!-- more -->
+
+<p>-z：有gzip属性的<br/>
+-j：有bz2属性的<br/>
+-Z：有compress属性的<br/>
+-v：显示所有过程<br/>
+-O：将文件解开到标准输出</p>
+
+<p>下面的参数-f是必须的</p>
+
+<p>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</p>
+
+<h3 id="toc_1">tar -cf all.tar *.jpg</h3>
+
+<p>这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。</p>
+
+<h3 id="toc_2">tar -rf all.tar *.gif</h3>
+
+<p>这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</p>
+
+<h3 id="toc_3">tar -uf all.tar logo.gif</h3>
+
+<p>这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</p>
+
+<h3 id="toc_4">tar -tf all.tar</h3>
+
+<p>这条命令是列出all.tar包中所有文件，-t是列出文件的意思</p>
+
+<h3 id="toc_5">tar -xf all.tar</h3>
+
+<p>这条命令是解出all.tar包中所有文件，-x是解开的意思</p>
+
+<h3 id="toc_6">压缩</h3>
+
+<p>tar –cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg</p>
+
+<p>tar –czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz</p>
+
+<p>tar –cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2</p>
+
+<p>tar –cZf jpg.tar.Z *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z</p>
+
+<p>rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for Linux</p>
+
+<p>zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux</p>
+
+<h3 id="toc_7">解压</h3>
+
+<p>tar –xvf file.tar //解压 tar包</p>
+
+<p>tar -xzvf file.tar.gz //解压tar.gz</p>
+
+<p>tar -xjvf file.tar.bz2   //解压 tar.bz2</p>
+
+<p>tar –xZvf file.tar.Z   //解压tar.Z</p>
+
+<p>unrar e file.rar //解压rar<br/>
+unzip file.zip //解压zip</p>
+
+<p>总结<br/>
+1、*.tar 用 tar –xvf 解压<br/>
+2、*.gz 用 gzip -d或者gunzip 解压<br/>
+3、*.tar.gz和*.tgz 用 tar –xzf 解压<br/>
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压<br/>
+5、*.tar.bz2用tar –xjf 解压<br/>
+6、*.Z 用 uncompress 解压<br/>
+7、*.tar.Z 用tar –xZf 解压<br/>
+8、*.rar 用 unrar e解压<br/>
+9、*.zip 用 unzip 解压</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[GO语言中的StructTag类型]]></title>
     <link href="http://golog.cc/structtag-of-go.html"/>
     <updated>2017-06-24T18:57:27+08:00</updated>
     <id>http://golog.cc/structtag-of-go.html</id>
     <content type="html"><![CDATA[
 <p>StructTag是什么？在Go语言里，StructTag是一个标记字符串，此字符串可跟随在Struct中字段定义的后面。StructTag就是一系列的 key:”value” 形式的组合，其中key是一个不可为空的字符串，key-value组合可以有多个，空格分隔。</p>
+
+<span id="more"></span><!-- more -->
 
 <p>StructTag有什么用？！StructTag主要解决了不同类型数据集合间(Struct,Json,Table等)转换中键值Key定义不一样的问题。StructTag可以理解为一个不用数据类型键值Key的映射表Map, 在StructTag中可以定义不用数据集合键值和Struct中Key值的映射关系，这样方便了Struct数据转为其他类型数据的过程。例如我们可以把Struct数据映射成为一个Json格式的数据，或者把Struct数据映射成为一个数据表Table。当然我们也可以依据StructTag的定义，把一个Json数据转为一个Struct结构数据。</p>
 
@@ -1028,131 +1168,6 @@ os.Geteuid() != 0
     <id>http://golog.cc/path-package.html</id>
     <content type="html"><![CDATA[
 <p>path.clean用于对路径../../等进行过滤，在创建、修改文件的时候需要使用，否则会有漏洞</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go time package 时间包]]></title>
-    <link href="http://golog.cc/time-package-of-golang.html"/>
-    <updated>2016-07-22T18:54:24+08:00</updated>
-    <id>http://golog.cc/time-package-of-golang.html</id>
-    <content type="html"><![CDATA[
-<p>go 的time package 提供了time.Format函数，用来对时间进行格式化输出。</p>
-
-<p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
-
-<span id="more"></span><!-- more -->
-
-<p>问题是，go采用的格式化layout 和我们以往所用的任何经验都不同。以至于初次接触总是一头雾水。</p>
-
-<p>其实go提供的这个layout对算法的实现非常科学高效，而且很规律。下面我们详细分解下。</p>
-
-<p><strong>直接上个对应表：</strong></p>
-
-<p>前面是含义，后面是 go 的表示值,多种表示,逗号&quot;,&quot;分割：</p>
-
-<ul>
-<li>月份 1,01,Jan,January</li>
-<li>日　 2,02,_2</li>
-<li>时　 3,03,15,PM,pm,AM,am</li>
-<li>分　 4,04</li>
-<li>秒　 5,05</li>
-<li>年　 06,2006</li>
-<li>时区 -07,-0700,Z0700,Z07:00,-07:00,MST</li>
-<li>周几 Mon,Monday</li>
-</ul>
-
-<p>您看出规律了么！哦是的，你发现了，这里面没有一个是重复的，所有的值表示都唯一对应一个时间部分。并且涵盖了很多格式组合。</p>
-
-<!-- more -->
-
-<p><strong>比如小时的表示(原定义是下午3时，也就是15时)</strong></p>
-
-<ul>
-<li>3 用12小时制表示，去掉前导0</li>
-<li>03 用12小时制表示，保留前导0</li>
-<li>15 用24小时制表示，保留前导0</li>
-<li>03pm 用24小时制am/pm表示上下午表示，保留前导0</li>
-<li>3pm 用24小时制am/pm表示上下午表示，去掉前导0
-又比如月份</li>
-<li>1 数字表示月份，去掉前导0</li>
-<li>01 数字表示月份，保留前导0</li>
-<li>Jan 缩写单词表示月份</li>
-<li>January 全单词表示月份</li>
-</ul>
-
-<p><strong>实例对应</strong></p>
-
-<p>真实时间：我的UTC时间是 2013年12月5日，我的本地时区是Asia </p>
-
-<p>字符表示：　　2013 12 5 Asia</p>
-
-<p>Go Layout：　2006 01 2 MST</p>
-
-<p>真实时间：我的UTC时间是 2013年12月22点，我的本地时区是Asia</p>
-
-<p>字符表示：　　2013 12 22 Asia</p>
-
-<p>Go Layout：　2006 01 15 MST</p>
-
-<p>是滴，上面这个时间是合法的，虽然没有说是那一天，但是说了小时。而所有这些数字的顺序正好是1,2,4,5,6,7和一个时区MST。</p>
-
-<p>其实还有一个秒的 repeated digits for fractional seconds 表示法，用的是 0和9 ,很少用，源代码里面是这样写的</p>
-
-<pre><code>1. stdFracSecond0                          // &quot;.0&quot;, &quot;.00&quot;, ... , trailing zeros included
-2. stdFracSecond9                          // &quot;.9&quot;, &quot;.99&quot;, ..., trailing zeros omitted
-</code></pre>
-
-<p><strong>那些分界符</strong></p>
-
-<p>除了那些值之外的都是分界符号，自然匹配了，直接举例子吧</p>
-
-<p>字符表示：　　2013-12 21 Asia</p>
-
-<p>Go Layout：　2006-01 15 MST</p>
-
-<p>字符表示：　　2013年12月21时 时区Asia</p>
-
-<p>Go Layout：　2006年01月15时 时区MST</p>
-
-<p>好了，您是否感觉这个表示方法兼容度更好，适应性更强呢，更容易记忆呢。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go 类型转换]]></title>
-    <link href="http://golog.cc/change-type-of-data.html"/>
-    <updated>2016-07-22T18:51:23+08:00</updated>
-    <id>http://golog.cc/change-type-of-data.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li><p>整型到字符串</p>
-
-<pre><code>s = strconv.Itoa(i) 
-
-s = strconv.FormatInt(int64(i), 10)
-</code></pre></li>
-<li><p>字符串到整型</p>
-
-<pre><code>i, err = strconv.Atoi(s)
-
-i, err = ParseInt(s, 10, 0) 
-</code></pre>
-
-<span id="more"></span><!-- more --></li>
-<li><p>字符串到float（32/64）</p>
-
-<pre><code>f, err = ParseFloat(s, 32) `
-</code></pre></li>
-<li><p>整型到float或者float到整型</p>
-
-<pre><code>float(i)
-
-int(f)
-</code></pre></li>
-</ol>
 
 ]]></content>
   </entry>

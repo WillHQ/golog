@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		使用Git的钩子实现自动部署 - GOLOG
+  		阿里云vps上mysql挂掉的解决办法 - GOLOG
   	
   	</title>
   	
@@ -114,14 +114,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>使用Git的钩子实现自动部署</h1>
+          <h1>阿里云vps上mysql挂掉的解决办法</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/8</span>
+          <span class="date">2017/12/20</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+              <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
            
          
           <span class="comments">
@@ -134,45 +134,45 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ol>
-<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
-</ol>
+      <p>用阿里云的vps用作blog服务器，系统很稳定，已经100多天一直运行正常，大概从上个月开始发现blog的mysql会有时挂掉，会收到短信通知。之前没太追究，重新启动了mysql解决的。今天上午又收到短信，已经第三次了。</p>
+
+<p>查了一下日志，三次基本都是一样的：</p>
 
 <span id="more"></span><!-- more -->
 
-<ol>
-<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
+<p>130728  6:50:14 [Note] Plugin &#39;FEDERATED&#39; is disabled.<br/>
+130728  6:50:14 InnoDB: The InnoDB memory heap is disabled<br/>
+130728  6:50:14 InnoDB: Mutexes and rw_locks use GCC atomic builtins<br/>
+130728  6:50:14 InnoDB: Compressed tables use zlib 1.2.3.4<br/>
+130728  6:50:14 InnoDB: Initializing buffer pool, size = 128.0M<br/>
+InnoDB: mmap(137363456 bytes) failed; errno 12<br/>
+130728  6:50:14 InnoDB: Completed initialization of buffer pool<br/>
+130728  6:50:14 InnoDB: Fatal error: cannot allocate memory for the buffer pool<br/>
+130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; init function returned error.<br/>
+130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; registration as a STORAGE ENGINE failed.<br/>
+130728  6:50:14 [ERROR] Unknown/unsupported storage engine: InnoDB<br/>
+130728  6:50:14 [ERROR] Aborting<br/>
+130728  6:50:14 [Note] /usr/sbin/mysqld: Shutdown complete</p>
 
-<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
-<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
+<p>解决方法：<br/>
+1) 在 /etc/mysql/my.cnf 的 mysqld 下增加下面一句：</p>
 
-<p>在该目录下，运行：</p>
+<p>innodb_buffer_pool_size = 64M</p>
 
-<pre><code>
-git clone /var/git/testRep /var/testDeploy
+<p>还要设置一下swap分区，因为我的vps是没有swap分区的，通过fdisk -l 和 1mount 看不到swap的信息，需要手动添加一下。</p>
 
-</code></pre>
+<p>2) 添加swap分区的步骤：</p>
 
-<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p>
+<p>2.1) dd if=/dev/zero of=/swapfile bs=1M count=1024<br/>
+2.2) mkswap /swapfile<br/>
+2.3) swapon /swapfile<br/>
+2.4) 添加这行： /swapfile swap swap defaults 0 0 到 /etc/fstab</p>
 
-<blockquote>
-<p>注意：删除已有的文件夹中的文件、删除.git文件夹之后，要切换到git用户之下，使用git用户重新git clone一遍，才可以自动的进行部署，因为部署需要用git用户进行操作，在root做所有的操作，git就没办法把更新的文件部署到发布的目录下面。</p>
-</blockquote></li>
-<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
+<p>目前已经设置了swap分区，并重启了mysql，后续观察一下看看还会不会出现吧。</p>
 
-<pre><code>
-unset GIT_DIR
-DeployDir=/var/testDeploy/
-cd $DeployDir
-git add . -A &amp;&amp; git stash
-git pull origin master
+<p>参考：<a href="http://stackoverflow.com/questions/10284532/amazon-ec2-mysql-aborting-start-because-innodb-mmap-x-bytes-failed-errno-12">http://stackoverflow.com/questions/10284532/amazon-ec2-mysql-aborting-start-because-innodb-mmap-x-bytes-failed-errno-12</a></p>
 
-</code></pre>
-
-<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
-
-<p>以上方法步骤，验证通过。</p></li>
-</ol>
+<p>补充，经过近2个月观察，没再发生down掉的情况。</p>
 
 
     
@@ -183,16 +183,13 @@ git pull origin master
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="mac-xcrun-error-fixed.html" 
-          title="Previous Post: Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法">&laquo; Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="change-user-os.html" 
-          title="Next Post: Linux下切换用户的命令">Linux下切换用户的命令 &raquo;</a>
+          <a  href="14984642074461.html" 
+          title="Next Post: Linux 下压缩与解压缩命令">Linux 下压缩与解压缩命令 &raquo;</a>
       
       </p>
         </div>
