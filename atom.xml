@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2018-08-05T23:15:41+08:00</updated>
+  <updated>2018-08-05T23:22:43+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -65,19 +65,22 @@ go install google.golang.org/grpc
 
 <span id="more"></span><!-- more -->
 
-<p>130728  6:50:14 [Note] Plugin &#39;FEDERATED&#39; is disabled.<br/>
-130728  6:50:14 InnoDB: The InnoDB memory heap is disabled<br/>
-130728  6:50:14 InnoDB: Mutexes and rw_locks use GCC atomic builtins<br/>
-130728  6:50:14 InnoDB: Compressed tables use zlib 1.2.3.4<br/>
-130728  6:50:14 InnoDB: Initializing buffer pool, size = 128.0M<br/>
-InnoDB: mmap(137363456 bytes) failed; errno 12<br/>
-130728  6:50:14 InnoDB: Completed initialization of buffer pool<br/>
-130728  6:50:14 InnoDB: Fatal error: cannot allocate memory for the buffer pool<br/>
-130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; init function returned error.<br/>
-130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; registration as a STORAGE ENGINE failed.<br/>
-130728  6:50:14 [ERROR] Unknown/unsupported storage engine: InnoDB<br/>
-130728  6:50:14 [ERROR] Aborting<br/>
-130728  6:50:14 [Note] /usr/sbin/mysqld: Shutdown complete</p>
+<pre><code>
+130728  6:50:14 [Note] Plugin &#39;FEDERATED&#39; is disabled.
+130728  6:50:14 InnoDB: The InnoDB memory heap is disabled
+130728  6:50:14 InnoDB: Mutexes and rw_locks use GCC atomic builtins
+130728  6:50:14 InnoDB: Compressed tables use zlib 1.2.3.4
+130728  6:50:14 InnoDB: Initializing buffer pool, size = 128.0M
+InnoDB: mmap(137363456 bytes) failed; errno 12
+130728  6:50:14 InnoDB: Completed initialization of buffer pool
+130728  6:50:14 InnoDB: Fatal error: cannot allocate memory for the buffer pool
+130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; init function returned error.
+130728  6:50:14 [ERROR] Plugin &#39;InnoDB&#39; registration as a STORAGE ENGINE failed.
+130728  6:50:14 [ERROR] Unknown/unsupported storage engine: InnoDB
+130728  6:50:14 [ERROR] Aborting
+130728  6:50:14 [Note] /usr/sbin/mysqld: Shutdown complete
+
+</code></pre>
 
 <p>解决方法：<br/>
 1) 在 /etc/mysql/my.cnf 的 mysqld 下增加下面一句：</p>
@@ -88,10 +91,13 @@ InnoDB: mmap(137363456 bytes) failed; errno 12<br/>
 
 <p>2) 添加swap分区的步骤：</p>
 
-<p>2.1) dd if=/dev/zero of=/swapfile bs=1M count=1024<br/>
-2.2) mkswap /swapfile<br/>
-2.3) swapon /swapfile<br/>
-2.4) 添加这行： /swapfile swap swap defaults 0 0 到 /etc/fstab</p>
+<pre><code>
+2.1) dd if=/dev/zero of=/swapfile bs=1M count=1024
+2.2) mkswap /swapfile
+2.3) swapon /swapfile
+2.4) 添加这行： /swapfile swap swap defaults 0 0 到 /etc/fstab
+
+</code></pre>
 
 <p>目前已经设置了swap分区，并重启了mysql，后续观察一下看看还会不会出现吧。</p>
 
