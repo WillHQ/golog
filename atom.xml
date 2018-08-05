@@ -4,13 +4,54 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2018-08-04T16:43:52+08:00</updated>
+  <updated>2018-08-04T17:18:20+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[golang安装gRPC]]></title>
+    <link href="http://golog.cc/15334819083636.html"/>
+    <updated>2018-08-05T23:11:48+08:00</updated>
+    <id>http://golog.cc/15334819083636.html</id>
+    <content type="html"><![CDATA[
+<p>gRPC安装官方安装命令：</p>
+
+<pre><code>go get google.golang.org/grpc
+
+</code></pre>
+
+<p>这个安装命令是有问题的，会报：</p>
+
+<pre><code>package google.golang.org/grpc: unrecognized import path &quot;google.golang.org/grpc&quot;(https fetch: Get https://google.golang.org/grpc?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
+
+</code></pre>
+
+<span id="more"></span><!-- more -->
+
+<p>这个代码已经转移到github上面了，但是代码里面的包依赖还是没有修改，还是google.golang.org这种，因此不能直接用go get的方式安装，而是要采用下面的方式进行安装：</p>
+
+<pre><code>
+git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc
+    
+git clone https://github.com/golang/net.git $GOPATH/src/golang.org/x/net
+    
+git clone https://github.com/golang/text.git $GOPATH/src/golang.org/x/text
+    
+go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+    
+git clone https://github.com/google/go-genproto.git $GOPATH/src/google.golang.org/genproto
+     
+cd $GOPATH/src/
+go install google.golang.org/grpc
+
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[阿里云vps上mysql挂掉的解决办法]]></title>
@@ -1157,17 +1198,6 @@ os.Geteuid() != 0
 
 </code></pre></li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Path包]]></title>
-    <link href="http://golog.cc/path-package.html"/>
-    <updated>2016-07-22T18:32:21+08:00</updated>
-    <id>http://golog.cc/path-package.html</id>
-    <content type="html"><![CDATA[
-<p>path.clean用于对路径../../等进行过滤，在创建、修改文件的时候需要使用，否则会有漏洞</p>
 
 ]]></content>
   </entry>

@@ -93,6 +93,8 @@
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
+		            <li><a href="golang-third-party-package.html">GO语言第三方包</a></li>
+		        
 		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
@@ -138,6 +140,8 @@
     
     category['about-database.html'] = 3;
     
+    category['golang-third-party-package.html'] = 1;
+    
     category['golang-framework.html'] = 1;
     
     console.log(file_name);
@@ -177,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+1+4+4+5+3+1 ;
+      total_posts = 0 +2+3+2+1+4+4+5+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -454,6 +458,8 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 				    
 				        <a href="about-database.html"><strong>数据库相关</strong></a>
 				    
+				        <a href="golang-third-party-package.html"><strong>GO语言第三方包</strong></a>
+				    
 				        <a href="golang-framework.html"><strong>GO语言框架</strong></a>
 				     
 				    </p>
@@ -469,6 +475,12 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
                 <div class="side-content">
                 <ul class="posts-list">
 	      
+		      
+			      <li class="post">
+			        <a href="15334819083636.html">golang安装gRPC</a>
+			      </li>
+		     
+		  
 		      
 			      <li class="post">
 			        <a href="15137583342148.html">阿里云vps上mysql挂掉的解决办法</a>
@@ -520,12 +532,6 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 		      
 			      <li class="post">
 			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="change-user-os.html">Linux下切换用户的命令</a>
 			      </li>
 		     
 		  

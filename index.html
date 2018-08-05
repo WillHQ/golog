@@ -93,6 +93,8 @@
 		        
 		            <li><a href="about-database.html">数据库相关</a></li>
 		        
+		            <li><a href="golang-third-party-package.html">GO语言第三方包</a></li>
+		        
 		            <li><a href="golang-framework.html">GO语言框架</a></li>
 		         
 	      	</ul>
@@ -138,6 +140,8 @@
     
     category['about-database.html'] = 3;
     
+    category['golang-third-party-package.html'] = 1;
+    
     category['golang-framework.html'] = 1;
     
     console.log(file_name);
@@ -177,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+1+4+4+5+3+1 ;
+      total_posts = 0 +2+3+2+1+4+4+5+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -249,6 +253,50 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="15334819083636.html">
+                
+                  <h1>golang安装gRPC</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>gRPC安装官方安装命令：</p>
+
+<pre><code>go get google.golang.org/grpc
+
+</code></pre>
+
+<p>这个安装命令是有问题的，会报：</p>
+
+<pre><code>package google.golang.org/grpc: unrecognized import path &quot;google.golang.org/grpc&quot;(https fetch: Get https://google.golang.org/grpc?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
+
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15334819083636.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2018/8/5</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-third-party-package.html'>GO语言第三方包</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15137583342148.html">
                 
@@ -813,47 +861,6 @@ Another MySQL daemon already running with the same unix socket.
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="golog-log-project.html">
-                
-                  <h1>简单 golang 日志 Golog</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>Golog 是简单的golang日志，基于golang内置log封装.</p>
-
-<p>特征</p>
-
-<ol>
-<li><p>实现各种日志 level: DEBUG, INFO, WARN, ERROR</p></li>
-<li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
-</ol>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="golog-log-project.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/7</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -936,6 +943,8 @@ Another MySQL daemon already running with the same unix socket.
 				    
 				        <a href="about-database.html"><strong>数据库相关</strong></a>
 				    
+				        <a href="golang-third-party-package.html"><strong>GO语言第三方包</strong></a>
+				    
 				        <a href="golang-framework.html"><strong>GO语言框架</strong></a>
 				     
 				    </p>
@@ -951,6 +960,12 @@ Another MySQL daemon already running with the same unix socket.
                 <div class="side-content">
                 <ul class="posts-list">
 	      
+		      
+			      <li class="post">
+			        <a href="15334819083636.html">golang安装gRPC</a>
+			      </li>
+		     
+		  
 		      
 			      <li class="post">
 			        <a href="15137583342148.html">阿里云vps上mysql挂掉的解决办法</a>
@@ -1002,12 +1017,6 @@ Another MySQL daemon already running with the same unix socket.
 		      
 			      <li class="post">
 			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="change-user-os.html">Linux下切换用户的命令</a>
 			      </li>
 		     
 		  
