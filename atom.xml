@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2018-08-05T23:32:46+08:00</updated>
+  <updated>2019-02-23T10:53:35+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -156,6 +156,8 @@ git --version
     <id>http://golog.cc/cross-compiling-of-golang.html</id>
     <content type="html"><![CDATA[
 <p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
+
+<span id="more"></span><!-- more -->
 
 <p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
 

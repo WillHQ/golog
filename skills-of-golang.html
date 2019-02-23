@@ -304,49 +304,6 @@
                         
                         	<p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
 
-<p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
-
-<pre><code>
-$ cd /usr/local/go/src
-$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
-
-</code></pre>
-
-<p>如果是 Windows 则修改 GOOS 即可。</p>
-
-<pre><code>
-$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
-
-</code></pre>
-
-<p>(2) 现在可以编译 Linux 和 Windows 平台所需的执行文件了。</p>
-
-<pre><code>
-$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
-$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
-
-</code></pre>
-
-<p>不过该方式暂时不支持 CGO。</p>
-
-<p>以上假定是64位架构，32位，修改GOARCH为386</p>
-
-<p>说明：</p>
-
-<p>这里并不是重新编译Go，因为安装Go的时候，只是编译了本地系统需要的东西；而需要跨平台交叉编译，需要在Go中增加对其他平台的支持。所以，有 ./make.bash 这么一个过程</p>
-
-<p>交叉编译问题补充：</p>
-
-<p>首先，建议安装Go语言通过源码安装，否则可能没有make.bash或make.bat程序。</p>
-
-<p>之所以需要执行上面的这些步骤，是因为安装Go语言时，一些工具和平台相关的代码并没有生成，执行上面的步骤，并不是重新安装Go语言，而是生成交叉编译（目标平台）需要的工具和文件。这些只是在第一次交叉编译的时候做。之后就不需要了。</p>
-
-<p>为了更快的编译，可以</p>
-
-<pre><code>
-./make.bash --no-clean
-
-</code></pre>
 
                         
                       </div>
@@ -354,7 +311,7 @@ $ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="cross-compiling-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
                     <span class="date">2018/8/14</span>
                     <span>文章分类：</span> 
           				  
