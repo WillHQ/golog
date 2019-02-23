@@ -4,13 +4,232 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2018-08-05T23:22:43+08:00</updated>
+  <updated>2018-08-05T23:32:46+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Go语言微服务实践]]></title>
+    <link href="http://golog.cc/15508824829994.html"/>
+    <updated>2019-02-23T08:41:22+08:00</updated>
+    <id>http://golog.cc/15508824829994.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">consul</h2>
+
+<p>执行命令</p>
+
+<pre><code>consul agent -server -bootstrap-expect=1  -node=hq-server -bind=127.0.0.1 -data-dir=~/temp -ui
+
+</code></pre>
+
+<p>consul使用手册参考：<a href="https://blog.csdn.net/liuzhuchen/article/details/81913562">https://blog.csdn.net/liuzhuchen/article/details/81913562</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来]]></title>
+    <link href="http://golog.cc/problem-of-ParseForm-function-of-beego.html"/>
+    <updated>2018-08-20T13:46:55+08:00</updated>
+    <id>http://golog.cc/problem-of-ParseForm-function-of-beego.html</id>
+    <content type="html"><![CDATA[
+<p>经过一番查找，User字段中，有个关联的字段，使用的RoleIds []int64，这个数据解析不出来。</p>
+
+<p>后来调整成RoleIds []int，数据就能够解析出来了。</p>
+
+<p>虽然问题找到并解决了，但是不清楚问题的真实原因是什么，后续需要仔细的研究。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[设置Mac终端提示符颜色以及设置golang环境变量]]></title>
+    <link href="http://golog.cc/15345015075900.html"/>
+    <updated>2018-08-17T18:25:07+08:00</updated>
+    <id>http://golog.cc/15345015075900.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">设置Mac终端提示符颜色</h2>
+
+<pre><code>
+export LS_OPTIONS=&#39;--color=auto&#39; # 如果没有指定，则自动选择颜色
+export CLICOLOR=1 #是否输出颜色
+export LSCOLORS=&#39;Exfxcxdxbxegedabagacad&#39; #指定颜色
+export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
+
+</code></pre>
+
+<pre><code>
+export LS_OPTIONS=&#39;--color=auto&#39; #如果没有指定，则自动选择颜色
+export CLICOLOR=&#39;Yes&#39; #是否输出颜色
+export LSCOLORS=&#39;CxfxcxdxbxegedabagGxGx&#39; #指定颜色
+export TERM=&quot;xterm-color&quot;
+\# PS1=&#39;\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ &#39;
+export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
+
+</code></pre>
+
+<h2 id="toc_1">定义Go语言环境变量</h2>
+
+<pre><code>
+export GOPATH=/Users/houqun/Code/GoCode
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+</code></pre>
+
+<pre><code>
+export GOPATH=/Users/houqun/Code/GoCode
+export PATH=$PATH:$GOPATH/bin
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[阿里云服务上，gogs的安装与迁移]]></title>
+    <link href="http://golog.cc/15344946625117.html"/>
+    <updated>2018-08-17T16:31:02+08:00</updated>
+    <id>http://golog.cc/15344946625117.html</id>
+    <content type="html"><![CDATA[
+<p>之前在一台阿里云服务器上装了gogs，作为个人的代码管理工具。</p>
+
+<p>这台阿里云服务器到期，换了一台新的阿里云服务器，就需要在新服务器上安装gogs，且要把原服务器上的gogs的数据迁移到新服务器上。</p>
+
+<p>这里记录这个迁移过程，留作以后参考备用。</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_0">gogs的安装</h2>
+
+<ol>
+<li><p>下载linux版本的gogs二进制安装包，下载地址：<a href="https://dl.gogs.io">gogs</a> ；</p></li>
+<li><p>解压安装包，上传到阿里云服务器上，放到你喜欢的位置上；</p></li>
+<li><p>按照<a href="https://gogs.io">gogs</a>网站主页的内容进行操作，运行命令./gogs web，启动gogs的服务，通过IP+端口访问，具体端口可在gogs运行时的命令行提示的信息中找到；</p></li>
+<li><p>若在上一步发现操作中，发现通过IP+端口访问不到gogs，很可能是因为阿里云没有开放出gogs运行所需要的端口；在阿里云WEB端的管理后台，开放出gogs所需要的端口即可；</p></li>
+<li><p>第一次运行gogs时，会跳转到初始安装的界面，按照提示填写安装的信息即可；在安装的过程中，需要填写运行的用户，可以根据需要创建一个git用户；不怕风险的话，也可以直接用root用户（不建议）。</p></li>
+<li><p>若系统中没有安装git，还需要先安装git工具</p></li>
+</ol>
+
+<h2 id="toc_1">git的安装</h2>
+
+<ol>
+<li>安装Git依赖</li>
+</ol>
+
+<pre><code>
+yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
+
+</code></pre>
+
+<p>2.安装Git</p>
+
+<pre><code>
+yum install -y git
+
+</code></pre>
+
+<p>验证正常安装，安装环境是CentOS6.5。</p>
+
+<p>安装之后，通过以下命令查看是否git版本，同时判断是否安装成功。</p>
+
+<pre><code>
+git --version
+
+</code></pre>
+
+<p>也可以通过<code>whereis git</code>命令来查看。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[跨平台交叉编译Go程序]]></title>
+    <link href="http://golog.cc/cross-compiling-of-golang.html"/>
+    <updated>2018-08-14T13:01:31+08:00</updated>
+    <id>http://golog.cc/cross-compiling-of-golang.html</id>
+    <content type="html"><![CDATA[
+<p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
+
+<p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
+
+<pre><code>
+$ cd /usr/local/go/src
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
+
+</code></pre>
+
+<p>如果是 Windows 则修改 GOOS 即可。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
+
+</code></pre>
+
+<p>(2) 现在可以编译 Linux 和 Windows 平台所需的执行文件了。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
+
+</code></pre>
+
+<p>不过该方式暂时不支持 CGO。</p>
+
+<p>以上假定是64位架构，32位，修改GOARCH为386</p>
+
+<p>说明：</p>
+
+<p>这里并不是重新编译Go，因为安装Go的时候，只是编译了本地系统需要的东西；而需要跨平台交叉编译，需要在Go中增加对其他平台的支持。所以，有 ./make.bash 这么一个过程</p>
+
+<p>交叉编译问题补充：</p>
+
+<p>首先，建议安装Go语言通过源码安装，否则可能没有make.bash或make.bat程序。</p>
+
+<p>之所以需要执行上面的这些步骤，是因为安装Go语言时，一些工具和平台相关的代码并没有生成，执行上面的步骤，并不是重新安装Go语言，而是生成交叉编译（目标平台）需要的工具和文件。这些只是在第一次交叉编译的时候做。之后就不需要了。</p>
+
+<p>为了更快的编译，可以</p>
+
+<pre><code>
+./make.bash --no-clean
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[go run main.go杀掉进程的方法]]></title>
+    <link href="http://golog.cc/how-to-kill-go-run-process.html"/>
+    <updated>2018-08-12T13:08:50+08:00</updated>
+    <id>http://golog.cc/how-to-kill-go-run-process.html</id>
+    <content type="html"><![CDATA[
+<p>可以通过下面的命令来处理：</p>
+
+<pre><code>
+lsof -i tcp:端口号
+
+kill PID 
+
+</code></pre>
+
+<p>也可以通过下面的命令来处理：</p>
+
+<pre><code>
+killall -9 main
+
+</code></pre>
+
+<p>其中的main，就是main.go运行之后的进程名称。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[golang安装gRPC]]></title>
@@ -980,230 +1199,6 @@ Another MySQL daemon already running with the same unix socket.
 <span id="more"></span><!-- more -->
 
 <p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Slack 的开源替代品 Mattermost]]></title>
-    <link href="http://golog.cc/mattermost-go-project.html"/>
-    <updated>2016-10-07T18:27:08+08:00</updated>
-    <id>http://golog.cc/mattermost-go-project.html</id>
-    <content type="html"><![CDATA[
-<p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
-
-<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
-
-<span id="more"></span><!-- more -->
-
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
-
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[简单 golang 日志 Golog]]></title>
-    <link href="http://golog.cc/golog-log-project.html"/>
-    <updated>2016-10-07T18:15:02+08:00</updated>
-    <id>http://golog.cc/golog-log-project.html</id>
-    <content type="html"><![CDATA[
-<p>Golog 是简单的golang日志，基于golang内置log封装.</p>
-
-<p>特征</p>
-
-<ol>
-<li><p>实现各种日志 level: DEBUG, INFO, WARN, ERROR</p></li>
-<li><p>实现各种日志 handlers: ConsoleHander, FileHandler, RotatingHandler</p></li>
-</ol>
-
-<span id="more"></span><!-- more -->
-
-<p>代码实例</p>
-
-<pre><code>// rotating hander, max log files is 4, max file size is 4M
-rotatingHandler := logger.NewRotatingHandler(&quot;./&quot;, &quot;test.log&quot;, 4, 4*1024*1024)
-
-// logger set handlers: console, rotating
-logger.SetHandlers(logger.Console, rotatingHandler)
-
-defer logger.Close()
-
-// logger set flags
-logger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-
-// logger set log level
-logger.SetLevel(logger.INFO)
-
-logger.Debug(&quot;something&quot;, &quot;debug&quot;)
-logger.Info(&quot;something&quot;)
-logger.Warn(&quot;something&quot;)
-logger.Error(&quot;something&quot;)
-</code></pre>
-
-<p>项目Github链接：<a href="https://github.com/jander/golog">https://github.com/jander/golog</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Go 编写的内容管理系统 Fragmenta CMS]]></title>
-    <link href="http://golog.cc/fragmenta-cms-project.html"/>
-    <updated>2016-10-07T18:04:12+08:00</updated>
-    <id>http://golog.cc/fragmenta-cms-project.html</id>
-    <content type="html"><![CDATA[
-<p>Fragmenta CMS 是一个用户友好的内容管理系统，用 Go 编写。</p>
-
-<p>Fragmenta CMS 可以让你快速建立网站，它包办了创建网站的一般性的繁琐工作，包括：用户登录，网页，博客文章等，让你专注于你 app 自身的特点，你可以:</p>
-
-<span id="more"></span><!-- more -->
-
-<ul>
-<li><p>简单部署 —— 你只需要一个数据库和fragment —— 与内置的Web服务器本地进行测试</p></li>
-<li><p>使用与你网站相同的风格进行Rich editing</p></li>
-<li><p>免费且开源 (MIT) ——下载二进制文件或自己编译</p></li>
-</ul>
-
-<p>项目的Github链接：<a href="http://github.com/fragmenta/fragmenta-cms">http://github.com/fragmenta/fragmenta-cms</a></p>
-
-<p>项目的主页链接：<a href="http://fragmenta.eu/">http://fragmenta.eu/</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go build时的错误分析]]></title>
-    <link href="http://golog.cc/error-of-go-build.html"/>
-    <updated>2016-07-22T18:38:27+08:00</updated>
-    <id>http://golog.cc/error-of-go-build.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">go build 错误一</h2>
-
-<p>如果出现：</p>
-
-<pre><code>
-warning: building out-of-date packages:
-
-runtime/pprof
-
-testing
-
-regexp/syntax
-
-regexp
-
-installing these packages with &#39;go test -i&#39; will speed future tests.
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>那么就是说明下面的包已经有修改过了，但是没有重新install<br/>
-如果有标准的包过期，使用<code>go install -a -v std</code>来进行更新。</p>
-
-<p>如果是自定义的包过期，重新调用<code>go instal</code></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[go中获取各种路径]]></title>
-    <link href="http://golog.cc/get-path-with-golang.html"/>
-    <updated>2016-07-22T18:45:18+08:00</updated>
-    <id>http://golog.cc/get-path-with-golang.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li><p>执行用户当前所在路径：</p>
-
-<pre><code>
-os.Getwd()
-
-</code></pre></li>
-<li><p>执行程序所在路径：</p>
-
-<p>执行程序文件相对路径：</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[操作系统相关操作]]></title>
-    <link href="http://golog.cc/operation-of-os.html"/>
-    <updated>2016-07-22T18:43:07+08:00</updated>
-    <id>http://golog.cc/operation-of-os.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
-<li><p>判断当前用户是否是root用户</p>
-
-<pre><code>
-os.Geteuid() != 0
-
-</code></pre></li>
-</ul>
 
 ]]></content>
   </entry>

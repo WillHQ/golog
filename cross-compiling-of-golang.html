@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Slack 的开源替代品 Mattermost - GOLOG
+  		跨平台交叉编译Go程序 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Slack 的开源替代品 Mattermost</h1>
+          <h1>跨平台交叉编译Go程序</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/7</span>
+          <span class="date">2018/8/14</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -136,19 +136,51 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
+      <p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
 
-<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
+<p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
 
-<span id="more"></span><!-- more -->
+<pre><code>
+$ cd /usr/local/go/src
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
 
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
+</code></pre>
 
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
+<p>如果是 Windows 则修改 GOOS 即可。</p>
 
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
+<pre><code>
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
 
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
+</code></pre>
+
+<p>(2) 现在可以编译 Linux 和 Windows 平台所需的执行文件了。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
+
+</code></pre>
+
+<p>不过该方式暂时不支持 CGO。</p>
+
+<p>以上假定是64位架构，32位，修改GOARCH为386</p>
+
+<p>说明：</p>
+
+<p>这里并不是重新编译Go，因为安装Go的时候，只是编译了本地系统需要的东西；而需要跨平台交叉编译，需要在Go中增加对其他平台的支持。所以，有 ./make.bash 这么一个过程</p>
+
+<p>交叉编译问题补充：</p>
+
+<p>首先，建议安装Go语言通过源码安装，否则可能没有make.bash或make.bat程序。</p>
+
+<p>之所以需要执行上面的这些步骤，是因为安装Go语言时，一些工具和平台相关的代码并没有生成，执行上面的步骤，并不是重新安装Go语言，而是生成交叉编译（目标平台）需要的工具和文件。这些只是在第一次交叉编译的时候做。之后就不需要了。</p>
+
+<p>为了更快的编译，可以</p>
+
+<pre><code>
+./make.bash --no-clean
+
+</code></pre>
 
 
     
@@ -159,16 +191,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="thinkgo-web-frame-project.html" 
-          title="Previous Post: ThinkGo类ThinkPHP的Go语言WEB开发框架">&laquo; ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
+          <a href="15344946625117.html" 
+          title="Previous Post: 阿里云服务上，gogs的安装与迁移">&laquo; 阿里云服务上，gogs的安装与迁移</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="golog-log-project.html" 
-          title="Next Post: 简单 golang 日志 Golog">简单 golang 日志 Golog &raquo;</a>
+          <a  href="how-to-kill-go-run-process.html" 
+          title="Next Post: go run main.go杀掉进程的方法">go run main.go杀掉进程的方法 &raquo;</a>
       
       </p>
         </div>

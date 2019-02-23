@@ -130,13 +130,13 @@
     
     category['golang-grammar.html'] = 2;
     
-    category['golang-errors-handle.html'] = 1;
+    category['golang-errors-handle.html'] = 2;
     
-    category['skills-of-golang.html'] = 4;
+    category['skills-of-golang.html'] = 7;
     
-    category['projects-of-go.html'] = 4;
+    category['projects-of-go.html'] = 5;
     
-    category['about-os.html'] = 5;
+    category['about-os.html'] = 6;
     
     category['about-database.html'] = 3;
     
@@ -181,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+1+4+4+5+3+1+1 ;
+      total_posts = 0 +2+3+2+2+7+5+6+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -253,6 +253,260 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="auto-deploy-with-git-hook.html">
+                
+                  <h1>使用Git的钩子实现自动部署</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ol>
+<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
+</ol>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="auto-deploy-with-git-hook.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/8</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="change-user-os.html">
+                
+                  <h1>Linux下切换用户的命令</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ol>
+<li>增加用户，在root下：</li>
+</ol>
+
+<pre><code>
+add user git
+
+</code></pre>
+
+<p>表示增加git用户。</p>
+
+<ol>
+<li>切换用户</li>
+</ol>
+
+<pre><code>
+su git
+
+</code></pre>
+
+<p>切换成git用户。</p>
+
+<p>从root用户切换到其他用户不需要密码，从其他用户切换到root用户，需要输入密码。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/10/8</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="how-to-update-mysql-in-centos.html">
+                
+                  <h1>如何升级CentOS 6.5下的MySQL</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>1. 备份数据库，升级MySQL通常不会丢失数据，但保险起见，我们需要做这一步。输入命令：</li>
+</ul>
+
+<pre><code>
+mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
+
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="how-to-update-mysql-in-centos.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="centos-Another-MySQL-daemon-already-running.html">
+                
+                  <h1>CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
+
+<pre><code>
+service mysqld restart
+
+service mysqld start
+
+</code></pre>
+
+<p>都解决不了，会提示：</p>
+
+<pre><code>
+Another MySQL daemon already running with the same unix socket.
+
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="centos-Another-MySQL-daemon-already-running.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="thinkgo-web-frame-project.html">
+                
+                  <h1>ThinkGo类ThinkPHP的Go语言WEB开发框架</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>ThinkGo 是一款 Go 语言编写的 web 快速开发框架。</p>
+
+<p>它基于开源框架 Gin 进行二次开发，旨在实现一种类 ThinkPHP 的高可用、高效率的 web 框架。</p>
+
+<p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="thinkgo-web-frame-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="mattermost-go-project.html">
+                
+                  <h1>Slack 的开源替代品 Mattermost</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
+
+<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="mattermost-go-project.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/10/7</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="golog-log-project.html">
                 
@@ -622,89 +876,6 @@ i, err = ParseInt(s, 10, 0) 
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="github-pages-and-static-website.html">
-                
-                  <h1>Github Pages 静态网站托管</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>本网站就是采用Github pages托管的静态网站。</p>
-
-<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="github-pages-and-static-website.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/22</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="set-many-ssh-keys-in-a-computer.html">
-                
-                  <h1>一台机器上设置多个SSH Key</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
-</blockquote>
-
-<p><strong>1. 生成 ssh keys</strong></p>
-
-<p>终端下输入命令：</p>
-
-<pre><code>
-ssh-keygen -t rsa -C &quot;youname@example.com&quot;
-
-</code></pre>
-
-<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="set-many-ssh-keys-in-a-computer.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/22</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -719,7 +890,7 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
         </div>
 			  <div class="large-3 columns">
     			<p class="text-right" style="padding-top:25px;">
-    			
+    			 <a href="all_2.html">&raquo; 下一页</a> 
     			</p>
 			  </div>
 			</div>
@@ -806,6 +977,42 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 	      
 		      
 			      <li class="post">
+			        <a href="15508824829994.html">Go语言微服务实践</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="problem-of-ParseForm-function-of-beego.html">使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15345015075900.html">设置Mac终端提示符颜色以及设置golang环境变量</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
 			      </li>
 		     
@@ -825,42 +1032,6 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 		      
 			      <li class="post">
 			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="linux-commandp-in-common-use.html">常用的Linux命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="plugins-of-sublime.html">实用的sublime插件集合 – sublime推荐必备插件</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="comparison-of-different-ways-to-join-strings.html">Go语言的字符串拼装方式性能对比</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="beego-web-framework-of-golang.html">GO语言重量级WEB框架BEEGO</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="mac-xcrun-error-fixed.html">Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
 			      </li>
 		     
 		  

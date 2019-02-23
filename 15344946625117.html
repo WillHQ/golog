@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Slack 的开源替代品 Mattermost - GOLOG
+  		阿里云服务上，gogs的安装与迁移 - GOLOG
   	
   	</title>
   	
@@ -116,10 +116,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Slack 的开源替代品 Mattermost</h1>
+          <h1>阿里云服务上，gogs的安装与迁移</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/7</span>
+          <span class="date">2018/8/17</span>
 
           <span>文章分类：</span> 
           
@@ -136,19 +136,53 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
+      <p>之前在一台阿里云服务器上装了gogs，作为个人的代码管理工具。</p>
 
-<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
+<p>这台阿里云服务器到期，换了一台新的阿里云服务器，就需要在新服务器上安装gogs，且要把原服务器上的gogs的数据迁移到新服务器上。</p>
+
+<p>这里记录这个迁移过程，留作以后参考备用。</p>
 
 <span id="more"></span><!-- more -->
 
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
+<h2 id="toc_0">gogs的安装</h2>
 
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
+<ol>
+<li><p>下载linux版本的gogs二进制安装包，下载地址：<a href="https://dl.gogs.io">gogs</a> ；</p></li>
+<li><p>解压安装包，上传到阿里云服务器上，放到你喜欢的位置上；</p></li>
+<li><p>按照<a href="https://gogs.io">gogs</a>网站主页的内容进行操作，运行命令./gogs web，启动gogs的服务，通过IP+端口访问，具体端口可在gogs运行时的命令行提示的信息中找到；</p></li>
+<li><p>若在上一步发现操作中，发现通过IP+端口访问不到gogs，很可能是因为阿里云没有开放出gogs运行所需要的端口；在阿里云WEB端的管理后台，开放出gogs所需要的端口即可；</p></li>
+<li><p>第一次运行gogs时，会跳转到初始安装的界面，按照提示填写安装的信息即可；在安装的过程中，需要填写运行的用户，可以根据需要创建一个git用户；不怕风险的话，也可以直接用root用户（不建议）。</p></li>
+<li><p>若系统中没有安装git，还需要先安装git工具</p></li>
+</ol>
 
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
+<h2 id="toc_1">git的安装</h2>
 
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
+<ol>
+<li>安装Git依赖</li>
+</ol>
+
+<pre><code>
+yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
+
+</code></pre>
+
+<p>2.安装Git</p>
+
+<pre><code>
+yum install -y git
+
+</code></pre>
+
+<p>验证正常安装，安装环境是CentOS6.5。</p>
+
+<p>安装之后，通过以下命令查看是否git版本，同时判断是否安装成功。</p>
+
+<pre><code>
+git --version
+
+</code></pre>
+
+<p>也可以通过<code>whereis git</code>命令来查看。</p>
 
 
     
@@ -159,16 +193,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="thinkgo-web-frame-project.html" 
-          title="Previous Post: ThinkGo类ThinkPHP的Go语言WEB开发框架">&laquo; ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
+          <a href="15345015075900.html" 
+          title="Previous Post: 设置Mac终端提示符颜色以及设置golang环境变量">&laquo; 设置Mac终端提示符颜色以及设置golang环境变量</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="golog-log-project.html" 
-          title="Next Post: 简单 golang 日志 Golog">简单 golang 日志 Golog &raquo;</a>
+          <a  href="cross-compiling-of-golang.html" 
+          title="Next Post: 跨平台交叉编译Go程序">跨平台交叉编译Go程序 &raquo;</a>
       
       </p>
         </div>

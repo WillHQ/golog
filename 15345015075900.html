@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Slack 的开源替代品 Mattermost - GOLOG
+  		设置Mac终端提示符颜色以及设置golang环境变量 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Slack 的开源替代品 Mattermost</h1>
+          <h1>设置Mac终端提示符颜色以及设置golang环境变量</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/7</span>
+          <span class="date">2018/8/17</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+              <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
            
          
           <span class="comments">
@@ -136,19 +136,42 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
+      <h2 id="toc_0">设置Mac终端提示符颜色</h2>
 
-<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
+<pre><code>
+export LS_OPTIONS=&#39;--color=auto&#39; # 如果没有指定，则自动选择颜色
+export CLICOLOR=1 #是否输出颜色
+export LSCOLORS=&#39;Exfxcxdxbxegedabagacad&#39; #指定颜色
+export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
 
-<span id="more"></span><!-- more -->
+</code></pre>
 
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
+<pre><code>
+export LS_OPTIONS=&#39;--color=auto&#39; #如果没有指定，则自动选择颜色
+export CLICOLOR=&#39;Yes&#39; #是否输出颜色
+export LSCOLORS=&#39;CxfxcxdxbxegedabagGxGx&#39; #指定颜色
+export TERM=&quot;xterm-color&quot;
+\# PS1=&#39;\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ &#39;
+export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
 
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
+</code></pre>
 
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
+<h2 id="toc_1">定义Go语言环境变量</h2>
 
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
+<pre><code>
+export GOPATH=/Users/houqun/Code/GoCode
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+</code></pre>
+
+<pre><code>
+export GOPATH=/Users/houqun/Code/GoCode
+export PATH=$PATH:$GOPATH/bin
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT
+
+</code></pre>
 
 
     
@@ -159,16 +182,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="thinkgo-web-frame-project.html" 
-          title="Previous Post: ThinkGo类ThinkPHP的Go语言WEB开发框架">&laquo; ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
+          <a href="problem-of-ParseForm-function-of-beego.html" 
+          title="Previous Post: 使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来">&laquo; 使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="golog-log-project.html" 
-          title="Next Post: 简单 golang 日志 Golog">简单 golang 日志 Golog &raquo;</a>
+          <a  href="15344946625117.html" 
+          title="Next Post: 阿里云服务上，gogs的安装与迁移">阿里云服务上，gogs的安装与迁移 &raquo;</a>
       
       </p>
         </div>

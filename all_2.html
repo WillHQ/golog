@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		操作系统相关 - GOLOG
+  		GOLOG
   	
   	</title>
   	
@@ -254,49 +254,17 @@
 
 		
 			<div class="article">
-                <a class="clearlink" href="15345015075900.html">
+                <a class="clearlink" href="github-pages-and-static-website.html">
                 
-                  <h1>设置Mac终端提示符颜色以及设置golang环境变量</h1>
+                  <h1>Github Pages 静态网站托管</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">设置Mac终端提示符颜色</h2>
+                        	<p>本网站就是采用Github pages托管的静态网站。</p>
 
-<pre><code>
-export LS_OPTIONS=&#39;--color=auto&#39; # 如果没有指定，则自动选择颜色
-export CLICOLOR=1 #是否输出颜色
-export LSCOLORS=&#39;Exfxcxdxbxegedabagacad&#39; #指定颜色
-export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
+<p>静态网站的生成，有各种方法。本网站是采用了Mac下的一个Markdown的工具，可以直接把一个目录下面的所有的MD文件生成静态网站，我就采用这种方式了，没有使用其他的例如hexo、hugo之类的工具。</p>
 
-</code></pre>
-
-<pre><code>
-export LS_OPTIONS=&#39;--color=auto&#39; #如果没有指定，则自动选择颜色
-export CLICOLOR=&#39;Yes&#39; #是否输出颜色
-export LSCOLORS=&#39;CxfxcxdxbxegedabagGxGx&#39; #指定颜色
-export TERM=&quot;xterm-color&quot;
-\# PS1=&#39;\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ &#39;
-export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
-
-</code></pre>
-
-<h2 id="toc_1">定义Go语言环境变量</h2>
-
-<pre><code>
-export GOPATH=/Users/houqun/Code/GoCode
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
-
-</code></pre>
-
-<pre><code>
-export GOPATH=/Users/houqun/Code/GoCode
-export PATH=$PATH:$GOPATH/bin
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT
-
-</code></pre>
 
                         
                       </div>
@@ -304,11 +272,11 @@ export PATH=$PATH:$GOROOT
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/8/17</span>
+                   <a href="github-pages-and-static-website.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -322,102 +290,27 @@ export PATH=$PATH:$GOROOT
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="compress-command-of-linux.html">
+                <a class="clearlink" href="set-many-ssh-keys-in-a-computer.html">
                 
-                  <h1>Linux 下压缩与解压缩命令</h1>
+                  <h1>一台机器上设置多个SSH Key</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h3 id="toc_0">tar</h3>
+                        	<blockquote>
+<p>先声明，这篇里提到的方法，我并没有测试成功，我的环境是Mac。</p>
+</blockquote>
 
-<p>-c: 建立压缩档案<br/>
--x：解压<br/>
--t：查看内容<br/>
--r：向压缩归档文件末尾追加文件<br/>
--u：更新原压缩包中的文件</p>
+<p><strong>1. 生成 ssh keys</strong></p>
 
-<p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="compress-command-of-linux.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/26</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="linux-commandp-in-common-use.html">
-                
-                  <h1>常用的Linux命令</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h3 id="toc_0">1. 查看文件大小</h3>
-
-<p>查看当前文件夹下所有文件大小（包括子文件夹）</p>
-
-<pre><code>du -sh
-</code></pre>
-
-<p>后面可以跟具体的文件夹名称</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="linux-commandp-in-common-use.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/24</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="mac-xcrun-error-fixed.html">
-                
-                  <h1>Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>在Mac下，执行git命令时候出现如下的错误：</p>
+<p>终端下输入命令：</p>
 
 <pre><code>
-xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 
 </code></pre>
+
+<p>这时可以一路回车，不输入任何字符，将会在~/.ssh下自动生成id_rsa和id_rsa.pub文件。</p>
 
 
                         
@@ -426,102 +319,11 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="mac-xcrun-error-fixed.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2017/6/16</span>
+                   <a href="set-many-ssh-keys-in-a-computer.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
                     <span>文章分类：</span> 
           				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="auto-deploy-with-git-hook.html">
-                
-                  <h1>使用Git的钩子实现自动部署</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
-</ol>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="auto-deploy-with-git-hook.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/8</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="change-user-os.html">
-                
-                  <h1>Linux下切换用户的命令</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li>增加用户，在root下：</li>
-</ol>
-
-<pre><code>
-add user git
-
-</code></pre>
-
-<p>表示增加git用户。</p>
-
-<ol>
-<li>切换用户</li>
-</ol>
-
-<pre><code>
-su git
-
-</code></pre>
-
-<p>切换成git用户。</p>
-
-<p>从root用户切换到其他用户不需要密码，从其他用户切换到root用户，需要输入密码。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/10/8</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          					    <span class="posted-in"><a href='golang-all-none.html'>GO语言杂谈</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -540,7 +342,7 @@ su git
 			<div class="row">
 			  <div class="large-3 columns">
   			  <p class="text-left" style="padding-top:25px;">
-  			   
+  			   <a href="all_1.html">&laquo; 上一页</a>  
   			  </p>
 			  </div>
         <div class="large-6 columns" id="pagination-div" style="margin-top: 25px;text-align: center;">

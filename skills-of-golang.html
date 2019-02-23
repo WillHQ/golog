@@ -130,13 +130,13 @@
     
     category['golang-grammar.html'] = 2;
     
-    category['golang-errors-handle.html'] = 1;
+    category['golang-errors-handle.html'] = 2;
     
-    category['skills-of-golang.html'] = 4;
+    category['skills-of-golang.html'] = 7;
     
-    category['projects-of-go.html'] = 4;
+    category['projects-of-go.html'] = 5;
     
-    category['about-os.html'] = 5;
+    category['about-os.html'] = 6;
     
     category['about-database.html'] = 3;
     
@@ -181,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+1+4+4+5+3+1+1 ;
+      total_posts = 0 +2+3+2+2+7+5+6+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -253,6 +253,173 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="15508824829994.html">
+                
+                  <h1>Go语言微服务实践</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">consul</h2>
+
+<p>执行命令</p>
+
+<pre><code>consul agent -server -bootstrap-expect=1  -node=hq-server -bind=127.0.0.1 -data-dir=~/temp -ui
+
+</code></pre>
+
+<p>consul使用手册参考：<a href="https://blog.csdn.net/liuzhuchen/article/details/81913562">https://blog.csdn.net/liuzhuchen/article/details/81913562</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/2/23</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="cross-compiling-of-golang.html">
+                
+                  <h1>跨平台交叉编译Go程序</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
+
+<p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
+
+<pre><code>
+$ cd /usr/local/go/src
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
+
+</code></pre>
+
+<p>如果是 Windows 则修改 GOOS 即可。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
+
+</code></pre>
+
+<p>(2) 现在可以编译 Linux 和 Windows 平台所需的执行文件了。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
+
+</code></pre>
+
+<p>不过该方式暂时不支持 CGO。</p>
+
+<p>以上假定是64位架构，32位，修改GOARCH为386</p>
+
+<p>说明：</p>
+
+<p>这里并不是重新编译Go，因为安装Go的时候，只是编译了本地系统需要的东西；而需要跨平台交叉编译，需要在Go中增加对其他平台的支持。所以，有 ./make.bash 这么一个过程</p>
+
+<p>交叉编译问题补充：</p>
+
+<p>首先，建议安装Go语言通过源码安装，否则可能没有make.bash或make.bat程序。</p>
+
+<p>之所以需要执行上面的这些步骤，是因为安装Go语言时，一些工具和平台相关的代码并没有生成，执行上面的步骤，并不是重新安装Go语言，而是生成交叉编译（目标平台）需要的工具和文件。这些只是在第一次交叉编译的时候做。之后就不需要了。</p>
+
+<p>为了更快的编译，可以</p>
+
+<pre><code>
+./make.bash --no-clean
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/14</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="how-to-kill-go-run-process.html">
+                
+                  <h1>go run main.go杀掉进程的方法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>可以通过下面的命令来处理：</p>
+
+<pre><code>
+lsof -i tcp:端口号
+
+kill PID 
+
+</code></pre>
+
+<p>也可以通过下面的命令来处理：</p>
+
+<pre><code>
+killall -9 main
+
+</code></pre>
+
+<p>其中的main，就是main.go运行之后的进程名称。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/12</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="comparison-of-different-ways-to-join-strings.html">
                 
@@ -533,6 +700,42 @@ i, err = ParseInt(s, 10, 0) 
 	      
 		      
 			      <li class="post">
+			        <a href="15508824829994.html">Go语言微服务实践</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="problem-of-ParseForm-function-of-beego.html">使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15345015075900.html">设置Mac终端提示符颜色以及设置golang环境变量</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
 			      </li>
 		     
@@ -552,42 +755,6 @@ i, err = ParseInt(s, 10, 0) 
 		      
 			      <li class="post">
 			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="linux-commandp-in-common-use.html">常用的Linux命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="plugins-of-sublime.html">实用的sublime插件集合 – sublime推荐必备插件</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="comparison-of-different-ways-to-join-strings.html">Go语言的字符串拼装方式性能对比</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="beego-web-framework-of-golang.html">GO语言重量级WEB框架BEEGO</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="mac-xcrun-error-fixed.html">Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
 			      </li>
 		     
 		  

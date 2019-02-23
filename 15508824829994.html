@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Slack 的开源替代品 Mattermost - GOLOG
+  		Go语言微服务实践 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Slack 的开源替代品 Mattermost</h1>
+          <h1>Go语言微服务实践</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/10/7</span>
+          <span class="date">2019/2/23</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -136,19 +136,15 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
+      <h2 id="toc_0">consul</h2>
 
-<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
+<p>执行命令</p>
 
-<span id="more"></span><!-- more -->
+<pre><code>consul agent -server -bootstrap-expect=1  -node=hq-server -bind=127.0.0.1 -data-dir=~/temp -ui
 
-<p><img src="media/14758360281130/14758360579753.png" alt=""/></p>
+</code></pre>
 
-<p><img src="media/14758360281130/14758360724395.png" alt=""/></p>
-
-<p><img src="media/14758360281130/14758360833394.gif" alt=""/></p>
-
-<p>项目Github链接：<a href="http://github.com/mattermost/platform">http://github.com/mattermost/platform</a></p>
+<p>consul使用手册参考：<a href="https://blog.csdn.net/liuzhuchen/article/details/81913562">https://blog.csdn.net/liuzhuchen/article/details/81913562</a></p>
 
 
     
@@ -159,16 +155,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="thinkgo-web-frame-project.html" 
-          title="Previous Post: ThinkGo类ThinkPHP的Go语言WEB开发框架">&laquo; ThinkGo类ThinkPHP的Go语言WEB开发框架</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="golog-log-project.html" 
-          title="Next Post: 简单 golang 日志 Golog">简单 golang 日志 Golog &raquo;</a>
+          <a  href="problem-of-ParseForm-function-of-beego.html" 
+          title="Next Post: 使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来">使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来 &raquo;</a>
       
       </p>
         </div>

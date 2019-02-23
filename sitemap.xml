@@ -2,7 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>http://golog.cc/</loc>
-  <lastmod>2018-08-05T23:32:45+08:00</lastmod>
+  <lastmod>2019-02-23T10:53:34+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/15508824829994.html</loc>
+  <lastmod>2019-02-23T08:41:22+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/problem-of-ParseForm-function-of-beego.html</loc>
+  <lastmod>2018-08-20T13:46:55+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/15345015075900.html</loc>
+  <lastmod>2018-08-17T18:25:07+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/15344946625117.html</loc>
+  <lastmod>2018-08-17T16:31:02+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/cross-compiling-of-golang.html</loc>
+  <lastmod>2018-08-14T13:01:31+08:00</lastmod>
+</url>
+
+<url>
+  <loc>http://golog.cc/how-to-kill-go-run-process.html</loc>
+  <lastmod>2018-08-12T13:08:50+08:00</lastmod>
 </url>
 
 <url>

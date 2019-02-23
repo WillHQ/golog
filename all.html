@@ -130,13 +130,13 @@
     
     category['golang-grammar.html'] = 2;
     
-    category['golang-errors-handle.html'] = 1;
+    category['golang-errors-handle.html'] = 2;
     
-    category['skills-of-golang.html'] = 4;
+    category['skills-of-golang.html'] = 7;
     
-    category['projects-of-go.html'] = 4;
+    category['projects-of-go.html'] = 5;
     
-    category['about-os.html'] = 5;
+    category['about-os.html'] = 6;
     
     category['about-database.html'] = 3;
     
@@ -181,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+1+4+4+5+3+1+1 ;
+      total_posts = 0 +2+3+2+2+7+5+6+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -253,6 +253,316 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="15508824829994.html">
+                
+                  <h1>Go语言微服务实践</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">consul</h2>
+
+<p>执行命令</p>
+
+<pre><code>consul agent -server -bootstrap-expect=1  -node=hq-server -bind=127.0.0.1 -data-dir=~/temp -ui
+
+</code></pre>
+
+<p>consul使用手册参考：<a href="https://blog.csdn.net/liuzhuchen/article/details/81913562">https://blog.csdn.net/liuzhuchen/article/details/81913562</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/2/23</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="problem-of-ParseForm-function-of-beego.html">
+                
+                  <h1>使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>经过一番查找，User字段中，有个关联的字段，使用的RoleIds []int64，这个数据解析不出来。</p>
+
+<p>后来调整成RoleIds []int，数据就能够解析出来了。</p>
+
+<p>虽然问题找到并解决了，但是不清楚问题的真实原因是什么，后续需要仔细的研究。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/20</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15345015075900.html">
+                
+                  <h1>设置Mac终端提示符颜色以及设置golang环境变量</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">设置Mac终端提示符颜色</h2>
+
+<pre><code>
+export LS_OPTIONS=&#39;--color=auto&#39; # 如果没有指定，则自动选择颜色
+export CLICOLOR=1 #是否输出颜色
+export LSCOLORS=&#39;Exfxcxdxbxegedabagacad&#39; #指定颜色
+export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
+
+</code></pre>
+
+<pre><code>
+export LS_OPTIONS=&#39;--color=auto&#39; #如果没有指定，则自动选择颜色
+export CLICOLOR=&#39;Yes&#39; #是否输出颜色
+export LSCOLORS=&#39;CxfxcxdxbxegedabagGxGx&#39; #指定颜色
+export TERM=&quot;xterm-color&quot;
+\# PS1=&#39;\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ &#39;
+export PS1=&#39;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#39;
+
+</code></pre>
+
+<h2 id="toc_1">定义Go语言环境变量</h2>
+
+<pre><code>
+export GOPATH=/Users/houqun/Code/GoCode
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+</code></pre>
+
+<pre><code>
+export GOPATH=/Users/houqun/Code/GoCode
+export PATH=$PATH:$GOPATH/bin
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/17</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15344946625117.html">
+                
+                  <h1>阿里云服务上，gogs的安装与迁移</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>之前在一台阿里云服务器上装了gogs，作为个人的代码管理工具。</p>
+
+<p>这台阿里云服务器到期，换了一台新的阿里云服务器，就需要在新服务器上安装gogs，且要把原服务器上的gogs的数据迁移到新服务器上。</p>
+
+<p>这里记录这个迁移过程，留作以后参考备用。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15344946625117.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2018/8/17</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="cross-compiling-of-golang.html">
+                
+                  <h1>跨平台交叉编译Go程序</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
+
+<p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
+
+<pre><code>
+$ cd /usr/local/go/src
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
+
+</code></pre>
+
+<p>如果是 Windows 则修改 GOOS 即可。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
+
+</code></pre>
+
+<p>(2) 现在可以编译 Linux 和 Windows 平台所需的执行文件了。</p>
+
+<pre><code>
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
+$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
+
+</code></pre>
+
+<p>不过该方式暂时不支持 CGO。</p>
+
+<p>以上假定是64位架构，32位，修改GOARCH为386</p>
+
+<p>说明：</p>
+
+<p>这里并不是重新编译Go，因为安装Go的时候，只是编译了本地系统需要的东西；而需要跨平台交叉编译，需要在Go中增加对其他平台的支持。所以，有 ./make.bash 这么一个过程</p>
+
+<p>交叉编译问题补充：</p>
+
+<p>首先，建议安装Go语言通过源码安装，否则可能没有make.bash或make.bat程序。</p>
+
+<p>之所以需要执行上面的这些步骤，是因为安装Go语言时，一些工具和平台相关的代码并没有生成，执行上面的步骤，并不是重新安装Go语言，而是生成交叉编译（目标平台）需要的工具和文件。这些只是在第一次交叉编译的时候做。之后就不需要了。</p>
+
+<p>为了更快的编译，可以</p>
+
+<pre><code>
+./make.bash --no-clean
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/14</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="how-to-kill-go-run-process.html">
+                
+                  <h1>go run main.go杀掉进程的方法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>可以通过下面的命令来处理：</p>
+
+<pre><code>
+lsof -i tcp:端口号
+
+kill PID 
+
+</code></pre>
+
+<p>也可以通过下面的命令来处理：</p>
+
+<pre><code>
+killall -9 main
+
+</code></pre>
+
+<p>其中的main，就是main.go运行之后的进程名称。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/12</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="install-grpc-of-golang.html">
                 
@@ -607,260 +917,6 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="auto-deploy-with-git-hook.html">
-                
-                  <h1>使用Git的钩子实现自动部署</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
-</ol>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="auto-deploy-with-git-hook.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/8</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="change-user-os.html">
-                
-                  <h1>Linux下切换用户的命令</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li>增加用户，在root下：</li>
-</ol>
-
-<pre><code>
-add user git
-
-</code></pre>
-
-<p>表示增加git用户。</p>
-
-<ol>
-<li>切换用户</li>
-</ol>
-
-<pre><code>
-su git
-
-</code></pre>
-
-<p>切换成git用户。</p>
-
-<p>从root用户切换到其他用户不需要密码，从其他用户切换到root用户，需要输入密码。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/10/8</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="how-to-update-mysql-in-centos.html">
-                
-                  <h1>如何升级CentOS 6.5下的MySQL</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ul>
-<li>1. 备份数据库，升级MySQL通常不会丢失数据，但保险起见，我们需要做这一步。输入命令：</li>
-</ul>
-
-<pre><code>
-mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
-
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="how-to-update-mysql-in-centos.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/7</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="centos-Another-MySQL-daemon-already-running.html">
-                
-                  <h1>CentOS下Mysql无法启动，提示“Another MySQL daemon already running”</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
-
-<pre><code>
-service mysqld restart
-
-service mysqld start
-
-</code></pre>
-
-<p>都解决不了，会提示：</p>
-
-<pre><code>
-Another MySQL daemon already running with the same unix socket.
-
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="centos-Another-MySQL-daemon-already-running.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/7</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='about-database.html'>数据库相关</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="thinkgo-web-frame-project.html">
-                
-                  <h1>ThinkGo类ThinkPHP的Go语言WEB开发框架</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>ThinkGo 是一款 Go 语言编写的 web 快速开发框架。</p>
-
-<p>它基于开源框架 Gin 进行二次开发，旨在实现一种类 ThinkPHP 的高可用、高效率的 web 框架。</p>
-
-<p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="thinkgo-web-frame-project.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/7</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="mattermost-go-project.html">
-                
-                  <h1>Slack 的开源替代品 Mattermost</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>Mattermost 是一个 Slack 的开源替代品。Mattermost 采用 Go 语言开发，这是一个开源的团队通讯服务。为团队带来跨 PC 和移动设备的消息、文件分享，提供归档和搜索功能。</p>
-
-<p>Slack 是聊天群组 + 大规模工具集成 + 文件整合 + 统一搜索。截至2014年底，Slack 已经整合了电子邮件、短信、Google Drives、Twitter、Trello、Asana、GitHub 等 65 种工具和服务，把可以把各种碎片化的企业沟通和协作集中到一起。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="mattermost-go-project.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/10/7</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -962,6 +1018,42 @@ Another MySQL daemon already running with the same unix socket.
 	      
 		      
 			      <li class="post">
+			        <a href="15508824829994.html">Go语言微服务实践</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="problem-of-ParseForm-function-of-beego.html">使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15345015075900.html">设置Mac终端提示符颜色以及设置golang环境变量</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
 			      </li>
 		     
@@ -981,42 +1073,6 @@ Another MySQL daemon already running with the same unix socket.
 		      
 			      <li class="post">
 			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="linux-commandp-in-common-use.html">常用的Linux命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="plugins-of-sublime.html">实用的sublime插件集合 – sublime推荐必备插件</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="comparison-of-different-ways-to-join-strings.html">Go语言的字符串拼装方式性能对比</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="beego-web-framework-of-golang.html">GO语言重量级WEB框架BEEGO</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="mac-xcrun-error-fixed.html">Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="auto-deploy-with-git-hook.html">使用Git的钩子实现自动部署</a>
 			      </li>
 		     
 		  
