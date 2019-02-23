@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		跨平台交叉编译Go程序 - GOLOG
+  		github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>跨平台交叉编译Go程序</h1>
+          <h1>github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2018/8/14</span>
+          <span class="date">2019/2/23</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+              <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
            
          
           <span class="comments">
@@ -136,51 +136,19 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>作用：比如你手头只有Mac系统，而你的用户有Linux和Windows的，他们也想用，你可以通过交叉编译出Linux和Windows上的可执行文件给他们用</p>
+      <p>做一个项目时，用到了sqlite3。</p>
 
-<span id="more"></span><!-- more -->
-
-<p>(1)首先进入go/src 源码所在目录，执行如下命令创建目标平台所需的包和工具文件。</p>
+<p>在编译时，出现了下面的错误：</p>
 
 <pre><code>
-$ cd /usr/local/go/src
-$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 ./make.bash
+github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn
 
 </code></pre>
 
-<p>如果是 Windows 则修改 GOOS 即可。</p>
+<p>经查找是因为go-sqlite3中用到了CGO，因此可以用下面的命令进行编译：</p>
 
 <pre><code>
-$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 ./make.bash
-
-</code></pre>
-
-<p>(2) 现在可以编译 Linux 和 Windows 平台所需的执行文件了。</p>
-
-<pre><code>
-$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
-$ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
-
-</code></pre>
-
-<p>不过该方式暂时不支持 CGO。</p>
-
-<p>以上假定是64位架构，32位，修改GOARCH为386</p>
-
-<p>说明：</p>
-
-<p>这里并不是重新编译Go，因为安装Go的时候，只是编译了本地系统需要的东西；而需要跨平台交叉编译，需要在Go中增加对其他平台的支持。所以，有 ./make.bash 这么一个过程</p>
-
-<p>交叉编译问题补充：</p>
-
-<p>首先，建议安装Go语言通过源码安装，否则可能没有make.bash或make.bat程序。</p>
-
-<p>之所以需要执行上面的这些步骤，是因为安装Go语言时，一些工具和平台相关的代码并没有生成，执行上面的步骤，并不是重新安装Go语言，而是生成交叉编译（目标平台）需要的工具和文件。这些只是在第一次交叉编译的时候做。之后就不需要了。</p>
-
-<p>为了更快的编译，可以</p>
-
-<pre><code>
-./make.bash --no-clean
+CGO_ENABLED=1 go build
 
 </code></pre>
 
@@ -193,16 +161,13 @@ $ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15344946625117.html" 
-          title="Previous Post: 阿里云服务上，gogs的安装与迁移">&laquo; 阿里云服务上，gogs的安装与迁移</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="how-to-kill-go-run-process.html" 
-          title="Next Post: go run main.go杀掉进程的方法">go run main.go杀掉进程的方法 &raquo;</a>
+          <a  href="15508917108507.html" 
+          title="Next Post: combining dwarf failed: Unknown load command 0x32 (50)错误">combining dwarf failed: Unknown load command 0x32 (50)错误 &raquo;</a>
       
       </p>
         </div>

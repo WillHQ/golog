@@ -130,7 +130,7 @@
     
     category['golang-grammar.html'] = 2;
     
-    category['golang-errors-handle.html'] = 2;
+    category['golang-errors-handle.html'] = 4;
     
     category['skills-of-golang.html'] = 7;
     
@@ -181,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+2+7+5+6+3+1+1 ;
+      total_posts = 0 +2+3+2+4+7+5+6+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -253,6 +253,79 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="beego-web-framework-of-golang.html">
+                
+                  <h1>GO语言重量级WEB框架BEEGO</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>BEEGO作为GO语言的重量级框架，被很多人用在了各自的项目当中。可以在Beego的官方网站（<a href="http://beego.me">Beego</a>）上查看应用案例，不少是大型的企业，以及大型的项目。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="beego-web-framework-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/16</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-framework.html'>GO语言框架</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="mac-xcrun-error-fixed.html">
+                
+                  <h1>Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在Mac下，执行git命令时候出现如下的错误：</p>
+
+<pre><code>
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="mac-xcrun-error-fixed.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2017/6/16</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="auto-deploy-with-git-hook.html">
                 
@@ -793,89 +866,6 @@ os.Geteuid() != 0
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="change-type-of-data.html">
-                
-                  <h1>go 类型转换</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li><p>整型到字符串</p>
-
-<pre><code>s = strconv.Itoa(i) 
-
-s = strconv.FormatInt(int64(i), 10)
-</code></pre></li>
-<li><p>字符串到整型</p>
-
-<pre><code>i, err = strconv.Atoi(s)
-
-i, err = ParseInt(s, 10, 0) 
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="change-type-of-data.html">阅读全文</a>&nbsp;&nbsp; 
-                    <span class="date">2016/7/22</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="usage-of-import.html">
-                
-                  <h1>import的使用</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ul>
-<li><p>import包命名</p>
-
-<p>import l4g &quot;code.google.com/p/log4go&quot;</p></li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/7/22</span>
-                    <span>文章分类：</span> 
-          				  
-          					    <span class="posted-in"><a href='golang-grammar.html'>GO语言语法</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -977,6 +967,18 @@ i, err = ParseInt(s, 10, 0) 
 	      
 		      
 			      <li class="post">
+			        <a href="15508917930915.html">github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15508917108507.html">combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15508824829994.html">Go语言微服务实践</a>
 			      </li>
 		     
@@ -1020,18 +1022,6 @@ i, err = ParseInt(s, 10, 0) 
 		      
 			      <li class="post">
 			        <a href="solution-to-solve-mysql-break-down-in-aliyun-vps.html">阿里云vps上mysql挂掉的解决办法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="compress-command-of-linux.html">Linux 下压缩与解压缩命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
 			      </li>
 		     
 		  

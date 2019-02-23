@@ -4,13 +4,58 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2019-02-23T10:56:21+08:00</updated>
+  <updated>2019-02-23T11:03:14+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误]]></title>
+    <link href="http://golog.cc/15508917930915.html"/>
+    <updated>2019-02-23T11:16:33+08:00</updated>
+    <id>http://golog.cc/15508917930915.html</id>
+    <content type="html"><![CDATA[
+<p>做一个项目时，用到了sqlite3。</p>
+
+<p>在编译时，出现了下面的错误：</p>
+
+<pre><code>
+github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn
+
+</code></pre>
+
+<p>经查找是因为go-sqlite3中用到了CGO，因此可以用下面的命令进行编译：</p>
+
+<pre><code>
+CGO_ENABLED=1 go build
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[combining dwarf failed: Unknown load command 0x32 (50)错误]]></title>
+    <link href="http://golog.cc/15508917108507.html"/>
+    <updated>2019-02-23T11:15:10+08:00</updated>
+    <id>http://golog.cc/15508917108507.html</id>
+    <content type="html"><![CDATA[
+<p>编译时，出现错误：</p>
+
+<pre><code>
+/usr/local/go/pkg/tool/darwin_amd64/link: /usr/local/go/pkg/tool/darwin_amd64/link: combining dwarf failed: Unknown load command 0x32 (50)
+
+</code></pre>
+
+<p>原因是：Golang编译器的BUG</p>
+
+<p>解决办法：在新版本的Golang中解决了该问题</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Go语言微服务实践]]></title>
@@ -1141,68 +1186,6 @@ rm -rf /var/lib/mysql/ib*
 </code></pre>
 
 <p>删除ibdata1、ib_logfile0、ib_logfile1等文件，再重启Mysql即可。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CentOS下Mysql无法启动，提示“Another MySQL daemon already running”]]></title>
-    <link href="http://golog.cc/centos-Another-MySQL-daemon-already-running.html"/>
-    <updated>2016-10-07T21:04:41+08:00</updated>
-    <id>http://golog.cc/centos-Another-MySQL-daemon-already-running.html</id>
-    <content type="html"><![CDATA[
-<p>有些情况下，CentOS下的Mysql启动不了，采用:</p>
-
-<pre><code>
-service mysqld restart
-
-service mysqld start
-
-</code></pre>
-
-<p>都解决不了，会提示：</p>
-
-<pre><code>
-Another MySQL daemon already running with the same unix socket.
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>目前，具体造成该问题的原因，暂且不知，但可以采取以下的方法，解决这个问题：</p>
-
-<ol>
-<li><p>重启服务器</p></li>
-<li><p>采用如下的命令：</p></li>
-</ol>
-
-<pre><code>
-# mv /var/lib/mysql/mysql.sock /var/lib/mysql/mysql.sock.bak
-
-# service mysqld start
-
-</code></pre>
-
-<p>相当于删除mysql.sock，重新启动mysql服务，重新生成一个有效的mysql.sock，问题就可以解决。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ThinkGo类ThinkPHP的Go语言WEB开发框架]]></title>
-    <link href="http://golog.cc/thinkgo-web-frame-project.html"/>
-    <updated>2016-10-07T19:02:19+08:00</updated>
-    <id>http://golog.cc/thinkgo-web-frame-project.html</id>
-    <content type="html"><![CDATA[
-<p>ThinkGo 是一款 Go 语言编写的 web 快速开发框架。</p>
-
-<p>它基于开源框架 Gin 进行二次开发，旨在实现一种类 ThinkPHP 的高可用、高效率的 web 框架。</p>
-
-<p>它最显著的特点是模块、控制器、操作三段式的标准 MVC 架构，且模块与插件的目录结构完全一致，令开发变得非常简单灵活。</p>
-
-<span id="more"></span><!-- more -->
-
-<p>该项目Github链接：<a href="https://github.com/henrylee2cn/thinkgo">https://github.com/henrylee2cn/thinkgo</a></p>
 
 ]]></content>
   </entry>

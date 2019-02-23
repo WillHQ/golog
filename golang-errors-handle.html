@@ -130,7 +130,7 @@
     
     category['golang-grammar.html'] = 2;
     
-    category['golang-errors-handle.html'] = 2;
+    category['golang-errors-handle.html'] = 4;
     
     category['skills-of-golang.html'] = 7;
     
@@ -181,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+2+7+5+6+3+1+1 ;
+      total_posts = 0 +2+3+2+4+7+5+6+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -253,6 +253,95 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="15508917930915.html">
+                
+                  <h1>github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>做一个项目时，用到了sqlite3。</p>
+
+<p>在编译时，出现了下面的错误：</p>
+
+<pre><code>
+github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn
+
+</code></pre>
+
+<p>经查找是因为go-sqlite3中用到了CGO，因此可以用下面的命令进行编译：</p>
+
+<pre><code>
+CGO_ENABLED=1 go build
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/2/23</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15508917108507.html">
+                
+                  <h1>combining dwarf failed: Unknown load command 0x32 (50)错误</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>编译时，出现错误：</p>
+
+<pre><code>
+/usr/local/go/pkg/tool/darwin_amd64/link: /usr/local/go/pkg/tool/darwin_amd64/link: combining dwarf failed: Unknown load command 0x32 (50)
+
+</code></pre>
+
+<p>原因是：Golang编译器的BUG</p>
+
+<p>解决办法：在新版本的Golang中解决了该问题</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/2/23</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="problem-of-ParseForm-function-of-beego.html">
                 
@@ -442,6 +531,18 @@ installing these packages with &#39;go test -i&#39; will speed future tests.
 	      
 		      
 			      <li class="post">
+			        <a href="15508917930915.html">github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15508917108507.html">combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15508824829994.html">Go语言微服务实践</a>
 			      </li>
 		     
@@ -485,18 +586,6 @@ installing these packages with &#39;go test -i&#39; will speed future tests.
 		      
 			      <li class="post">
 			        <a href="solution-to-solve-mysql-break-down-in-aliyun-vps.html">阿里云vps上mysql挂掉的解决办法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="compress-command-of-linux.html">Linux 下压缩与解压缩命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="structtag-of-go.html">GO语言中的StructTag类型</a>
 			      </li>
 		     
 		  
