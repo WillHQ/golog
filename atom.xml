@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2019-02-23T11:03:14+08:00</updated>
+  <updated>2019-02-23T11:30:24+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -33,6 +33,8 @@ github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn
 CGO_ENABLED=1 go build
 
 </code></pre>
+
+<p>另外安装最新版本的Golang，<code>go env</code>若显示<code>CGO_ENABLED=1</code>，则可以直接编译。</p>
 
 ]]></content>
   </entry>
