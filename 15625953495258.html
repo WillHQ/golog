@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		go中获取各种路径 - GOLOG
+  		sublime text3解决Gosublime无法自动补全代码 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>go中获取各种路径</h1>
+          <h1>sublime text3解决Gosublime无法自动补全代码</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/7/22</span>
+          <span class="date">2019/7/8</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+              <span class="posted-in"><a href='about-os.html'>操作系统相关</a></span>
            
          
           <span class="comments">
@@ -136,74 +136,94 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ol>
-<li><p>执行用户当前所在路径：</p>
+      <h2 id="toc_0">版本</h2>
 
-<pre><code>
-os.Getwd()
+<blockquote>
+<ol>
+<li>Sublime Text3.2.1</li>
+<li>go version go1.12.1 darwin/amd64</li>
+<li>Gosublime 18.11.28</li>
+</ol>
+</blockquote>
 
-</code></pre></li>
-<li><p>执行程序所在路径：</p>
+<h2 id="toc_1">安装Gosublime</h2>
 
-<p>执行程序文件相对路径：</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-
-</code></pre>
+<p>打开Perferences–Browse Packages…，进入Gosublime，在命令行里输入：</p>
 
 <span id="more"></span><!-- more -->
 
-<p>执行程序所在的绝对路径：</p>
+<pre><code>git clone https://github.com/DisposaBoy/GoSublime.git
+</code></pre>
 
-<p>（使用下面一套方法）</p>
+<p>git下载出错的话，可直接打开连接，通过浏览器直接下载。</p>
+
+<h2 id="toc_2">自动补全解决方法</h2>
+
+<p>在windows和mac上使用sublime text3安装Gosublime插件后都无法自动补全代码，经过多日的研究找到如下解决方法。</p>
+
+<p>打开Perferences–Browse Packages…，进入Gosublime：</p>
+
+<pre><code>1、在src目录下创建margo目录；
+2、拷贝src/margo.sh/extension-example/extension-example.go文件到margo目录下；
+3、拷贝margo文件夹（所有文件和目录）到src/margo.sh/vendor目录下；
+4、重新打开sublime text3，稍等几分钟就可以自动补全代码了。
+</code></pre>
+
+<h2 id="toc_3">Gosublime配置</h2>
+
+<pre><code>Perferences–Package Settings–Gosublime–Settings - User
+
+{
+    &quot;env&quot;: {
+        &quot;GOPATH&quot;: &quot;/data&quot;,
+        &quot;GOROOT&quot;: &quot;/usr/local/go&quot;,
+        &quot;PATH&quot;: &quot;$GOROOT:$GOPATH:$GOROOT/bin&quot;,
+    },
+    &quot;gscomplete_enabled&quot;: true,
+    &quot;fmt_enabled&quot;: true,
+    &quot;fmt_tab_indent&quot;: false,
+    &quot;fmt_tab_width&quot;: 4,
+
+    &quot;autocomplete_snippets&quot;: true,
+    &quot;autocomplete_tests&quot;: true,
+    &quot;autocomplete_builtins&quot;: true,
+    &quot;autocomplete_closures&quot;: true,
+    &quot;autocomplete_suggest_imports&quot;: true,
+    &quot;calltips&quot;: true,
+    &quot;use_named_imports&quot;: true,
+    &quot;autoinst&quot;: true,
+    &quot;ipc_timeout&quot;: 1,
+    &quot;fmt_cmd&quot;: [&quot;goimports&quot;],
+    &quot;on_save&quot;: [
+        {&quot;cmd&quot;: &quot;gs_comp_lint&quot;},
+        {&quot;cmd&quot;: &quot;goimports&quot;}
+    ],
+    &quot;lint_enabled&quot;: true,
+    &quot;linters&quot;: [
+        {&quot;cmd&quot;: [&quot;go&quot;, &quot;run&quot;]}
+    ],
+    &quot;comp_lint_enabled&quot;: true,
+    &quot;comp_lint_commands&quot;: [
+        {&quot;cmd&quot;: [&quot;go&quot;, &quot;install&quot;]}
+    ],
+}
+</code></pre>
+
+<p>ctrl+q显示帮助<br/>
+Perferences–Package Settings–Gosublime–Key Bindings - Default</p>
 
 <pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
+{
+
+        &quot;keys&quot;: [&quot;ctrl+q&quot;],
+        // &quot;keys&quot;: [&quot;super+.&quot;, &quot;super+h&quot;],
+        &quot;command&quot;: &quot;gs_doc&quot;,
+        &quot;args&quot;: {&quot;mode&quot;: &quot;hint&quot;},
+        &quot;context&quot;: [{ &quot;key&quot;: &quot;selector&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: &quot;source.go&quot; }]
+
+},
 
 </code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
 
 
     
@@ -214,16 +234,13 @@ func main() {
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="error-of-go-build.html" 
-          title="Previous Post: go build时的错误分析">&laquo; go build时的错误分析</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="operation-of-os.html" 
-          title="Next Post: 操作系统相关操作">操作系统相关操作 &raquo;</a>
+          <a  href="15571436351370.html" 
+          title="Next Post: Javascript对象与JSON的互转">Javascript对象与JSON的互转 &raquo;</a>
       
       </p>
         </div>

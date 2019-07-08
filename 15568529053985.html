@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误 - GOLOG
+  		golang通过反射获取和设置结构体字段的值 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</h1>
+          <h1>golang通过反射获取和设置结构体字段的值</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/2/23</span>
+          <span class="date">2019/5/3</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -136,23 +136,60 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>做一个项目时，用到了sqlite3。</p>
+      <h2 id="toc_0">参考一</h2>
 
-<p>在编译时，出现了下面的错误：</p>
+<pre><code> type MyStruct struct {
+        N int
+    }
+    n := MyStruct{ 1 }
 
-<pre><code>
-github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn
+    // get 
+    immutable := reflect.ValueOf(n)
+    val := immutable.FieldByName(&quot;N&quot;).Int()
+    fmt.Printf(&quot;N=%d\n&quot;, val) // prints 1
 
+    // set
+    mutable := reflect.ValueOf(&amp;n).Elem()
+    mutable.FieldByName(&quot;N&quot;).SetInt(7)
+    fmt.Printf(&quot;N=%d\n&quot;, n.N) // prints 7
+    
 </code></pre>
 
-<p>经查找是因为go-sqlite3中用到了CGO，因此可以用下面的命令进行编译：</p>
+<h2 id="toc_1">参考二</h2>
 
-<pre><code>
-CGO_ENABLED=1 go build
+<pre><code>type Person struct {
+    Name   string  `json:&quot;name&quot;`
+    Age       int   `json:&quot;age&quot;`
+}
 
+func SetValueToStruct(name string,age int) *Person {
+        p := &amp;Person{}
+        v := reflect.ValueOf℗.Elem()
+        v.FieldByName(&quot;Name&quot;).Set(reflect.ValueOf(name))
+        v.FieldByName(&quot;Age&quot;).Set(reflect.ValueOf(age))
+        return p
+}
+
+
+func main()  {
+    p := SetValueToStruct(&quot;张三&quot;,18)
+    fmt.Println(*p)
+}
 </code></pre>
 
-<p>另外安装最新版本的Golang，<code>go env</code>若显示<code>CGO_ENABLED=1</code>，则可以直接编译。</p>
+<p>注：可能出现的错误</p>
+
+<p>1.结构体首字母必须大写，否则会出现：panic: reflect: reflect.Value.Set using value obtained using unexported field<br/>
+在Golang中首字母的大小写代表着访问权限，首字母小写则包外无法访问<br/>
+2.   反射需要使用地址 否则会出现：panic: reflect: reflect.Value.Set using unaddressable value<br/>
+如下代码就会出现panic</p>
+
+<pre><code>p := Person{}
+v := reflect.ValueOf℗
+v.FieldByName(&quot;Name&quot;).Set(reflect.ValueOf(name))
+v.FieldByName(&quot;Age&quot;).Set(reflect.ValueOf(age))
+
+</code></pre>
 
 
     
@@ -163,13 +200,16 @@ CGO_ENABLED=1 go build
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
+          <a href="15568530148488.html" 
+          title="Previous Post: Golang结构体遍历">&laquo; Golang结构体遍历</a>
+      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15508917108507.html" 
-          title="Next Post: combining dwarf failed: Unknown load command 0x32 (50)错误">combining dwarf failed: Unknown load command 0x32 (50)错误 &raquo;</a>
+          <a  href="15568481571072.html" 
+          title="Next Post: 有点不安全却又一亮的 Go unsafe.Pointer">有点不安全却又一亮的 Go unsafe.Pointer &raquo;</a>
       
       </p>
         </div>
@@ -285,19 +325,43 @@ CGO_ENABLED=1 go build
 	      
 		      
 			      <li class="post">
-			        <a href="15508917930915.html">github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+			        <a href="15625953495258.html">sublime text3解决Gosublime无法自动补全代码</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508917108507.html">combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+			        <a href="15571436351370.html">Javascript对象与JSON的互转</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508824829994.html">Go语言微服务实践</a>
+			        <a href="15571313099162.html">golang 1.12 版本的自动补全问题</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568530148488.html">Golang结构体遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568529053985.html">golang通过反射获取和设置结构体字段的值</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568481571072.html">有点不安全却又一亮的 Go unsafe.Pointer</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15566847780090.html">go-micro的项目实战</a>
 			      </li>
 		     
 		  
@@ -316,30 +380,6 @@ CGO_ENABLED=1 go build
 		      
 			      <li class="post">
 			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="solution-to-solve-mysql-break-down-in-aliyun-vps.html">阿里云vps上mysql挂掉的解决办法</a>
 			      </li>
 		     
 		  

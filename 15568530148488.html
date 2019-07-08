@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		go中获取各种路径 - GOLOG
+  		Golang结构体遍历 - GOLOG
   	
   	</title>
   	
@@ -116,10 +116,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>go中获取各种路径</h1>
+          <h1>Golang结构体遍历</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/7/22</span>
+          <span class="date">2019/5/3</span>
 
           <span>文章分类：</span> 
           
@@ -136,74 +136,29 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ol>
-<li><p>执行用户当前所在路径：</p>
+      <pre><code>package main
 
-<pre><code>
-os.Getwd()
-
-</code></pre></li>
-<li><p>执行程序所在路径：</p>
-
-<p>执行程序文件相对路径：</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
+import (
+        &quot;fmt&quot;
+        &quot;reflect&quot;
 )
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
+
+type User struct  {
+        Id int
+        Name string
+        //addr string
+}
+
+func main(){
+        u := User{Id:1001, Name:&quot;xxx&quot;/*, addr:&quot;xxx&quot;*/}
+        t := reflect.TypeOf(u)
+        v := reflect.ValueOf(u)
+        for k := 0; k &lt; t.NumField(); k++ {
+                fmt.Printf(&quot;%s -- %v \n&quot;, t.Field(k).Name, v.Field(k).Interface())   
+        }
 }
 
 </code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
 
 
     
@@ -214,16 +169,16 @@ func main() {
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="error-of-go-build.html" 
-          title="Previous Post: go build时的错误分析">&laquo; go build时的错误分析</a>
+          <a href="15571313099162.html" 
+          title="Previous Post: golang 1.12 版本的自动补全问题">&laquo; golang 1.12 版本的自动补全问题</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="operation-of-os.html" 
-          title="Next Post: 操作系统相关操作">操作系统相关操作 &raquo;</a>
+          <a  href="15568529053985.html" 
+          title="Next Post: golang通过反射获取和设置结构体字段的值">golang通过反射获取和设置结构体字段的值 &raquo;</a>
       
       </p>
         </div>

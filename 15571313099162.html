@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		go中获取各种路径 - GOLOG
+  		golang 1.12 版本的自动补全问题 - GOLOG
   	
   	</title>
   	
@@ -116,10 +116,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>go中获取各种路径</h1>
+          <h1>golang 1.12 版本的自动补全问题</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/7/22</span>
+          <span class="date">2019/5/6</span>
 
           <span>文章分类：</span> 
           
@@ -136,74 +136,14 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ol>
-<li><p>执行用户当前所在路径：</p>
+      <h2 id="toc_0">问题</h2>
 
-<pre><code>
-os.Getwd()
+<p>golang 1.12 开始, 默认的 <code>go install</code> 不再生成 pkg 文件.<br/>
+所以对第三方库的引用, 无法进行代码的自动补全.</p>
 
-</code></pre></li>
-<li><p>执行程序所在路径：</p>
+<h2 id="toc_1">解决方法</h2>
 
-<p>执行程序文件相对路径：</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
-</ol>
+<p><code>go install -i</code> 会生成 pkg 文件夹和编译文件</p>
 
 
     
@@ -214,16 +154,16 @@ func main() {
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="error-of-go-build.html" 
-          title="Previous Post: go build时的错误分析">&laquo; go build时的错误分析</a>
+          <a href="15571436351370.html" 
+          title="Previous Post: Javascript对象与JSON的互转">&laquo; Javascript对象与JSON的互转</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="operation-of-os.html" 
-          title="Next Post: 操作系统相关操作">操作系统相关操作 &raquo;</a>
+          <a  href="15568530148488.html" 
+          title="Next Post: Golang结构体遍历">Golang结构体遍历 &raquo;</a>
       
       </p>
         </div>

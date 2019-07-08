@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		Go语言微服务实践 - GOLOG
+  		Javascript对象与JSON的互转 - GOLOG
   	
   	</title>
   	
@@ -116,10 +116,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Go语言微服务实践</h1>
+          <h1>Javascript对象与JSON的互转</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/2/23</span>
+          <span class="date">2019/5/6</span>
 
           <span>文章分类：</span> 
           
@@ -136,15 +136,12 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">consul</h2>
+      <p>var obj = JSON.parse(json); //由JSON字符串转换为JSON对象</p>
 
-<p>执行命令</p>
+<p>var json=JSON.stringify(obj); //将JSON对象转化为JSON字符</p>
 
-<pre><code>consul agent -server -bootstrap-expect=1  -node=hq-server -bind=127.0.0.1 -data-dir=~/temp -ui
-
-</code></pre>
-
-<p>consul使用手册参考：<a href="https://blog.csdn.net/liuzhuchen/article/details/81913562">https://blog.csdn.net/liuzhuchen/article/details/81913562</a></p>
+<p>//此种需下载插件<br/>
+var json=obj.toJSONString(); //将JSON对象转化为JSON字符</p>
 
 
     
@@ -155,16 +152,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15508917108507.html" 
-          title="Previous Post: combining dwarf failed: Unknown load command 0x32 (50)错误">&laquo; combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+          <a href="15625953495258.html" 
+          title="Previous Post: sublime text3解决Gosublime无法自动补全代码">&laquo; sublime text3解决Gosublime无法自动补全代码</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="problem-of-ParseForm-function-of-beego.html" 
-          title="Next Post: 使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来">使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来 &raquo;</a>
+          <a  href="15571313099162.html" 
+          title="Next Post: golang 1.12 版本的自动补全问题">golang 1.12 版本的自动补全问题 &raquo;</a>
       
       </p>
         </div>
@@ -280,19 +277,43 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15508917930915.html">github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+			        <a href="15625953495258.html">sublime text3解决Gosublime无法自动补全代码</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508917108507.html">combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+			        <a href="15571436351370.html">Javascript对象与JSON的互转</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508824829994.html">Go语言微服务实践</a>
+			        <a href="15571313099162.html">golang 1.12 版本的自动补全问题</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568530148488.html">Golang结构体遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568529053985.html">golang通过反射获取和设置结构体字段的值</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568481571072.html">有点不安全却又一亮的 Go unsafe.Pointer</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15566847780090.html">go-micro的项目实战</a>
 			      </li>
 		     
 		  
@@ -311,30 +332,6 @@
 		      
 			      <li class="post">
 			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="solution-to-solve-mysql-break-down-in-aliyun-vps.html">阿里云vps上mysql挂掉的解决办法</a>
 			      </li>
 		     
 		  

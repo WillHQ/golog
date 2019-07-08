@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		combining dwarf failed: Unknown load command 0x32 (50)错误 - GOLOG
+  		有点不安全却又一亮的 Go unsafe.Pointer - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>combining dwarf failed: Unknown load command 0x32 (50)错误</h1>
+          <h1>有点不安全却又一亮的 Go unsafe.Pointer</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/2/23</span>
+          <span class="date">2019/5/3</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='golang-errors-handle.html'>GO语言错误处理</a></span>
+              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
            
          
           <span class="comments">
@@ -136,16 +136,157 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>编译时，出现错误：</p>
+      <p>在上一篇文章 《深入理解 Go Slice》 中，大家会发现其底层数据结构使用了 unsafe.Pointer。因此想着再介绍一下其关联知识。</p>
 
-<pre><code>
-/usr/local/go/pkg/tool/darwin_amd64/link: /usr/local/go/pkg/tool/darwin_amd64/link: combining dwarf failed: Unknown load command 0x32 (50)
+<p>前言</p>
 
+<p>在大家学习 Go 的时候，肯定都学过 “Go 的指针是不支持指针运算和转换” 这个知识点。为什么呢？</p>
+
+<p>首先，Go 是一门静态语言，所有的变量都必须为标量类型。不同的类型不能够进行赋值、计算等跨类型的操作。那么指针也对应着相对的类型，也在 Compile 的静态类型检查的范围内。同时静态语言，也称为强类型。也就是一旦定义了，就不能再改变它。</p>
+
+<p>错误示例</p>
+
+<pre><code>func main(){
+    num := 5
+    numPointer := &amp;num
+
+    flnum := (*float32)(numPointer)
+    fmt.Println(flnum)
+}
 </code></pre>
 
-<p>原因是：Golang编译器的BUG</p>
+<p>输出结果：</p>
 
-<p>解决办法：在新版本的Golang中解决了该问题</p>
+<pre><code># command-line-arguments
+...: cannot convert numPointer (type *int) to type *float32
+</code></pre>
+
+<p>在示例中，我们创建了一个 num 变量，值为 5，类型为 int。取了其对于的指针地址后，试图强制转换为 *float32，结果失败...</p>
+
+<p>unsafe</p>
+
+<p>针对刚刚的 “错误示例”，我们可以采用今天的男主角 unsafe 标准库来解决。它是一个神奇的包，在官方的诠释中，有如下概述：</p>
+
+<ul>
+<li><p>围绕 Go 程序内存安全及类型的操作</p></li>
+<li><p>很可能会是不可移植的</p></li>
+<li><p>不受 Go 1 兼容性指南的保护</p></li>
+</ul>
+
+<p>简单来讲就是，不怎么推荐你使用。因为它是 unsafe（不安全的），但是在特殊的场景下，使用了它。可以打破 Go 的类型和内存安全机制，让你获得眼前一亮的惊喜效果。</p>
+
+<p>Pointer</p>
+
+<p>为了解决这个问题，需要用到 unsafe.Pointer。它表示任意类型且可寻址的指针值，可以在不同的指针类型之间进行转换（类似 C 语言的 void * 的用途）</p>
+
+<p>其包含四种核心操作：</p>
+
+<ul>
+<li><p>任何类型的指针值都可以转换为 Pointer</p></li>
+<li><p>Pointer 可以转换为任何类型的指针值</p></li>
+<li><p>uintptr 可以转换为 Pointer</p></li>
+<li><p>Pointer 可以转换为 uintptr</p></li>
+</ul>
+
+<p>在这一部分，重点看第一点、第二点。你再想想怎么修改 “错误示例” 让它运行起来？</p>
+
+<pre><code>func main(){
+    num := 5
+    numPointer := &amp;num
+
+    flnum := (*float32)(unsafe.Pointer(numPointer))
+    fmt.Println(flnum)
+}
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code>0xc4200140b0
+</code></pre>
+
+<p>在上述代码中，我们小加改动。通过 unsafe.Pointer 的特性对该指针变量进行了修改，就可以完成任意类型（*T）的指针转换。</p>
+
+<p>需要注意的是，这时还无法对变量进行操作或访问。因为不知道该指针地址指向的东西具体是什么类型。不知道是什么类型，又如何进行解析呢。无法解析也就自然无法对其变更了</p>
+
+<p>Offsetof</p>
+
+<p>在上小节中，我们对普通的指针变量进行了修改。那么它是否能做更复杂一点的事呢？</p>
+
+<pre><code>type Num struct{
+    i string
+    j int64
+}
+
+func main(){
+    n := Num{i: &quot;EDDYCJY&quot;, j: 1}
+    nPointer := unsafe.Pointer(&amp;n)
+
+    niPointer := (*string)(unsafe.Pointer(nPointer))
+    *niPointer = &quot;煎鱼&quot;
+
+    njPointer := (*int64)(unsafe.Pointer(uintptr(nPointer) + unsafe.Offsetof(n.j)))
+    *njPointer = 2
+
+    fmt.Printf(&quot;n.i: %s, n.j: %d&quot;, n.i, n.j)
+}
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code>n.i: 煎鱼, n.j: 2
+</code></pre>
+
+<p>在剖析这段代码做了什么事之前，我们需要了解结构体的一些基本概念：</p>
+
+<ul>
+<li><p>结构体的成员变量在内存存储上是一段连续的内存</p></li>
+<li><p>结构体的初始地址就是第一个成员变量的内存地址</p></li>
+<li><p>基于结构体的成员地址去计算偏移量。就能够得出其他成员变量的内存地址</p></li>
+</ul>
+
+<p>再回来看看上述代码，得出执行流程：</p>
+
+<ul>
+<li><p>修改 n.i 值：i 为第一个成员变量。因此不需要进行偏移量计算，直接取出指针后转换为 Pointer，再强制转换为字符串类型的指针值即可</p></li>
+<li><p>修改 n.j 值：j 为第二个成员变量。需要进行偏移量计算，才可以对其内存地址进行修改。在进行了偏移运算后，当前地址已经指向第二个成员变量。接着重复转换赋值即可</p></li>
+</ul>
+
+<p>需要注意的是，这里使用了如下方法（来完成偏移计算的目标）：</p>
+
+<p>1、uintptr：uintptr 是 Go 的内置类型。返回无符号整数，可存储一个完整的地址。后续常用于指针运算</p>
+
+<pre><code>type uintptr uintptr
+</code></pre>
+
+<p>2、unsafe.Offsetof：返回变量的字节大小，也就是本文用到的偏移量大小。需要注意的是入参 ArbitraryType 表示任意类型，并非定义的 int。它实际作用是一个占位符</p>
+
+<pre><code>func Offsetof(x ArbitraryType) uintptr
+</code></pre>
+
+<p>在这一部分，其实就是巧用了 Pointer 的第三、第四点特性。这时候就已经可以对变量进行操作了</p>
+
+<p>错误示例</p>
+
+<pre><code>func main(){
+    n := Num{i: &quot;EDDYCJY&quot;, j: 1}
+    nPointer := unsafe.Pointer(&amp;n)
+    ...
+
+    ptr := uintptr(nPointer)
+    njPointer := (*int64)(unsafe.Pointer(ptr + unsafe.Offsetof(n.j)))
+    ...
+}
+</code></pre>
+
+<p>这里存在一个问题，uintptr 类型是不能存储在临时变量中的。因为从 GC 的角度来看，uintptr 类型的临时变量只是一个无符号整数，并不知道它是一个指针地址</p>
+
+<p>因此当满足一定条件后，ptr 这个临时变量是可能被垃圾回收掉的，那么接下来的内存操作，岂不成迷？</p>
+
+<p>总结</p>
+
+<p>简洁回顾两个知识点。第一是 unsafe.Pointer 可以让你的变量在不同的指针类型转来转去，也就是表示为任意可寻址的指针类型。第二是 uintptr 常用于与 unsafe.Pointer 打配合，用于做指针运算，巧妙地很。</p>
+
+<p>最后还是那句话，没有特殊必要的话。是不建议使用 unsafe 标准库，它并不安全，虽然它常常能让你眼前一亮。</p>
 
 
     
@@ -156,16 +297,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15508917930915.html" 
-          title="Previous Post: github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误">&laquo; github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+          <a href="15568529053985.html" 
+          title="Previous Post: golang通过反射获取和设置结构体字段的值">&laquo; golang通过反射获取和设置结构体字段的值</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15508824829994.html" 
-          title="Next Post: Go语言微服务实践">Go语言微服务实践 &raquo;</a>
+          <a  href="15566847780090.html" 
+          title="Next Post: go-micro的项目实战">go-micro的项目实战 &raquo;</a>
       
       </p>
         </div>
@@ -281,19 +422,43 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15508917930915.html">github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+			        <a href="15625953495258.html">sublime text3解决Gosublime无法自动补全代码</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508917108507.html">combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+			        <a href="15571436351370.html">Javascript对象与JSON的互转</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508824829994.html">Go语言微服务实践</a>
+			        <a href="15571313099162.html">golang 1.12 版本的自动补全问题</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568530148488.html">Golang结构体遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568529053985.html">golang通过反射获取和设置结构体字段的值</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568481571072.html">有点不安全却又一亮的 Go unsafe.Pointer</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15566847780090.html">go-micro的项目实战</a>
 			      </li>
 		     
 		  
@@ -312,30 +477,6 @@
 		      
 			      <li class="post">
 			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="solution-to-solve-mysql-break-down-in-aliyun-vps.html">阿里云vps上mysql挂掉的解决办法</a>
 			      </li>
 		     
 		  

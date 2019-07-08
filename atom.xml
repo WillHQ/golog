@@ -4,7 +4,7 @@
   <title><![CDATA[GOLOG]]></title>
   <link href="http://golog.cc/atom.xml" rel="self"/>
   <link href="http://golog.cc/"/>
-  <updated>2019-02-23T11:30:24+08:00</updated>
+  <updated>2018-08-05T23:32:46+08:00</updated>
   <id>http://golog.cc/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,67 +13,476 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误]]></title>
-    <link href="http://golog.cc/15508917930915.html"/>
-    <updated>2019-02-23T11:16:33+08:00</updated>
-    <id>http://golog.cc/15508917930915.html</id>
+    <title type="html"><![CDATA[sublime text3解决Gosublime无法自动补全代码]]></title>
+    <link href="http://golog.cc/15625953495258.html"/>
+    <updated>2019-07-08T22:15:49+08:00</updated>
+    <id>http://golog.cc/15625953495258.html</id>
     <content type="html"><![CDATA[
-<p>做一个项目时，用到了sqlite3。</p>
+<h2 id="toc_0">版本</h2>
 
-<p>在编译时，出现了下面的错误：</p>
+<blockquote>
+<ol>
+<li>Sublime Text3.2.1</li>
+<li>go version go1.12.1 darwin/amd64</li>
+<li>Gosublime 18.11.28</li>
+</ol>
+</blockquote>
 
-<pre><code>
-github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn
+<h2 id="toc_1">安装Gosublime</h2>
 
+<p>打开Perferences–Browse Packages…，进入Gosublime，在命令行里输入：</p>
+
+<span id="more"></span><!-- more -->
+
+<pre><code>git clone https://github.com/DisposaBoy/GoSublime.git
 </code></pre>
 
-<p>经查找是因为go-sqlite3中用到了CGO，因此可以用下面的命令进行编译：</p>
+<p>git下载出错的话，可直接打开连接，通过浏览器直接下载。</p>
 
-<pre><code>
-CGO_ENABLED=1 go build
+<h2 id="toc_2">自动补全解决方法</h2>
 
+<p>在windows和mac上使用sublime text3安装Gosublime插件后都无法自动补全代码，经过多日的研究找到如下解决方法。</p>
+
+<p>打开Perferences–Browse Packages…，进入Gosublime：</p>
+
+<pre><code>1、在src目录下创建margo目录；
+2、拷贝src/margo.sh/extension-example/extension-example.go文件到margo目录下；
+3、拷贝margo文件夹（所有文件和目录）到src/margo.sh/vendor目录下；
+4、重新打开sublime text3，稍等几分钟就可以自动补全代码了。
 </code></pre>
 
-<p>另外安装最新版本的Golang，<code>go env</code>若显示<code>CGO_ENABLED=1</code>，则可以直接编译。</p>
+<h2 id="toc_3">Gosublime配置</h2>
+
+<pre><code>Perferences–Package Settings–Gosublime–Settings - User
+
+{
+    &quot;env&quot;: {
+        &quot;GOPATH&quot;: &quot;/data&quot;,
+        &quot;GOROOT&quot;: &quot;/usr/local/go&quot;,
+        &quot;PATH&quot;: &quot;$GOROOT:$GOPATH:$GOROOT/bin&quot;,
+    },
+    &quot;gscomplete_enabled&quot;: true,
+    &quot;fmt_enabled&quot;: true,
+    &quot;fmt_tab_indent&quot;: false,
+    &quot;fmt_tab_width&quot;: 4,
+
+    &quot;autocomplete_snippets&quot;: true,
+    &quot;autocomplete_tests&quot;: true,
+    &quot;autocomplete_builtins&quot;: true,
+    &quot;autocomplete_closures&quot;: true,
+    &quot;autocomplete_suggest_imports&quot;: true,
+    &quot;calltips&quot;: true,
+    &quot;use_named_imports&quot;: true,
+    &quot;autoinst&quot;: true,
+    &quot;ipc_timeout&quot;: 1,
+    &quot;fmt_cmd&quot;: [&quot;goimports&quot;],
+    &quot;on_save&quot;: [
+        {&quot;cmd&quot;: &quot;gs_comp_lint&quot;},
+        {&quot;cmd&quot;: &quot;goimports&quot;}
+    ],
+    &quot;lint_enabled&quot;: true,
+    &quot;linters&quot;: [
+        {&quot;cmd&quot;: [&quot;go&quot;, &quot;run&quot;]}
+    ],
+    &quot;comp_lint_enabled&quot;: true,
+    &quot;comp_lint_commands&quot;: [
+        {&quot;cmd&quot;: [&quot;go&quot;, &quot;install&quot;]}
+    ],
+}
+</code></pre>
+
+<p>ctrl+q显示帮助<br/>
+Perferences–Package Settings–Gosublime–Key Bindings - Default</p>
+
+<pre><code>
+{
+
+        &quot;keys&quot;: [&quot;ctrl+q&quot;],
+        // &quot;keys&quot;: [&quot;super+.&quot;, &quot;super+h&quot;],
+        &quot;command&quot;: &quot;gs_doc&quot;,
+        &quot;args&quot;: {&quot;mode&quot;: &quot;hint&quot;},
+        &quot;context&quot;: [{ &quot;key&quot;: &quot;selector&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: &quot;source.go&quot; }]
+
+},
+
+</code></pre>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[combining dwarf failed: Unknown load command 0x32 (50)错误]]></title>
-    <link href="http://golog.cc/15508917108507.html"/>
-    <updated>2019-02-23T11:15:10+08:00</updated>
-    <id>http://golog.cc/15508917108507.html</id>
+    <title type="html"><![CDATA[Javascript对象与JSON的互转]]></title>
+    <link href="http://golog.cc/15571436351370.html"/>
+    <updated>2019-05-06T19:53:55+08:00</updated>
+    <id>http://golog.cc/15571436351370.html</id>
     <content type="html"><![CDATA[
-<p>编译时，出现错误：</p>
+<p>var obj = JSON.parse(json); //由JSON字符串转换为JSON对象</p>
 
-<pre><code>
-/usr/local/go/pkg/tool/darwin_amd64/link: /usr/local/go/pkg/tool/darwin_amd64/link: combining dwarf failed: Unknown load command 0x32 (50)
+<p>var json=JSON.stringify(obj); //将JSON对象转化为JSON字符</p>
 
-</code></pre>
-
-<p>原因是：Golang编译器的BUG</p>
-
-<p>解决办法：在新版本的Golang中解决了该问题</p>
+<p>//此种需下载插件<br/>
+var json=obj.toJSONString(); //将JSON对象转化为JSON字符</p>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Go语言微服务实践]]></title>
-    <link href="http://golog.cc/15508824829994.html"/>
-    <updated>2019-02-23T08:41:22+08:00</updated>
-    <id>http://golog.cc/15508824829994.html</id>
+    <title type="html"><![CDATA[golang 1.12 版本的自动补全问题]]></title>
+    <link href="http://golog.cc/15571313099162.html"/>
+    <updated>2019-05-06T16:28:29+08:00</updated>
+    <id>http://golog.cc/15571313099162.html</id>
     <content type="html"><![CDATA[
-<h2 id="toc_0">consul</h2>
+<h2 id="toc_0">问题</h2>
 
-<p>执行命令</p>
+<p>golang 1.12 开始, 默认的 <code>go install</code> 不再生成 pkg 文件.<br/>
+所以对第三方库的引用, 无法进行代码的自动补全.</p>
 
-<pre><code>consul agent -server -bootstrap-expect=1  -node=hq-server -bind=127.0.0.1 -data-dir=~/temp -ui
+<h2 id="toc_1">解决方法</h2>
+
+<p><code>go install -i</code> 会生成 pkg 文件夹和编译文件</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Golang结构体遍历]]></title>
+    <link href="http://golog.cc/15568530148488.html"/>
+    <updated>2019-05-03T11:10:14+08:00</updated>
+    <id>http://golog.cc/15568530148488.html</id>
+    <content type="html"><![CDATA[
+<pre><code>package main
+
+import (
+        &quot;fmt&quot;
+        &quot;reflect&quot;
+)
+
+type User struct  {
+        Id int
+        Name string
+        //addr string
+}
+
+func main(){
+        u := User{Id:1001, Name:&quot;xxx&quot;/*, addr:&quot;xxx&quot;*/}
+        t := reflect.TypeOf(u)
+        v := reflect.ValueOf(u)
+        for k := 0; k &lt; t.NumField(); k++ {
+                fmt.Printf(&quot;%s -- %v \n&quot;, t.Field(k).Name, v.Field(k).Interface())   
+        }
+}
 
 </code></pre>
 
-<p>consul使用手册参考：<a href="https://blog.csdn.net/liuzhuchen/article/details/81913562">https://blog.csdn.net/liuzhuchen/article/details/81913562</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[golang通过反射获取和设置结构体字段的值]]></title>
+    <link href="http://golog.cc/15568529053985.html"/>
+    <updated>2019-05-03T11:08:25+08:00</updated>
+    <id>http://golog.cc/15568529053985.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">参考一</h2>
+
+<pre><code> type MyStruct struct {
+        N int
+    }
+    n := MyStruct{ 1 }
+
+    // get 
+    immutable := reflect.ValueOf(n)
+    val := immutable.FieldByName(&quot;N&quot;).Int()
+    fmt.Printf(&quot;N=%d\n&quot;, val) // prints 1
+
+    // set
+    mutable := reflect.ValueOf(&amp;n).Elem()
+    mutable.FieldByName(&quot;N&quot;).SetInt(7)
+    fmt.Printf(&quot;N=%d\n&quot;, n.N) // prints 7
+    
+</code></pre>
+
+<h2 id="toc_1">参考二</h2>
+
+<pre><code>type Person struct {
+    Name   string  `json:&quot;name&quot;`
+    Age       int   `json:&quot;age&quot;`
+}
+
+func SetValueToStruct(name string,age int) *Person {
+        p := &amp;Person{}
+        v := reflect.ValueOf℗.Elem()
+        v.FieldByName(&quot;Name&quot;).Set(reflect.ValueOf(name))
+        v.FieldByName(&quot;Age&quot;).Set(reflect.ValueOf(age))
+        return p
+}
+
+
+func main()  {
+    p := SetValueToStruct(&quot;张三&quot;,18)
+    fmt.Println(*p)
+}
+</code></pre>
+
+<p>注：可能出现的错误</p>
+
+<p>1.结构体首字母必须大写，否则会出现：panic: reflect: reflect.Value.Set using value obtained using unexported field<br/>
+在Golang中首字母的大小写代表着访问权限，首字母小写则包外无法访问<br/>
+2.   反射需要使用地址 否则会出现：panic: reflect: reflect.Value.Set using unaddressable value<br/>
+如下代码就会出现panic</p>
+
+<pre><code>p := Person{}
+v := reflect.ValueOf℗
+v.FieldByName(&quot;Name&quot;).Set(reflect.ValueOf(name))
+v.FieldByName(&quot;Age&quot;).Set(reflect.ValueOf(age))
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[有点不安全却又一亮的 Go unsafe.Pointer]]></title>
+    <link href="http://golog.cc/15568481571072.html"/>
+    <updated>2019-05-03T09:49:17+08:00</updated>
+    <id>http://golog.cc/15568481571072.html</id>
+    <content type="html"><![CDATA[
+<p>在上一篇文章 《深入理解 Go Slice》 中，大家会发现其底层数据结构使用了 unsafe.Pointer。因此想着再介绍一下其关联知识。</p>
+
+<p>前言</p>
+
+<p>在大家学习 Go 的时候，肯定都学过 “Go 的指针是不支持指针运算和转换” 这个知识点。为什么呢？</p>
+
+<p>首先，Go 是一门静态语言，所有的变量都必须为标量类型。不同的类型不能够进行赋值、计算等跨类型的操作。那么指针也对应着相对的类型，也在 Compile 的静态类型检查的范围内。同时静态语言，也称为强类型。也就是一旦定义了，就不能再改变它。</p>
+
+<p>错误示例</p>
+
+<pre><code>func main(){
+    num := 5
+    numPointer := &amp;num
+
+    flnum := (*float32)(numPointer)
+    fmt.Println(flnum)
+}
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code># command-line-arguments
+...: cannot convert numPointer (type *int) to type *float32
+</code></pre>
+
+<p>在示例中，我们创建了一个 num 变量，值为 5，类型为 int。取了其对于的指针地址后，试图强制转换为 *float32，结果失败...</p>
+
+<p>unsafe</p>
+
+<p>针对刚刚的 “错误示例”，我们可以采用今天的男主角 unsafe 标准库来解决。它是一个神奇的包，在官方的诠释中，有如下概述：</p>
+
+<ul>
+<li><p>围绕 Go 程序内存安全及类型的操作</p></li>
+<li><p>很可能会是不可移植的</p></li>
+<li><p>不受 Go 1 兼容性指南的保护</p></li>
+</ul>
+
+<p>简单来讲就是，不怎么推荐你使用。因为它是 unsafe（不安全的），但是在特殊的场景下，使用了它。可以打破 Go 的类型和内存安全机制，让你获得眼前一亮的惊喜效果。</p>
+
+<p>Pointer</p>
+
+<p>为了解决这个问题，需要用到 unsafe.Pointer。它表示任意类型且可寻址的指针值，可以在不同的指针类型之间进行转换（类似 C 语言的 void * 的用途）</p>
+
+<p>其包含四种核心操作：</p>
+
+<ul>
+<li><p>任何类型的指针值都可以转换为 Pointer</p></li>
+<li><p>Pointer 可以转换为任何类型的指针值</p></li>
+<li><p>uintptr 可以转换为 Pointer</p></li>
+<li><p>Pointer 可以转换为 uintptr</p></li>
+</ul>
+
+<p>在这一部分，重点看第一点、第二点。你再想想怎么修改 “错误示例” 让它运行起来？</p>
+
+<pre><code>func main(){
+    num := 5
+    numPointer := &amp;num
+
+    flnum := (*float32)(unsafe.Pointer(numPointer))
+    fmt.Println(flnum)
+}
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code>0xc4200140b0
+</code></pre>
+
+<p>在上述代码中，我们小加改动。通过 unsafe.Pointer 的特性对该指针变量进行了修改，就可以完成任意类型（*T）的指针转换。</p>
+
+<p>需要注意的是，这时还无法对变量进行操作或访问。因为不知道该指针地址指向的东西具体是什么类型。不知道是什么类型，又如何进行解析呢。无法解析也就自然无法对其变更了</p>
+
+<p>Offsetof</p>
+
+<p>在上小节中，我们对普通的指针变量进行了修改。那么它是否能做更复杂一点的事呢？</p>
+
+<pre><code>type Num struct{
+    i string
+    j int64
+}
+
+func main(){
+    n := Num{i: &quot;EDDYCJY&quot;, j: 1}
+    nPointer := unsafe.Pointer(&amp;n)
+
+    niPointer := (*string)(unsafe.Pointer(nPointer))
+    *niPointer = &quot;煎鱼&quot;
+
+    njPointer := (*int64)(unsafe.Pointer(uintptr(nPointer) + unsafe.Offsetof(n.j)))
+    *njPointer = 2
+
+    fmt.Printf(&quot;n.i: %s, n.j: %d&quot;, n.i, n.j)
+}
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code>n.i: 煎鱼, n.j: 2
+</code></pre>
+
+<p>在剖析这段代码做了什么事之前，我们需要了解结构体的一些基本概念：</p>
+
+<ul>
+<li><p>结构体的成员变量在内存存储上是一段连续的内存</p></li>
+<li><p>结构体的初始地址就是第一个成员变量的内存地址</p></li>
+<li><p>基于结构体的成员地址去计算偏移量。就能够得出其他成员变量的内存地址</p></li>
+</ul>
+
+<p>再回来看看上述代码，得出执行流程：</p>
+
+<ul>
+<li><p>修改 n.i 值：i 为第一个成员变量。因此不需要进行偏移量计算，直接取出指针后转换为 Pointer，再强制转换为字符串类型的指针值即可</p></li>
+<li><p>修改 n.j 值：j 为第二个成员变量。需要进行偏移量计算，才可以对其内存地址进行修改。在进行了偏移运算后，当前地址已经指向第二个成员变量。接着重复转换赋值即可</p></li>
+</ul>
+
+<p>需要注意的是，这里使用了如下方法（来完成偏移计算的目标）：</p>
+
+<p>1、uintptr：uintptr 是 Go 的内置类型。返回无符号整数，可存储一个完整的地址。后续常用于指针运算</p>
+
+<pre><code>type uintptr uintptr
+</code></pre>
+
+<p>2、unsafe.Offsetof：返回变量的字节大小，也就是本文用到的偏移量大小。需要注意的是入参 ArbitraryType 表示任意类型，并非定义的 int。它实际作用是一个占位符</p>
+
+<pre><code>func Offsetof(x ArbitraryType) uintptr
+</code></pre>
+
+<p>在这一部分，其实就是巧用了 Pointer 的第三、第四点特性。这时候就已经可以对变量进行操作了</p>
+
+<p>错误示例</p>
+
+<pre><code>func main(){
+    n := Num{i: &quot;EDDYCJY&quot;, j: 1}
+    nPointer := unsafe.Pointer(&amp;n)
+    ...
+
+    ptr := uintptr(nPointer)
+    njPointer := (*int64)(unsafe.Pointer(ptr + unsafe.Offsetof(n.j)))
+    ...
+}
+</code></pre>
+
+<p>这里存在一个问题，uintptr 类型是不能存储在临时变量中的。因为从 GC 的角度来看，uintptr 类型的临时变量只是一个无符号整数，并不知道它是一个指针地址</p>
+
+<p>因此当满足一定条件后，ptr 这个临时变量是可能被垃圾回收掉的，那么接下来的内存操作，岂不成迷？</p>
+
+<p>总结</p>
+
+<p>简洁回顾两个知识点。第一是 unsafe.Pointer 可以让你的变量在不同的指针类型转来转去，也就是表示为任意可寻址的指针类型。第二是 uintptr 常用于与 unsafe.Pointer 打配合，用于做指针运算，巧妙地很。</p>
+
+<p>最后还是那句话，没有特殊必要的话。是不建议使用 unsafe 标准库，它并不安全，虽然它常常能让你眼前一亮。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[go-micro的项目实战]]></title>
+    <link href="http://golog.cc/15566847780090.html"/>
+    <updated>2019-05-01T12:26:18+08:00</updated>
+    <id>http://golog.cc/15566847780090.html</id>
+    <content type="html"><![CDATA[
+<ol>
+<li>consul的开发状态的命令</li>
+</ol>
+
+<pre><code>
+consul agent -dev
+
+</code></pre>
+
+<ol>
+<li>micro的测试命令</li>
+</ol>
+
+<pre><code>
+micro --registry=consul call xsoft.go.mes.auth AuthService.CheckUserWithPwd &#39;{&quot;username&quot;:&quot;houqun-hahahah&quot;, &quot;password&quot;:&quot;12345&quot;}&#39;
+
+micro --registry=consul call xsoft.go.mes.auth AuthService.GetUserOneByUsername &#39;{&quot;username&quot;:&quot;admin&quot;, &quot;password&quot;:&quot;123456&quot;}&#39;
+
+</code></pre>
+
+<ol>
+<li>安装protobuf</li>
+</ol>
+
+<pre><code>go get github.com/micro/protobuf/{proto,protoc-gen-go}
+
+# install protoc-gen-micro
+go get -u github.com/micro/protoc-gen-micro
+
+</code></pre>
+
+<ol>
+<li>安装go-micro</li>
+</ol>
+
+<pre><code>go get github.com/micro/go-micro
+
+</code></pre>
+
+<ol>
+<li>安装micro</li>
+</ol>
+
+<pre><code>go get github.com/micro/micro
+
+</code></pre>
+
+<ol>
+<li>proto3 生成的文件 包含 const _ = proto.ProtoPackageIsVersion2</li>
+</ol>
+
+<p>(1)检查protoc版本</p>
+
+<pre><code>protoc --version
+libprotoc 3.7.0
+</code></pre>
+
+<p>看看版本是不是3.x.x以上<br/>
+如果是的，那么多半是protoc-gen-go 没升级</p>
+
+<p>linux下 来取最新的 github.com/golang/protobuf</p>
+
+<pre><code>go get github.com/golang/protobuf
+echo $GOPATH
+cd $GOPATH/github.com/golang/protobuf/protoc-gen-go
+go build 
+</code></pre>
+
+<p>然后把生成的二进制文件 protoc-gen-go 拷贝到protoc 所在目录下 或者把protoc-gen-go  所在目录加入到环境变量中</p>
+
+<p>查看protoc所在目录</p>
+
+<pre><code>which protoc
+
+</code></pre>
 
 ]]></content>
   </entry>
@@ -972,222 +1381,6 @@ way 3 is    1.6 times of way 4
 <span id="more"></span><!-- more -->
 
 <p>从这篇开始，在使用Beego这个框架做项目的时候，陆续的记录一些笔记，供大家（也包括自己）参考使用。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac下执行git命令出现xcrun： error： invalid active developer path错误的处理方法]]></title>
-    <link href="http://golog.cc/mac-xcrun-error-fixed.html"/>
-    <updated>2017-06-16T22:48:46+08:00</updated>
-    <id>http://golog.cc/mac-xcrun-error-fixed.html</id>
-    <content type="html"><![CDATA[
-<p>在Mac下，执行git命令时候出现如下的错误：</p>
-
-<pre><code>
-xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>解决方法：</p>
-
-<p>打开终端输入</p>
-
-<p>xcode-select --install</p>
-
-<p>回车后，系统弹出下载xcode，点击确认，下载完成后即可。</p>
-
-<p>猜测可能是跟xcode卸载或者升级有些关系，一些插件或组件被破坏了，重新安装下就好。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用Git的钩子实现自动部署]]></title>
-    <link href="http://golog.cc/auto-deploy-with-git-hook.html"/>
-    <updated>2016-10-08T16:04:47+08:00</updated>
-    <id>http://golog.cc/auto-deploy-with-git-hook.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li>通过服务器系统自带git或者其他的方式，例如gogs，搭建git仓库。这里要注意，搭建git仓库时，要创建一个git用户。对于客户端而言，服务器是远端；对于服务器本机而言，就是本机。</li>
-</ol>
-
-<span id="more"></span><!-- more -->
-
-<ol>
-<li><p>在git仓库里，创建一个仓库，用于客户端上传文件使用。通过类似gitlab或者gogs之类工具，这里创建的仓库是在指定的位置。</p>
-
-<p>这一步的操作是在服务器上，记住路径，例如/var/git/testRep。</p></li>
-<li><p>进入服务器上的部署文件夹，假如是/var/testDeploy,</p>
-
-<p>在该目录下，运行：</p>
-
-<pre><code>
-git clone /var/git/testRep /var/testDeploy
-
-</code></pre>
-
-<p>相当于初始化本地一个库，后续就可以通过git pull来更新文件了</p>
-
-<blockquote>
-<p>注意：删除已有的文件夹中的文件、删除.git文件夹之后，要切换到git用户之下，使用git用户重新git clone一遍，才可以自动的进行部署，因为部署需要用git用户进行操作，在root做所有的操作，git就没办法把更新的文件部署到发布的目录下面。</p>
-</blockquote></li>
-<li><p>在服务器上的仓库/var/git/testRep.git/下面，找到hook文件夹，找到其中的post-receive文件，这个是响应在post的钩子文件，运行这个文件定义的脚本，对这个文件脚本进行编写：</p>
-
-<pre><code>
-unset GIT_DIR
-DeployDir=/var/testDeploy/
-cd $DeployDir
-git add . -A &amp;&amp; git stash
-git pull origin master
-
-</code></pre>
-
-<p>实现把文件pull部署文件夹，从而实现自动部署。</p>
-
-<p>以上方法步骤，验证通过。</p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux下切换用户的命令]]></title>
-    <link href="http://golog.cc/change-user-os.html"/>
-    <updated>2016-10-08T00:07:00+08:00</updated>
-    <id>http://golog.cc/change-user-os.html</id>
-    <content type="html"><![CDATA[
-<ol>
-<li>增加用户，在root下：</li>
-</ol>
-
-<pre><code>
-add user git
-
-</code></pre>
-
-<p>表示增加git用户。</p>
-
-<ol>
-<li>切换用户</li>
-</ol>
-
-<pre><code>
-su git
-
-</code></pre>
-
-<p>切换成git用户。</p>
-
-<p>从root用户切换到其他用户不需要密码，从其他用户切换到root用户，需要输入密码。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[如何升级CentOS 6.5下的MySQL]]></title>
-    <link href="http://golog.cc/how-to-update-mysql-in-centos.html"/>
-    <updated>2016-10-07T22:05:57+08:00</updated>
-    <id>http://golog.cc/how-to-update-mysql-in-centos.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>1. 备份数据库，升级MySQL通常不会丢失数据，但保险起见，我们需要做这一步。输入命令：</li>
-</ul>
-
-<pre><code>
-mysqldump -u xxx -h xxx -P 3306 -p --all-databases &gt; databases.sql
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<ul>
-<li>2. 停止MySQL服务，输入命令：</li>
-</ul>
-
-<pre><code>
-service mysqld stop
-
-</code></pre>
-
-<ul>
-<li>3. 卸载旧版MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-yum remove mysql mysql-*
-
-</code></pre>
-
-<ul>
-<li>4. 移除命令执行后，可再看看是否有残余的mysql，输入命令：</li>
-</ul>
-
-<pre><code>
-yum list installed | grep mysql
-
-</code></pre>
-
-<p>如果有，可输入命令删除：</p>
-
-<pre><code>
-rum remove mysql－libs
-
-</code></pre>
-
-<ul>
-<li>5. 下载安装最新的rpm文件</li>
-</ul>
-
-<pre><code>
-rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-
-</code></pre>
-
-<ul>
-<li>6. 安装MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-yum install mysql-community-server
-
-</code></pre>
-
-<ul>
-<li>7. 安装完成后，输入命令查看MySQL版本号：</li>
-</ul>
-
-<pre><code>
-mysql -V
-
-</code></pre>
-
-<ul>
-<li>8. 启动MySQL，输入命令：</li>
-</ul>
-
-<pre><code>
-service mysqld start
-
-</code></pre>
-
-<p>在经过上面的方法升级之后，Mysql启动时，可能会报错，复发启动，查看/var/log/mysqld.log发现：</p>
-
-<pre><code>
-[ERROR] InnoDB: auto-extending data file ./ibdata1 is of a different size 640 pages (rounded down to MB) than specified in the .cnf file: initial 768 pages, max 0 (relevant if non-zero) pages!
-
-</code></pre>
-
-<p>可以采用下面的方法来处理：</p>
-
-<pre><code>
-rm -rf /var/lib/mysql/ib*
-
-</code></pre>
-
-<p>删除ibdata1、ib_logfile0、ib_logfile1等文件，再重启Mysql即可。</p>
 
 ]]></content>
   </entry>

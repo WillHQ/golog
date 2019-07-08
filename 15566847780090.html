@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   	  
-  		go中获取各种路径 - GOLOG
+  		go-micro的项目实战 - GOLOG
   	
   	</title>
   	
@@ -116,14 +116,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>go中获取各种路径</h1>
+          <h1>go-micro的项目实战</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/7/22</span>
+          <span class="date">2019/5/1</span>
 
           <span>文章分类：</span> 
           
-              <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+              <span class="posted-in"><a href='projects-of-go.html'>Go语言项目</a></span>
            
          
           <span class="comments">
@@ -137,73 +137,80 @@
 
       <div class="article-content">
       <ol>
-<li><p>执行用户当前所在路径：</p>
-
-<pre><code>
-os.Getwd()
-
-</code></pre></li>
-<li><p>执行程序所在路径：</p>
-
-<p>执行程序文件相对路径：</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-
-</code></pre>
-
-<span id="more"></span><!-- more -->
-
-<p>执行程序所在的绝对路径：</p>
-
-<p>（使用下面一套方法）</p>
-
-<pre><code>
-file, _ := exec.LookPath(os.Args[0])
-log.Println(&quot;file:&quot;, file)
-dir,_ := path.Split(file)
-log.Println(&quot;dir:&quot;, dir)
-os.Chdir(dir)
-wd, _ := os.Getwd()
-log.Println(&quot;wd:&quot;, wd)
-
-</code></pre>
-
-<p>比如这个程序</p>
-
-<pre><code>package main
-import(
-    &quot;os&quot;
-    &quot;log&quot;
-    &quot;os/exec&quot;
-    &quot;path&quot;
-)
-func main() {
-    file, _ := os.Getwd()
-    log.Println(&quot;current path:&quot;, file)
-    file, _ = exec.LookPath(os.Args[0])
-    log.Println(&quot;exec path:&quot;, file)
-    dir,_ := path.Split(file)
-    log.Println(&quot;exec folder relative path:&quot;, dir)
-    os.Chdir(dir)
-    wd, _ := os.Getwd()
-    log.Println(&quot;exec folder absolute path:&quot;, wd)
-}
-
-</code></pre>
-
-<p>可执行文件我放在<code>/home/houqun/handcode/test</code><br/>
-我执行的路径是<code>/home/houqun/</code></p>
-
-<p>返回结果：</p>
-
-<pre><code>[houqun@HouTekiMacbook ~]$ handcode/test
-2013/02/06 11:09:07 current path: /home/houqun
-2013/02/06 11:09:07 exec path: handcode/test
-2013/02/06 11:09:07 exec folder relative path: handcode/
-2013/02/06 11:09:07 exec folder absolute path: /home/houqun/handcode
-</code></pre></li>
+<li>consul的开发状态的命令</li>
 </ol>
+
+<pre><code>
+consul agent -dev
+
+</code></pre>
+
+<ol>
+<li>micro的测试命令</li>
+</ol>
+
+<pre><code>
+micro --registry=consul call xsoft.go.mes.auth AuthService.CheckUserWithPwd &#39;{&quot;username&quot;:&quot;houqun-hahahah&quot;, &quot;password&quot;:&quot;12345&quot;}&#39;
+
+micro --registry=consul call xsoft.go.mes.auth AuthService.GetUserOneByUsername &#39;{&quot;username&quot;:&quot;admin&quot;, &quot;password&quot;:&quot;123456&quot;}&#39;
+
+</code></pre>
+
+<ol>
+<li>安装protobuf</li>
+</ol>
+
+<pre><code>go get github.com/micro/protobuf/{proto,protoc-gen-go}
+
+# install protoc-gen-micro
+go get -u github.com/micro/protoc-gen-micro
+
+</code></pre>
+
+<ol>
+<li>安装go-micro</li>
+</ol>
+
+<pre><code>go get github.com/micro/go-micro
+
+</code></pre>
+
+<ol>
+<li>安装micro</li>
+</ol>
+
+<pre><code>go get github.com/micro/micro
+
+</code></pre>
+
+<ol>
+<li>proto3 生成的文件 包含 const _ = proto.ProtoPackageIsVersion2</li>
+</ol>
+
+<p>(1)检查protoc版本</p>
+
+<pre><code>protoc --version
+libprotoc 3.7.0
+</code></pre>
+
+<p>看看版本是不是3.x.x以上<br/>
+如果是的，那么多半是protoc-gen-go 没升级</p>
+
+<p>linux下 来取最新的 github.com/golang/protobuf</p>
+
+<pre><code>go get github.com/golang/protobuf
+echo $GOPATH
+cd $GOPATH/github.com/golang/protobuf/protoc-gen-go
+go build 
+</code></pre>
+
+<p>然后把生成的二进制文件 protoc-gen-go 拷贝到protoc 所在目录下 或者把protoc-gen-go  所在目录加入到环境变量中</p>
+
+<p>查看protoc所在目录</p>
+
+<pre><code>which protoc
+
+</code></pre>
 
 
     
@@ -214,16 +221,16 @@ func main() {
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="error-of-go-build.html" 
-          title="Previous Post: go build时的错误分析">&laquo; go build时的错误分析</a>
+          <a href="15568481571072.html" 
+          title="Previous Post: 有点不安全却又一亮的 Go unsafe.Pointer">&laquo; 有点不安全却又一亮的 Go unsafe.Pointer</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="operation-of-os.html" 
-          title="Next Post: 操作系统相关操作">操作系统相关操作 &raquo;</a>
+          <a  href="problem-of-ParseForm-function-of-beego.html" 
+          title="Next Post: 使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来">使用beego的ParseForm把form数据解析成Struct时，部分数据解析不出来 &raquo;</a>
       
       </p>
         </div>

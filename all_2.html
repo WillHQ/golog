@@ -130,13 +130,13 @@
     
     category['golang-grammar.html'] = 2;
     
-    category['golang-errors-handle.html'] = 4;
+    category['golang-errors-handle.html'] = 2;
     
-    category['skills-of-golang.html'] = 7;
+    category['skills-of-golang.html'] = 11;
     
-    category['projects-of-go.html'] = 5;
+    category['projects-of-go.html'] = 6;
     
-    category['about-os.html'] = 6;
+    category['about-os.html'] = 7;
     
     category['about-database.html'] = 3;
     
@@ -181,7 +181,7 @@
     var total_pages = 0;
     // if category name is 'all', or is name of a category. Only these two options.
     if(category_name == 'all'){
-      total_posts = 0 +2+3+2+4+7+5+6+3+1+1 ;
+      total_posts = 0 +2+3+2+2+11+6+7+3+1+1 ;
     } else {
       total_posts = category[category_name + '.html'];
     }
@@ -253,6 +253,164 @@
 		<div class="markdown-body home-categories">
 
 		
+			<div class="article">
+                <a class="clearlink" href="get-path-with-golang.html">
+                
+                  <h1>go中获取各种路径</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ol>
+<li><p>执行用户当前所在路径：</p>
+
+<pre><code>
+os.Getwd()
+
+</code></pre></li>
+<li><p>执行程序所在路径：</p>
+
+<p>执行程序文件相对路径：</p>
+
+<pre><code>
+file, _ := exec.LookPath(os.Args[0])
+
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="get-path-with-golang.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="operation-of-os.html">
+                
+                  <h1>操作系统相关操作</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li><p>linux下获取进程信息是使用/proc/pid/</p></li>
+<li><p>判断当前用户是否是root用户</p>
+
+<pre><code>
+os.Geteuid() != 0
+
+</code></pre></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='skills-of-golang.html'>GO语言技巧</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="path-package.html">
+                
+                  <h1>Path包</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>path.clean用于对路径../../等进行过滤，在创建、修改文件的时候需要使用，否则会有漏洞</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="time-package-of-golang.html">
+                
+                  <h1>go time package 时间包</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>go 的time package 提供了time.Format函数，用来对时间进行格式化输出。</p>
+
+<p>类似的还有time.Parse用来解析字符串类型的时间到time.Time。这是两个互逆的函数。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="time-package-of-golang.html">阅读全文</a>&nbsp;&nbsp; 
+                    <span class="date">2016/7/22</span>
+                    <span>文章分类：</span> 
+          				  
+          					    <span class="posted-in"><a href='golang-standard-package.html'>GO语言标准包</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="change-type-of-data.html">
                 
@@ -520,19 +678,43 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 	      
 		      
 			      <li class="post">
-			        <a href="15508917930915.html">github.com/mattn/go-sqlite3/sqlite3_go18.go:18:10: undefined: SQLiteConn错误</a>
+			        <a href="15625953495258.html">sublime text3解决Gosublime无法自动补全代码</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508917108507.html">combining dwarf failed: Unknown load command 0x32 (50)错误</a>
+			        <a href="15571436351370.html">Javascript对象与JSON的互转</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15508824829994.html">Go语言微服务实践</a>
+			        <a href="15571313099162.html">golang 1.12 版本的自动补全问题</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568530148488.html">Golang结构体遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568529053985.html">golang通过反射获取和设置结构体字段的值</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15568481571072.html">有点不安全却又一亮的 Go unsafe.Pointer</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15566847780090.html">go-micro的项目实战</a>
 			      </li>
 		     
 		  
@@ -551,30 +733,6 @@ ssh-keygen -t rsa -C &quot;youname@example.com&quot;
 		      
 			      <li class="post">
 			        <a href="15344946625117.html">阿里云服务上，gogs的安装与迁移</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="cross-compiling-of-golang.html">跨平台交叉编译Go程序</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="how-to-kill-go-run-process.html">go run main.go杀掉进程的方法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="install-grpc-of-golang.html">golang安装gRPC</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="solution-to-solve-mysql-break-down-in-aliyun-vps.html">阿里云vps上mysql挂掉的解决办法</a>
 			      </li>
 		     
 		  
